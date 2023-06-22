@@ -1,4 +1,4 @@
-package selfmade.ebookconverter.ebookvocabularyconverter;
+package selfmade.ebookConverter.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
