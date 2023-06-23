@@ -3,7 +3,6 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
 
     opens selfmade.ebookConverter to javafx.fxml;
