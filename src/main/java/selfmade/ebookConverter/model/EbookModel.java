@@ -3,24 +3,21 @@ package selfmade.ebookConverter.model;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import selfmade.ebookConverter.view.EbookView;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class EbookModel {
 
     private static FileChooser fileChooser = new FileChooser();
 
-    public static String chooseFile(File file) throws IOException {
+    public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-        if (selectedFile != null) {
+
+        if (selectedFile != null) {  //Why??? No body here
         }
         readFile(selectedFile);
-        return selectedFile.getName();
+        return selectedFile.getName();//May produce 'NullPointerException
     }
 
     //Read content of file choosen and add it to the file
@@ -39,7 +36,7 @@ public class EbookModel {
             e.printStackTrace();
         }
     }
-
+//Not used so far???
     public static boolean createBufferedFile() {
         //Creates file when not already exist
         try {
@@ -57,14 +54,29 @@ public class EbookModel {
             return false;
         }
     }
-
+//Not used so far
     public static File writeFile() {
         File toWrite = new File("filename.txt");
         return toWrite;
     }
 
     public static boolean userNameFile(String name) {
-        File namedFile = new File(name);
-        return true;
+        File createdByUser = new File(name);
+        try {
+            File rootFile = new File("filename.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(rootFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(createdByUser));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Zeile in Zielbenutzerdatei schreiben
+                writer.write(line);
+                writer.newLine();
+            }
+
+            return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

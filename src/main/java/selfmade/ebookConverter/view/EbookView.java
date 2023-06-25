@@ -1,12 +1,14 @@
 package selfmade.ebookConverter.view;
 
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import selfmade.ebookConverter.model.EbookModel;
@@ -30,24 +32,39 @@ public class EbookView extends HBox implements Initializable {
     TextField fileTextField = new TextField();
     @FXML
     TextField createFileTextField = new TextField();
-    private File file;
+    @FXML
+    Label createFileLabel = new Label();
+
+    String choiceBoxOptions[] = {"Notes", "Bookmarks", "Notes and bookmarks"};
+    @FXML
+    ChoiceBox choiceBox = new ChoiceBox();
+
 
     //Methods
     @FXML
     void selectFile() throws IOException {
-        fileTextField.setText(EbookModel.chooseFile(file));
+        fileTextField.setText(EbookModel.chooseFile());
 
     }
 
     @FXML
     void setCreateButton() {
-       String name= createFileTextField.getText();
-       if( EbookModel.userNameFile(name));
+        createFileLabel.setText("");
+        String name = createFileTextField.getText();
+        if (!name.isEmpty()) {
+            EbookModel.userNameFile(name);
+            createFileLabel.setTextFill(Color.GREEN);
+            createFileLabel.setText("Successfull created!");
 
+        } else {
+            createFileLabel.setTextFill(Color.RED);
+            createFileLabel.setText("Please enter a name for your file");
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       choiceBox.setItems(FXCollections.observableArrayList("Notes", "Bookmarks", "Both"));
 
 
     }
