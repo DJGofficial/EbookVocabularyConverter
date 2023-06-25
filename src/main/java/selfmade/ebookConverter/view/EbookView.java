@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import selfmade.ebookConverter.model.EbookModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 public class EbookView extends HBox implements Initializable {
 
     @FXML
-    Button fileButton = new Button("Choose File");
+    Button fileButton = new Button();
 
     @FXML
     Button createButton = new Button();
@@ -27,20 +28,27 @@ public class EbookView extends HBox implements Initializable {
     Button ankiButton = new Button();
     @FXML
     TextField fileTextField = new TextField();
+    @FXML
+    TextField createFileTextField = new TextField();
+    private File file;
 
-    FileChooser fileChooser = new FileChooser();
+    //Methods
+    @FXML
+    void selectFile() throws IOException {
+        fileTextField.setText(EbookModel.chooseFile(file));
+
+    }
 
     @FXML
-    void selectFile() {
-        File file = fileChooser.showOpenDialog(new Stage());
-        fileTextField.setText(file.getName());
-        EbookModel.readStart(file);
+    void setCreateButton() {
+       String name= createFileTextField.getText();
+       if( EbookModel.userNameFile(name));
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fileChooser.setInitialDirectory(new File("/"));
+
 
     }
 
