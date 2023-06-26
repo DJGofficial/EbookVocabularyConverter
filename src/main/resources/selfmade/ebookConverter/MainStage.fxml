@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -11,8 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="375.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
-<HBox layoutY="1.0" prefHeight="126.0" prefWidth="520.0">
+<AnchorPane prefHeight="446.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
+<HBox layoutY="1.0" prefHeight="109.0" prefWidth="573.0">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -50,12 +51,16 @@
       </children>
 
 </HBox>
-   <Pane layoutY="116.0" prefHeight="240.0" prefWidth="521.0">
+   <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
       <children>
-         <TextFlow fx:id="textFlow" layoutY="-40.0" />
+         <ScrollPane fx:id="scrolllPane" prefHeight="276.0" prefWidth="565.0">
+            <content>
+               <TextFlow fx:id="textFlow" prefHeight="276.0" prefWidth="562.0" />
+            </content>
+         </ScrollPane>
       </children>
    </Pane>
-   <HBox layoutY="361.0" prefHeight="65.0" prefWidth="527.0">
+   <HBox layoutY="387.0" prefHeight="59.0" prefWidth="573.0">
       <children>
          <Label text="Third step">
             <HBox.margin>

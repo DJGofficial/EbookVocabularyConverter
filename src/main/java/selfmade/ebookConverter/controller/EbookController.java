@@ -1,5 +1,8 @@
 package selfmade.ebookConverter.controller;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import selfmade.ebookConverter.view.EbookView;
@@ -26,18 +29,12 @@ public class EbookController {
     //Read content of file choosen and add it to the file
     public static void readFile(File file) throws IOException {
         EbookView ebookView = new EbookView();
-
         FileWriter myWriter = new FileWriter("filename.txt");
         try (
                 FileReader fr = new FileReader(file)) {
             int content;
             while ((content = fr.read()) != -1) {
-
                 myWriter.write((char) content);
-                final String text = String.valueOf((char) content);
-                Platform.runLater(() -> {
-                ebookView.appendToTextFlow(text);
-                });
             }
         } catch (
                 IOException e) {
@@ -64,10 +61,50 @@ public class EbookController {
         }
     }
 
-    //Not used so far
-    public static File writeFile() {
+    //Writes into TextFlow and writes root file
+    public static Text writeFile() {
         File toWrite = new File("filename.txt");
-        return toWrite;
+        String textFromFile = null;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+            }
+            textFromFile = sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Text retVal = new Text(textFromFile);
+        return retVal;
+    }
+    //TEST ADD BUTTON
+    public static ButtonBar createButtonsFromFile() {
+        File toWrite = new File("filename.txt");
+        ButtonBar buttonBar = new ButtonBar();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] words = line.split("\\s+"); // Split the line into words
+
+                for (String word : words) {
+                    Button button = new Button(word);
+                    button.setOnAction(event -> {
+                        // Handle button click event
+                        // ...
+                    });
+
+                    buttonBar.getButtons().add(button); // Add the button to the ButtonBar
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return buttonBar;
     }
 
     public static boolean userNameFile(String name) {

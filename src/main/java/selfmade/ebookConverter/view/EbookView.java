@@ -26,7 +26,6 @@ public class EbookView extends HBox implements Initializable {
 
     @FXML
     Button fileButton = new Button();
-
     @FXML
     Button createButton = new Button();
     @FXML
@@ -37,17 +36,18 @@ public class EbookView extends HBox implements Initializable {
     TextField createFileTextField = new TextField();
     @FXML
     Label createFileLabel = new Label();
-
-    String choiceBoxOptions[];
     @FXML
     ChoiceBox choiceBox = new ChoiceBox();
     @FXML
     TextFlow textFlow = new TextFlow();
+    @FXML
+    ScrollPane scrollPane = new ScrollPane(textFlow);
+    EbookController ebookController = new EbookController();
 
     //Methods
     @FXML
     void setChooseFileButton() throws IOException {
-        fileTextField.setText(EbookController.chooseFile());
+        fileTextField.setText(ebookController.chooseFile());
 
     }
 
@@ -56,8 +56,8 @@ public class EbookView extends HBox implements Initializable {
         createFileLabel.setText("");
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
-            EbookController.userNameFile(name);
-            createFileLabel.setTextFill(Color.GREEN);
+            ebookController.userNameFile(name);
+            textFlow.getChildren().add(ebookController.createButtonsFromFile()); // textFlow.getChildren().add(ebookController.writeFile());
             createFileLabel.setText("Successfull created!");
 
         } else {
@@ -69,14 +69,11 @@ public class EbookView extends HBox implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(FXCollections.observableArrayList("Notes", "Bookmarks", "Both"));
-
+        choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Tadaadaaaaaa");;
+        });
 
     }
 
-    public void appendToTextFlow(String text) {
-      createFileTextField.setText(text);
-        Text newText = new Text(text);
-        System.out.print(text);
-        textFlow.getChildren().add(newText);
-    }
+
 }
