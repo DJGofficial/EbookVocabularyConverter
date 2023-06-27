@@ -1,36 +1,33 @@
 package selfmade.ebookConverter.controller;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
+
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import selfmade.ebookConverter.view.EbookView;
-import javafx.application.Platform;
+
+
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EbookController {
 
-    private static FileChooser fileChooser = new FileChooser();
+    private final static FileChooser fileChooser = new FileChooser();
 
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
 
-        if (selectedFile != null) {  //Why??? No body here
-        }
         readFile(selectedFile);
         return selectedFile.getName();//May produce 'NullPointerException
     }
 
     //Read content of file choosen and add it to the file
-    public static void readFile(File file) throws IOException {
-        EbookView ebookView = new EbookView();
-        FileWriter myWriter = new FileWriter("filename.txt");
+    public static void readFile(File file)  {
         try (
+                FileWriter myWriter = new FileWriter("filename.txt");
                 FileReader fr = new FileReader(file)) {
             int content;
             while ((content = fr.read()) != -1) {
@@ -80,6 +77,8 @@ public class EbookController {
         Text retVal = new Text(textFromFile);
         return retVal;
     }
+
+    /*
     //TEST ADD BUTTON
     public static ButtonBar createButtonsFromFile() {
         File toWrite = new File("filename.txt");
@@ -96,15 +95,40 @@ public class EbookController {
                         // Handle button click event
                         // ...
                     });
-
                     buttonBar.getButtons().add(button); // Add the button to the ButtonBar
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println(buttonBar);
         return buttonBar;
+    }
+
+     */
+    public static List<Button> createButtonsFromFile() {
+        List<Button> buttons = new ArrayList<>();
+        File toWrite = new File("filename.txt");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] words = line.split("\\s+"); // Split the line into words
+
+                for (String word : words) {
+                    Button button = new Button(word);
+                    button.setOnAction(event -> {
+                        // Handle button click event
+                        // ...
+                    });
+                    buttons.add(button); // Add the button to the list
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return buttons;
     }
 
     public static boolean userNameFile(String name) {

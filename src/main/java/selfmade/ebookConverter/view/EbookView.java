@@ -7,16 +7,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import selfmade.ebookConverter.controller.EbookController;
-import selfmade.ebookConverter.model.EbookModel;
 
-import java.io.File;
+import javafx.scene.paint.Color;
+
+import selfmade.ebookConverter.controller.EbookController;
+
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,43 +36,43 @@ public class EbookView extends HBox implements Initializable {
     @FXML
     Label createFileLabel = new Label();
     @FXML
-    ChoiceBox choiceBox = new ChoiceBox();
+    ChoiceBox<String> choiceBox = new ChoiceBox();
     @FXML
-    TextFlow textFlow = new TextFlow();
+    ScrollPane scrollPane = new ScrollPane();
     @FXML
-    ScrollPane scrollPane = new ScrollPane(textFlow);
+    FlowPane flowPane = new FlowPane();
     EbookController ebookController = new EbookController();
 
     //Methods
     @FXML
     void setChooseFileButton() throws IOException {
         fileTextField.setText(ebookController.chooseFile());
-
     }
-
     @FXML
     void setCreateButton() {
         createFileLabel.setText("");
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             ebookController.userNameFile(name);
-            textFlow.getChildren().add(ebookController.createButtonsFromFile()); // textFlow.getChildren().add(ebookController.writeFile());
-            createFileLabel.setText("Successfull created!");
+           createFileLabel.setText("Successfull created!");
 
         } else {
             createFileLabel.setTextFill(Color.RED);
             createFileLabel.setText("Please enter a name for your file");
         }
     }
+    @FXML
+    void createButtonText(){
+        flowPane.getChildren().addAll(ebookController.createButtonsFromFile());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBox.setItems(FXCollections.observableArrayList("Notes", "Bookmarks", "Both"));
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Tadaadaaaaaa");;
+            System.out.println("Tadaadaaaaaa");
         });
 
     }
-
 
 }
