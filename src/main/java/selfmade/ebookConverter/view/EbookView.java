@@ -68,7 +68,7 @@ public class EbookView extends HBox implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox.setItems(FXCollections.observableArrayList("Notes", "Bookmarks", "Both"));
+        choiceBox.setItems(FXCollections.observableArrayList("Note", "Bookmark", "Author","Title"));
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Tadaadaaaaaa");
         });

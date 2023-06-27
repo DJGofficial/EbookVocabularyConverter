@@ -45,7 +45,6 @@
                      <Insets />
                   </opaqueInsets>
                </TextField>
-               <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="304.0" />
 
          </VBox>
 
@@ -60,24 +59,21 @@
          </ScrollPane>
 
    </Pane>
-   <HBox layoutY="387.0" prefHeight="59.0" prefWidth="573.0">
+   <HBox layoutY="380.0" prefHeight="103.0" prefWidth="573.0">
       <children>
-         <Label text="Third step">
-            <HBox.margin>
-               <Insets right="5.0" />
-            </HBox.margin>
-         </Label>
-         <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File">
-            <HBox.margin>
-               <Insets right="5.0" />
-            </HBox.margin>
-         </Button>
-         <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
-            <HBox.margin>
-               <Insets right="5.0" />
-            </HBox.margin>
-         </TextField>
-         <Button fx:id="ankiButton" mnemonicParsing="false" text="Anki" />
+         <Label prefHeight="18.0" prefWidth="243.0" text="Third step" />
+         <VBox prefHeight="59.0" prefWidth="591.0">
+            <children>
+               <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File" />
+               <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
+                  <VBox.margin>
+                     <Insets top="5.0" />
+                  </VBox.margin>
+               </TextField>
+                     <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="304.0" />
+               <Button fx:id="ankiButton" mnemonicParsing="false" text="Anki" />
+            </children>
+         </VBox>
       </children>
    </HBox>
 
