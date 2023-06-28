@@ -1,74 +1,147 @@
 package selfmade.ebookConverter.anki;
 
-import com.google.gson.Gson;
+
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
 public class AnkiController {
-
+    //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
-    public static void main(String[] args) {
-        String deckName = "TestDeck";
+    public static void main(String[] args) throws IOException {
+        String deckName = "ZZDeck";
         String modelName = "Basic";
         String front = "this";
         String back = "there";
 
 
+        createDeck(deckName);
         addCard(deckName, modelName, front, back);
     }
 
-    public static void addCard(String deckName, String modelName, String front, String back) {
-
+    //Note action addNote
+    public static void addCard(String deckName, String modelName, String front, String back) throws IOException {
         try {
-            // Erstelle eine Verbindung zur AnkiConnect API
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
 
             // Erstelle das JSON-Objekt für die AnkiConnect-Anfrage
             JsonObject request = new JsonObject();
-            request.addProperty("action", "guiAddCards");
+            request.addProperty("action", "addNote");
             request.addProperty("version", 6);
 
             JsonObject params = new JsonObject();
 
-            // Erstelle das JSON-Objekt für das Kartenmodell
-            JsonObject note = new JsonObject();
-            note.addProperty("deckName", deckName);
-            note.addProperty("modelName", modelName);
+            JsonObject notes = new JsonObject();
+            notes.addProperty("deckName", deckName);
+            notes.addProperty("modelName", "Basic");
 
             JsonObject fields = new JsonObject();
             fields.add("Front", new JsonPrimitive(front));
             fields.add("Back", new JsonPrimitive(back));
-            note.add("fields", fields);
 
-            // Füge das Kartenmodell zur Anfrage hinzu
-            request.add("params", note);
+            notes.add("fields", fields);
+            params.add("note", notes);
+            request.add("params", params);
 
-            // Sende die Anfrage an AnkiConnect
+            // JsonObject note = new JsonObject();
+            // note.addProperty("deckName", deckName);
+            // note.addProperty("modelName", modelName);
+
+            //  JsonObject fields = new JsonObject();
+            // fields.add("Front", new JsonPrimitive(front));
+            // fields.add("Back", new JsonPrimitive(back));
+            // note.add("fields", fields);
+
+
             OutputStream outputStream = connection.getOutputStream();
             OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
             writer.write(request.toString());
             writer.flush();
 
-            // Lese die Antwort von AnkiConnect
+
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Die Anfrage war erfolgreich
-                // Du kannst hier zusätzlichen Code hinzufügen, um die Antwort zu verarbeiten
-                System.out.println("Karte wurde zur Anki-Kollektion hinzugefügt.");
-            } else {
-                // Die Anfrage ist fehlgeschlagen
-                System.err.println("Fehler beim Hinzufügen der Karte zur Anki-Kollektion. Antwortcode: " + responseCode);
-            }
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
+                // Lese die Antwortzeilen
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+                reader.close();
+
+                // Parst die Antwort als JSON-Objekt
+                JsonParser parser = new JsonParser();
+                JsonElement responseElement = parser.parse(responseBuilder.toString());
+                // if (responseElement.isJsonObject()) {
+                System.out.println(responseElement.getAsJsonObject());
+                // Schließe die Verbindung
+                writer.close();
+                outputStream.close();
+                connection.disconnect();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Create Deck
+    public static void createDeck(String deckName) throws IOException {
+        try {
+            // Erstelle eine Verbindung zur AnkiConnect API
+            URL url = new URL(ANKI_CONNECT_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+
+
+            JsonObject request = new JsonObject();
+            request.addProperty("action", "createDeck");
+            request.addProperty("version", 6);
+
+            JsonObject params = new JsonObject();
+            params.addProperty("deck", deckName);
+
+            request.add("params", params);
+
+            OutputStream outputStream = connection.getOutputStream();
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
+            writer.write(request.toString());
+            writer.flush();
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+
+                // Lese die Antwortzeilen
+                StringBuilder responseBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    responseBuilder.append(line);
+                }
+                reader.close();
+
+                // Parst die Antwort als JSON-Objekt
+                JsonParser parser = new JsonParser();
+                JsonElement responseElement = parser.parse(responseBuilder.toString());
+                // if (responseElement.isJsonObject()) {
+                System.out.println(responseElement.getAsJsonObject());
+                //   System.out.println("Karte wurde zur Anki-Kollektion hinzugefügt." + responseCode);
+                //   } else {
+                //    System.err.println("Fehler beim Hinzufügen der Karte zur Anki-Kollektion. Antwortcode: " + responseCode);
+                // }
+            }
             // Schließe die Verbindung
             writer.close();
             outputStream.close();
@@ -78,4 +151,6 @@ public class AnkiController {
             e.printStackTrace();
         }
     }
+
 }
+
