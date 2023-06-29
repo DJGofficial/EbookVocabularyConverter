@@ -13,11 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 import selfmade.ebookConverter.controller.EbookController;
-
+import selfmade.ebookConverter.model.TextColour;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -36,39 +37,45 @@ public class EbookView extends HBox implements Initializable {
     @FXML
     Label createFileLabel = new Label();
     @FXML
+    public
     ChoiceBox<String> choiceBox = new ChoiceBox();
     @FXML
     ScrollPane scrollPane = new ScrollPane();
     @FXML
     FlowPane flowPane = new FlowPane();
-    EbookController ebookController = new EbookController();
+
+  EbookController ebookController = new EbookController();
+
+    ArrayList<TextColour> textColourList = TextColour.createTextColourList();
 
     //Methods
     @FXML
     void setChooseFileButton() throws IOException {
         fileTextField.setText(ebookController.chooseFile());
     }
+
     @FXML
     void setCreateButton() {
         createFileLabel.setText("");
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             ebookController.userNameFile(name);
-           createFileLabel.setText("Successfull created!");
+            createFileLabel.setText("Successfull created!");
 
         } else {
             createFileLabel.setTextFill(Color.RED);
             createFileLabel.setText("Please enter a name for your file");
         }
     }
+
     @FXML
-    void createButtonText(){
+    void createButtonText() {
         flowPane.getChildren().addAll(ebookController.createButtonsFromFile());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBox.setItems(FXCollections.observableArrayList("Note", "Bookmark", "Author","Title"));
+        choiceBox.setItems(FXCollections.observableArrayList(textColourList.get(0).getName(), textColourList.get(1).getName(), textColourList.get(2).getName(), textColourList.get(3).getName(), textColourList.get(4).getName()));
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Tadaadaaaaaa");
         });

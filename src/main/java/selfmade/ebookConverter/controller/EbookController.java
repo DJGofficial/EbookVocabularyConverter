@@ -2,10 +2,12 @@ package selfmade.ebookConverter.controller;
 
 import javafx.scene.control.Button;
 
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+import selfmade.ebookConverter.model.TextColour;
+import selfmade.ebookConverter.view.EbookView;
 
 
 import java.io.*;
@@ -16,6 +18,10 @@ public class EbookController {
 
     private final static FileChooser fileChooser = new FileChooser();
 
+    static EbookView ebookView = new EbookView();
+
+    TextColour textColour = new TextColour();
+
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -25,7 +31,7 @@ public class EbookController {
     }
 
     //Read content of file choosen and add it to the file
-    public static void readFile(File file)  {
+    public static void readFile(File file) {
         try (
                 FileWriter myWriter = new FileWriter("filename.txt");
                 FileReader fr = new FileReader(file)) {
@@ -118,10 +124,11 @@ public class EbookController {
                 for (String word : words) {
                     Button button = new Button(word);
                     button.setOnAction(event -> {
-                        // Handle button click event
-                        // ...
+                        button.setTextFill(getButtonColour());
+
+                        System.out.println("Button clicked");
                     });
-                    buttons.add(button); // Add the button to the list
+                    buttons.add(button);
                 }
             }
         } catch (IOException e) {
@@ -129,6 +136,15 @@ public class EbookController {
         }
 
         return buttons;
+    }
+
+    public static Color getButtonColour() {
+        Color retVal = null;
+        for (TextColour tC : TextColour.createTextColourList()) {
+            if (ebookView.choiceBox.getValue().equals(tC))
+                retVal = tC.getColour();
+        }
+        return retVal;
     }
 
     public static boolean userNameFile(String name) {

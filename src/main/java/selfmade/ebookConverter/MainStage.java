@@ -13,7 +13,7 @@ public class MainStage extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainStage.class.getResource("MainStage.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("TreeView in HBox in AnchorPane!");
+        stage.setTitle("Ebook Vocabulary Converter");
         stage.setScene(scene);
         stage.show();
     }
