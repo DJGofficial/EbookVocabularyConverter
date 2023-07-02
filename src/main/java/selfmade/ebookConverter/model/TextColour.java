@@ -10,49 +10,30 @@ public class TextColour {
     private String name;
     private Color colour;
 
-    public String getName() {
-        return name;
+   static ArrayList<TextColour> textColourList = new ArrayList<>();
+    public TextColour(String name, Color colour) {
+        this.name = name;
+        this.colour = colour;
+    }
+    public  TextColour(){
+
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getName() {
+        return name;
     }
 
     public Color getColour() {
         return colour;
     }
 
-    public void setColour(Color colour) {
-        this.colour = colour;
-    }
-
     public static ArrayList<TextColour> createTextColourList() {
-        ArrayList<TextColour> textColourList = new ArrayList<>();
 
-        TextColour red = new TextColour();
-        red.setName("Notes");
-        red.setColour(Color.RED);
-        textColourList.add(red);
-
-        TextColour green = new TextColour();
-        green.setName("Bookmarks");
-        green.setColour(Color.GREEN);
-        textColourList.add(green);
-
-        TextColour blue = new TextColour();
-        blue.setName("Author");
-        blue.setColour(Color.BLUE);
-        textColourList.add(blue);
-
-        TextColour yellow = new TextColour();
-        blue.setName("Title");
-        blue.setColour(Color.YELLOW);
-        textColourList.add(yellow);
-
-        TextColour black = new TextColour();
-        blue.setName("End");
-        blue.setColour(Color.BLACK);
-        textColourList.add(black);
+        textColourList.add(new TextColour("Notes", Color.RED));
+        textColourList.add(new TextColour("Bookmarks", Color.GREEN));
+        textColourList.add(new TextColour("Author", Color.BLUE));
+        textColourList.add(new TextColour("Title", Color.YELLOW));
+        textColourList.add(new TextColour("End", Color.BLACK));
 
         return textColourList;
     }

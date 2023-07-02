@@ -1,6 +1,7 @@
 package selfmade.ebookConverter.model;
 
 
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -9,6 +10,11 @@ import java.io.*;
 public class EbookModel {
 
     private static FileChooser fileChooser = new FileChooser();
+
+    static Color buttonChoiceBoxStatus = null;
+
+    static TextColour textColour = new TextColour();
+
 
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
@@ -36,6 +42,17 @@ public class EbookModel {
             e.printStackTrace();
         }
     }
-//Not used so far???
 
+    public static void setButtonColour(String value) {
+        for (TextColour tc : textColour.textColourList) {
+            if (tc.getName().equals(value)) {
+                buttonChoiceBoxStatus = tc.getColour();
+
+            }
+        }
+    }
+
+    public static Color getButtonColour() {
+        return buttonChoiceBoxStatus;
+    }
 }

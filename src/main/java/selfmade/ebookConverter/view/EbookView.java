@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 import selfmade.ebookConverter.controller.EbookController;
+import selfmade.ebookConverter.model.EbookModel;
 import selfmade.ebookConverter.model.TextColour;
 
 
@@ -37,8 +38,10 @@ public class EbookView extends HBox implements Initializable {
     @FXML
     Label createFileLabel = new Label();
     @FXML
-    public
-    ChoiceBox<String> choiceBox = new ChoiceBox();
+    public ChoiceBox<String> choiceBox = new ChoiceBox();
+ //   public String getChoiceBoxValue() {
+   //     return choiceBox.getValue();
+    //}
     @FXML
     ScrollPane scrollPane = new ScrollPane();
     @FXML
@@ -75,9 +78,11 @@ public class EbookView extends HBox implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("TextColourList "+textColourList.get(0).getName());
         choiceBox.setItems(FXCollections.observableArrayList(textColourList.get(0).getName(), textColourList.get(1).getName(), textColourList.get(2).getName(), textColourList.get(3).getName(), textColourList.get(4).getName()));
         choiceBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Tadaadaaaaaa");
+            EbookModel.setButtonColour(newValue);
+          //  System.out.println("NewValue "+newValue);
         });
 
     }
