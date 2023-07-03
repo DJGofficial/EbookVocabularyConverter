@@ -102,9 +102,11 @@ public class EbookController {
                 for (String word : words) {
                     ToggleButton button = new ToggleButton(word);
                     button.setOnAction(event -> {
-                        System.out.println("Button clicked");
-                        // button.setTextFill(Paint.valueOf(ebookModel.getButtonColour()));
-                        button.setStyle(String.valueOf(ebookModel.getButtonColour()));
+                        if (button.isSelected()==true) {
+                            button.setStyle("-fx-background-color: " + ebookModel.getButtonColour());
+                        } else {
+                           button.setStyle("");
+                        }
                     });
                     buttons.add(button);
                 }
@@ -116,7 +118,7 @@ public class EbookController {
         return buttons;
     }
 
-    public static Color getButtonColour(String value) {
+    public static String getButtonColour(String value) {
         if (value != null) {
             for (TextColour tC : TextColour.createTextColourList()) {
                 if (value.equals(tC.getColour())) {

@@ -11,7 +11,9 @@ public class EbookModel {
 
     private static FileChooser fileChooser = new FileChooser();
 
-    static Color buttonChoiceBoxStatus = null;
+    static String buttonChoiceBoxStatus = null;
+
+    static String buttonDefaultStatus;
 
     static TextColour textColour = new TextColour();
 
@@ -52,7 +54,7 @@ public class EbookModel {
         }
     }
 
-    public static Color getButtonColour() {
+    public static String getButtonColour() {
         return buttonChoiceBoxStatus;
     }
 }

@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class TextColour {
     private String name;
-    private Color colour;
+    private String colour;
 
    static ArrayList<TextColour> textColourList = new ArrayList<>();
-    public TextColour(String name, Color colour) {
+    public TextColour(String name, String colour) {
         this.name = name;
         this.colour = colour;
     }
@@ -23,17 +23,17 @@ public class TextColour {
         return name;
     }
 
-    public Color getColour() {
+    public String getColour() {
         return colour;
     }
 
     public static ArrayList<TextColour> createTextColourList() {
 
-        textColourList.add(new TextColour("Notes", Color.RED));
-        textColourList.add(new TextColour("Bookmarks", Color.GREEN));
-        textColourList.add(new TextColour("Author", Color.BLUE));
-        textColourList.add(new TextColour("Title", Color.YELLOW));
-        textColourList.add(new TextColour("End", Color.BLACK));
+        textColourList.add(new TextColour("Notes", "#FFD9D9"));
+        textColourList.add(new TextColour("Bookmarks", "#D9D9FF"));
+        textColourList.add(new TextColour("Author", "#D9FFD9"));
+        textColourList.add(new TextColour("Title", "#FFFFD9"));
+        textColourList.add(new TextColour("End", "#DDDDDD"));
 
         return textColourList;
     }
