@@ -13,68 +13,76 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="446.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
-<HBox layoutY="1.0" prefHeight="83.0" prefWidth="573.0">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+    <HBox layoutY="1.0" prefHeight="83.0" prefWidth="573.0">
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
 
-         <VBox prefHeight="258.0" prefWidth="98.0">
-
-               <Label alignment="TOP_LEFT" prefHeight="28.0" prefWidth="80.0" text="First Step" />
-               <Label alignment="TOP_LEFT" prefHeight="29.0" prefWidth="83.0" text="Second Step">
-                  <VBox.margin>
-                     <Insets top="20.0" />
-                  </VBox.margin>
-               </Label>
-
-         </VBox>
-         <VBox prefHeight="335.0" prefWidth="105.0">
-
-               <Button fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Choose File" />
-               <ChoiceBox fx:id="choiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0">
-                  <VBox.margin>
-                     <Insets top="20.0" />
-                  </VBox.margin>
-               </ChoiceBox>
-
-         </VBox>
-         <VBox prefHeight="65.0" prefWidth="297.0">
-
-               <TextField fx:id="fileTextField" prefHeight="26.0" prefWidth="240.0">
-                  <opaqueInsets>
-                     <Insets />
-                  </opaqueInsets>
-               </TextField>
-
-         </VBox>
-
-
-</HBox>
-   <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
-
-         <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="276.0" prefWidth="573.0" vbarPolicy="ALWAYS">
-            <content>
-               <FlowPane fx:id="flowPane" />
-            </content>
-         </ScrollPane>
-
-   </Pane>
-   <HBox layoutY="380.0" prefHeight="103.0" prefWidth="573.0">
-      <children>
-         <Label prefHeight="18.0" prefWidth="243.0" text="Third step" />
-         <VBox prefHeight="59.0" prefWidth="591.0">
+        <VBox prefHeight="258.0" prefWidth="98.0">
             <children>
-               <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File" />
-               <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
-                  <VBox.margin>
-                     <Insets top="5.0" />
-                  </VBox.margin>
-               </TextField>
-                     <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="304.0" />
-               <Button fx:id="ankiButton" mnemonicParsing="false" text="Anki" />
-            </children>
-         </VBox>
-      </children>
-   </HBox>
 
+                <Button fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Choose File" />
+                <ChoiceBox fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </ChoiceBox>
+            </children>
+
+        </VBox>
+        <VBox prefHeight="335.0" prefWidth="105.0">
+            <children>
+                <ChoiceBox fx:id="optionChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0">
+                    <VBox.margin>
+                        <Insets top="45.0" />
+                    </VBox.margin>
+                </ChoiceBox>
+            </children>
+
+        </VBox>
+        <VBox prefHeight="65.0" prefWidth="297.0">
+
+            <TextField fx:id="fileTextField" prefHeight="26.0" prefWidth="240.0">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            </TextField>
+            <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" text="Done">
+                <graphic>
+                    <ChoiceBox fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="95.0" />
+                </graphic>
+                <VBox.margin>
+                    <Insets top="15.0" />
+                </VBox.margin>
+            </Button>
+
+        </VBox>
+
+
+    </HBox>
+    <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
+
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="276.0" prefWidth="591.0" vbarPolicy="ALWAYS">
+            <content>
+                <FlowPane fx:id="flowPane" />
+            </content>
+        </ScrollPane>
+
+    </Pane>
+    <HBox layoutY="376.0" prefHeight="103.0" prefWidth="591.0">
+      <children>
+            <VBox prefHeight="59.0" prefWidth="591.0">
+                <children>
+                    <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File" />
+                    <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
+                        <VBox.margin>
+                            <Insets top="5.0" />
+                        </VBox.margin>
+                    </TextField>
+               <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="570.0" />
+                    <Button fx:id="ankiButton" mnemonicParsing="false" text="Anki" />
+                </children>
+            </VBox>
+      </children>
+    </HBox>
 </AnchorPane>
