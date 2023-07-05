@@ -73,7 +73,10 @@
       <children>
             <VBox prefHeight="59.0" prefWidth="591.0">
                 <children>
-                    <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File" />
+                    <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File">
+                  <VBox.margin>
+                     <Insets left="10.0" top="5.0" />
+                  </VBox.margin></Button>
                     <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
                         <VBox.margin>
                             <Insets top="5.0" />

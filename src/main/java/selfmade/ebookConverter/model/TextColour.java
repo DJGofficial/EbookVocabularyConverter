@@ -10,12 +10,13 @@ public class TextColour {
     private String name;
     private String colour;
 
-   static ArrayList<TextColour> textColourList = new ArrayList<>();
+   static ArrayList<TextColour> textColourList= new ArrayList<>();
     public TextColour(String name, String colour) {
         this.name = name;
         this.colour = colour;
     }
     public  TextColour(){
+        createTextColourList();
 
     }
 

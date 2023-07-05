@@ -8,6 +8,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.model.EbookModel;
 import selfmade.ebookConverter.model.TextColour;
 import selfmade.ebookConverter.view.EbookView;
@@ -90,10 +91,9 @@ public class EbookController {
     }
 
 
-    public static List<ToggleButton> createButtonsFromFile() {
+    public  List<ToggleButton> createButtonsFromFile() {
         List<ToggleButton> buttons = new ArrayList<>();
         File toWrite = new File("filename.txt");
-
         try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
             String line;
             while ((line = reader.readLine()) != null) {
