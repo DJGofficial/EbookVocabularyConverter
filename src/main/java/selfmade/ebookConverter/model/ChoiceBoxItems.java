@@ -8,15 +8,19 @@ import static selfmade.ebookConverter.model.TextColour.textColourList;
 public class ChoiceBoxItems {
     private ObservableList<String> firstItems;
     private ObservableList<String> secondItems;
-    private ObservableList<String> thirdItems;
+    private static ObservableList<String> thirdItems;
+  // static String status=getThirdItems().getValue();
 
     public ChoiceBoxItems() {
-        TextColour textColour= new TextColour();
         firstItems = FXCollections.observableArrayList("Anki", "Remnote", "PlainText");
         secondItems = FXCollections.observableArrayList();
         thirdItems = FXCollections.observableArrayList();
     }
-
+/*
+    public static String getStatus() {
+        return status;
+    }
+ */
     public ObservableList<String> getFirstItems() {
         return firstItems;
     }
@@ -25,7 +29,8 @@ public class ChoiceBoxItems {
         return secondItems;
     }
 
-    public ObservableList<String> getThirdItems() {
+    public  ObservableList<String> getThirdItems() {
+        System.out.println("ThirdItems "+thirdItems);
         return thirdItems;
     }
 
@@ -51,8 +56,6 @@ public class ChoiceBoxItems {
                     textColourList.get(4).getName());
         } else if (selectedSecondItem.equals("Option B")) {
             return FXCollections.observableArrayList("Option P", "Option Q", "Option R");
-        } else if (selectedSecondItem.equals("Option C")) {
-            return FXCollections.observableArrayList("Option M", "Option N", "Option O");
         }
         return FXCollections.emptyObservableList();
     }

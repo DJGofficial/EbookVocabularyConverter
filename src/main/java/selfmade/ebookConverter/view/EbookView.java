@@ -20,6 +20,7 @@ import selfmade.ebookConverter.model.TextColour;
 
 
 import java.io.IOException;
+import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,9 +29,9 @@ import java.util.ResourceBundle;
 public class EbookView implements Initializable {
 
     @FXML
-    Button fileButton,ankiButton,doneButton,createButton;
+    Button fileButton, ankiButton, doneButton, createButton;
     @FXML
-    TextField fileTextField,createFileTextField;
+    TextField fileTextField, createFileTextField;
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
     @FXML
@@ -41,8 +42,10 @@ public class EbookView implements Initializable {
     FlowPane flowPane;
     @FXML
     Label createFileLabel;
+
+
     EbookController ebookController;
-    ArrayList<TextColour> textColourList;
+    EbookModel ebookModel= new EbookModel();
 
     //Methods
     @FXML
@@ -68,18 +71,17 @@ public class EbookView implements Initializable {
     private void createButtonText() {
         flowPane.getChildren().addAll(ebookController.createButtonsFromFile());
     }
-
     @FXML
-    private void doneButtonClicked() throws IOException {
+    private void doneButtonClicked(){
 
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ebookController = new EbookController();
 
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
-
+        //   selected = fieldsChoiceBox.getValue();
+        //   System.out.println("Selected " + selected);
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
         fieldsChoiceBox.setItems(choiceBoxItems.getThirdItems());
@@ -93,6 +95,11 @@ public class EbookView implements Initializable {
         optionChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             ObservableList<String> updatedThirdItems = choiceBoxItems.updateThirdItems(newValue);
             fieldsChoiceBox.setItems(updatedThirdItems);
+
+        });
+        fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue)->{
+            System.out.println("ChoiceboxStatus is "+fieldsChoiceBox.getValue());
+           ebookModel.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
 }

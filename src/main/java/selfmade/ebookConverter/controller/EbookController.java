@@ -1,14 +1,9 @@
 package selfmade.ebookConverter.controller;
 
-import javafx.scene.control.Button;
-
 import javafx.scene.control.ToggleButton;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.model.EbookModel;
 import selfmade.ebookConverter.model.TextColour;
 import selfmade.ebookConverter.view.EbookView;
@@ -24,7 +19,7 @@ public class EbookController {
 
     static EbookView ebookView = new EbookView();
 
-    public static EbookModel ebookModel = new EbookModel();
+    EbookModel ebookModel = new EbookModel();
 
     static TextColour tC;
 
@@ -91,7 +86,7 @@ public class EbookController {
     }
 
 
-    public  List<ToggleButton> createButtonsFromFile() {
+    public List<ToggleButton> createButtonsFromFile() {
         List<ToggleButton> buttons = new ArrayList<>();
         File toWrite = new File("filename.txt");
         try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
@@ -102,11 +97,7 @@ public class EbookController {
                 for (String word : words) {
                     ToggleButton button = new ToggleButton(word);
                     button.setOnAction(event -> {
-                        if (button.isSelected()==true) {
-                            button.setStyle("-fx-background-color: " + ebookModel.getButtonColour());
-                        } else {
-                           button.setStyle("");
-                        }
+                        setButtonAction(button);
                     });
                     buttons.add(button);
                 }
@@ -118,32 +109,13 @@ public class EbookController {
         return buttons;
     }
 
-    public static String getButtonColour(String value) {
-        if (value != null) {
-            for (TextColour tC : TextColour.createTextColourList()) {
-                if (value.equals(tC.getColour())) {
-                    return tC.getColour();
-                }
-            }
-        }
-
-        return null;
-
-    /*String selectedTextColour = ebookView.choiceBox.getValue();
-        System.out.println("selectedTextColour "+selectedTextColour);
-    if (selectedTextColour != null) {
-        for (TextColour tC : TextColour.createTextColourList()) {
-            if (selectedTextColour.equals(tC.getColour())) {
-                return tC.getColour();
-            }
+    public void setButtonAction(ToggleButton button) {
+        if (button.isSelected() == true) {
+            button.setStyle("-fx-background-color: " + ebookModel.getButtonColour());
+        } else {
+            button.setStyle("");
         }
     }
-
-    return null;
-
-     */
-    }
-
     public static boolean userNameFile(String name) {
         File createdByUser = new File(name);
         try {
