@@ -21,19 +21,16 @@ public class AnkiController {
         String front = "this";
         String back = "there";
 
-
         createDeck(deckName);
         addCard(deckName, modelName, front, back);
     }
 
-    //Note action addNote
     public static void addCard(String deckName, String modelName, String front, String back) throws IOException {
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
 
-            // Erstelle das JSON-Objekt für die AnkiConnect-Anfrage
             JsonObject request = new JsonObject();
             request.addProperty("action", "addNote");
             request.addProperty("version", 6);
@@ -73,7 +70,6 @@ public class AnkiController {
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
-                // Lese die Antwortzeilen
                 StringBuilder responseBuilder = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -81,12 +77,12 @@ public class AnkiController {
                 }
                 reader.close();
 
-                // Parst die Antwort als JSON-Objekt
+
                 JsonParser parser = new JsonParser();
                 JsonElement responseElement = parser.parse(responseBuilder.toString());
                 // if (responseElement.isJsonObject()) {
                 System.out.println(responseElement.getAsJsonObject());
-                // Schließe die Verbindung
+
                 writer.close();
                 outputStream.close();
                 connection.disconnect();
@@ -96,10 +92,8 @@ public class AnkiController {
         }
     }
 
-    //Create Deck
     public static void createDeck(String deckName) throws IOException {
         try {
-            // Erstelle eine Verbindung zur AnkiConnect API
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
@@ -124,7 +118,7 @@ public class AnkiController {
                 InputStream inputStream = connection.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
-                // Lese die Antwortzeilen
+
                 StringBuilder responseBuilder = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -132,7 +126,7 @@ public class AnkiController {
                 }
                 reader.close();
 
-                // Parst die Antwort als JSON-Objekt
+
                 JsonParser parser = new JsonParser();
                 JsonElement responseElement = parser.parse(responseBuilder.toString());
                 // if (responseElement.isJsonObject()) {
@@ -142,7 +136,7 @@ public class AnkiController {
                 //    System.err.println("Fehler beim Hinzufügen der Karte zur Anki-Kollektion. Antwortcode: " + responseCode);
                 // }
             }
-            // Schließe die Verbindung
+
             writer.close();
             outputStream.close();
             connection.disconnect();

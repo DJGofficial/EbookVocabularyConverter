@@ -17,7 +17,6 @@ public class TextColour {
     }
     public  TextColour(){
         createTextColourList();
-
     }
 
     public String getName() {

@@ -31,7 +31,6 @@ public class EbookController {
         return selectedFile.getName();//May produce 'NullPointerException
     }
 
-    //Read content of file choosen and add it to the file
     public static void readFile(File file) {
         try (
                 FileWriter myWriter = new FileWriter("filename.txt");
@@ -46,9 +45,7 @@ public class EbookController {
         }
     }
 
-    //Not used so far???
     public static boolean createBufferedFile() {
-        //Creates file when not already exist
         try {
             File myObj = new File("filename.txt");
             if (myObj.createNewFile()) {
@@ -65,7 +62,7 @@ public class EbookController {
         }
     }
 
-    //Writes into TextFlow and writes root file
+
     public static Text writeFile() {
         File toWrite = new File("filename.txt");
         String textFromFile = null;
@@ -125,7 +122,6 @@ public class EbookController {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                // Zeile in Zielbenutzerdatei schreiben
                 writer.write(line);
                 writer.newLine();
             }

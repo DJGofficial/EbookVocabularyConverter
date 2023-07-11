@@ -32,7 +32,7 @@
         </VBox>
         <VBox prefHeight="335.0" prefWidth="105.0">
             <children>
-                <ChoiceBox fx:id="optionChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0">
+                <ChoiceBox fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="86.0">
                     <VBox.margin>
                         <Insets top="45.0" />
                     </VBox.margin>

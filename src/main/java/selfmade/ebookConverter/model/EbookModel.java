@@ -30,7 +30,7 @@ public class EbookModel {
         return selectedFile.getName();//May produce 'NullPointerException
     }
 
-    //Read content of file choosen and add it to the file
+
     public static void readFile(File file) throws IOException {
         FileWriter myWriter = new FileWriter("filename.txt");
         try (

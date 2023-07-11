@@ -60,7 +60,6 @@ public class EbookView implements Initializable {
         if (!name.isEmpty()) {
             ebookController.userNameFile(name);
             createFileLabel.setText("Successfull created!");
-
         } else {
             createFileLabel.setTextFill(Color.RED);
             createFileLabel.setText("Please enter a name for your file");
@@ -80,8 +79,7 @@ public class EbookView implements Initializable {
         ebookController = new EbookController();
 
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
-        //   selected = fieldsChoiceBox.getValue();
-        //   System.out.println("Selected " + selected);
+
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
         fieldsChoiceBox.setItems(choiceBoxItems.getThirdItems());
