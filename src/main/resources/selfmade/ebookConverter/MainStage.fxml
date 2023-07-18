@@ -62,9 +62,9 @@
     </HBox>
     <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
 
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="276.0" prefWidth="591.0" vbarPolicy="ALWAYS">
+        <ScrollPane fx:id="scrollPane" prefHeight="276.0" prefWidth="591.0" vbarPolicy="ALWAYS">
             <content>
-                <FlowPane fx:id="flowPane" />
+                <FlowPane fx:id="flowPane" prefHeight="274.0" prefWidth="575.0" />
             </content>
         </ScrollPane>
 
