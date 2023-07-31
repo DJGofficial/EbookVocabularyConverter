@@ -29,11 +29,11 @@ public class TextColour {
 
     public static ArrayList<TextColour> createTextColourList() {
 
-        textColourList.add(new TextColour("Notes", "#FFD9D9"));
-        textColourList.add(new TextColour("Bookmarks", "#D9D9FF"));
-        textColourList.add(new TextColour("Author", "#D9FFD9"));
-        textColourList.add(new TextColour("Title", "#FFFFD9"));
-        textColourList.add(new TextColour("End", "#DDDDDD"));
+        textColourList.add(new TextColour("Vokabel", "#FFD9D9"));
+        //textColourList.add(new TextColour("Bookmarks", "#D9D9FF"));
+      //  textColourList.add(new TextColour("Author", "#D9FFD9"));
+        textColourList.add(new TextColour("Titel", "#FFFFD9"));
+        textColourList.add(new TextColour("Ende/Anfang", "#D9FFD9"));
 
         return textColourList;
     }

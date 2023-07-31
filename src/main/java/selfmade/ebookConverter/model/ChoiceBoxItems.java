@@ -31,7 +31,7 @@ public class ChoiceBoxItems {
 
     public ObservableList<String> updateSecondItems(String selectedFirstItem) {
         if (selectedFirstItem.equals("Anki")) {
-            return FXCollections.observableArrayList("Add Note");
+            return FXCollections.observableArrayList("Vokabel hinzufügen");
         } else if (selectedFirstItem.equals("Remnote")) {
             return FXCollections.observableArrayList("Option A", "Option B");
         } else if (selectedFirstItem.equals("PlainText")) {
@@ -41,12 +41,10 @@ public class ChoiceBoxItems {
     }
 
     public ObservableList<String> updateThirdItems(String selectedSecondItem) {
-        if (selectedSecondItem.equals("Add Note")) {
+        if (selectedSecondItem.equals("Vokabel hinzufügen")) {
             return FXCollections.observableArrayList( textColourList.get(0).getName(),
                     textColourList.get(1).getName(),
-                    textColourList.get(2).getName(),
-                    textColourList.get(3).getName(),
-                    textColourList.get(4).getName());
+                    textColourList.get(2).getName());
         } else if (selectedSecondItem.equals("Option A")) {
             return FXCollections.observableArrayList("Option 1", "Option 2", "Option 3");
         }

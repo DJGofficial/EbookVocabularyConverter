@@ -3,9 +3,9 @@ package selfmade.ebookConverter.view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 
@@ -13,16 +13,14 @@ import javafx.scene.layout.FlowPane;
 
 import javafx.scene.paint.Color;
 
-import selfmade.ebookConverter.controller.EbookController;
+import selfmade.ebookConverter.controller.FileController;
+import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
-import selfmade.ebookConverter.model.EbookModel;
-import selfmade.ebookConverter.model.TextColour;
+import selfmade.ebookConverter.controller.ButtonController;
 
 
 import java.io.IOException;
-import java.lang.annotation.Inherited;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -39,18 +37,20 @@ public class EbookView implements Initializable {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    FlowPane flowPane;
+    public FlowPane flowPane;
     @FXML
     Label createFileLabel;
 
 
-    EbookController ebookController;
-    EbookModel ebookModel= new EbookModel();
+    FileController fileController;
+    ButtonController buttonController;
+
+    TrimAlgorithm trimAlgorithm = new TrimAlgorithm();
 
     //Methods
     @FXML
     private void setChooseFileButton() throws IOException {
-        fileTextField.setText(ebookController.chooseFile());
+        fileTextField.setText(fileController.chooseFile());
     }
 
     @FXML
@@ -58,7 +58,7 @@ public class EbookView implements Initializable {
         createFileLabel.setText("");
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
-            ebookController.userNameFile(name);
+            fileController.userNameFile(name);
             createFileLabel.setText("Successfull created!");
         } else {
             createFileLabel.setTextFill(Color.RED);
@@ -68,15 +68,20 @@ public class EbookView implements Initializable {
 
     @FXML
     private void createButtonText() {
-        flowPane.getChildren().addAll(ebookController.createButtonsFromFile());
+        flowPane.getChildren().addAll(fileController.createButtonsFromFile());
     }
-    @FXML
-    private void doneButtonClicked(){
 
+    @FXML
+    private void doneButtonClicked() {
+        ObservableList<Node> content = flowPane.getChildren();
+        for (Node node : content) {
+            System.out.println(node);        }
+        trimAlgorithm.getTextToVocabulary(optionChoiceBox.getValue());
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ebookController = new EbookController();
+        fileController = new FileController();
 
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
 
@@ -95,9 +100,9 @@ public class EbookView implements Initializable {
             fieldsChoiceBox.setItems(updatedThirdItems);
 
         });
-        fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue)->{
-            System.out.println("ChoiceboxStatus is "+fieldsChoiceBox.getValue());
-           ebookModel.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
+        fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            System.out.println("ChoiceboxStatus is " + fieldsChoiceBox.getValue());
+            buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
 }

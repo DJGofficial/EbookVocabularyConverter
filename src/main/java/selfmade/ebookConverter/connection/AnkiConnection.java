@@ -1,4 +1,4 @@
-package selfmade.ebookConverter.anki;
+package selfmade.ebookConverter.connection;
 
 
 import com.google.gson.JsonElement;
@@ -8,10 +8,9 @@ import com.google.gson.JsonPrimitive;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 
-public class AnkiController {
+public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
