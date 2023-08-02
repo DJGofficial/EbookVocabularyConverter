@@ -74,9 +74,7 @@ public class EbookView implements Initializable {
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
-        for (Node node : content) {
-            System.out.println(node);        }
-        trimAlgorithm.getTextToVocabulary(optionChoiceBox.getValue());
+        trimAlgorithm.getTextToVocabulary(content);//optionChoiceBox.getValue());
     }
 
     @Override

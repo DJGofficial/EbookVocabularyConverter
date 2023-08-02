@@ -6,10 +6,11 @@ import selfmade.ebookConverter.view.EbookView;
 
 public class TrimAlgorithm {
 
-    public void getTextToVocabulary(String value) {
-        if (value.equals("Vokabel hinzufügen")) {
-            System.out.println();
-            }
+    public void getTextToVocabulary(ObservableList<Node> content) {
+        for (Node node : content) {
+            node.lookup(".toggle-button").getStyle();
+            System.out.println(node);
+        }
         }
 
 }
