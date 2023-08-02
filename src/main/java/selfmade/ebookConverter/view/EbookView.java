@@ -45,7 +45,7 @@ public class EbookView implements Initializable {
     FileController fileController;
     ButtonController buttonController;
 
-    TrimAlgorithm trimAlgorithm = new TrimAlgorithm();
+    TrimAlgorithm trimAlgorithm;
 
     //Methods
     @FXML
@@ -74,7 +74,8 @@ public class EbookView implements Initializable {
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
-        trimAlgorithm.getTextToVocabulary(content);//optionChoiceBox.getValue());
+        trimAlgorithm= new TrimAlgorithm(content);
+        trimAlgorithm.getTextToVocabulary();
     }
 
     @Override
