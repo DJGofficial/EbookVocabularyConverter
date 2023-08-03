@@ -75,7 +75,7 @@ public class EbookView implements Initializable {
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
         trimAlgorithm= new TrimAlgorithm(content);
-        trimAlgorithm.getTextToVocabulary();
+        trimAlgorithm.getContentToTextFragments();
     }
 
     @Override

@@ -31,9 +31,9 @@ public class TextColour {
 
         textColourList.add(new TextColour("Vokabel", "#FFD9D9"));
         //textColourList.add(new TextColour("Bookmarks", "#D9D9FF"));
-      //  textColourList.add(new TextColour("Author", "#D9FFD9"));
+        textColourList.add(new TextColour("Art", "#D9E5FF"));
         textColourList.add(new TextColour("Titel", "#FFFFD9"));
-        textColourList.add(new TextColour("Ende/Anfang", "#D9FFD9"));
+        textColourList.add(new TextColour("Zeichen für Ende", "#D9FFD9"));
 
         return textColourList;
     }
