@@ -100,7 +100,6 @@ public class EbookView implements Initializable {
 
         });
         fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("ChoiceboxStatus is " + fieldsChoiceBox.getValue());
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }

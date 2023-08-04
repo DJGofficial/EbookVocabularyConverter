@@ -10,10 +10,10 @@ import java.util.List;
 
 public class TrimAlgorithm {
 
-    private String title;
-    private String type;
-    private String endMark;
-    private String vocabulary;
+    private String title = "";
+    private String type = "";
+    private String endMark = "";
+    private String vocabulary = "";
     private ObservableList<Node> contentList;
 
     private List<String> texts = new ArrayList<>();
@@ -50,6 +50,7 @@ public class TrimAlgorithm {
 
     //Search content for begin/end marks
     private void getMarkings() {
+        System.out.println("GetMarking wurde aufgerufen");
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
             String buttonText = toggleButton.getText();
@@ -69,8 +70,12 @@ public class TrimAlgorithm {
                     System.out.println(type);
 
             }
-
         }
+            extractVocabulary();
+    }
+
+    private void extractVocabulary() {
+        System.out.println("You arte heere");
     }
 
     private void separatTextFragments(String value) {
