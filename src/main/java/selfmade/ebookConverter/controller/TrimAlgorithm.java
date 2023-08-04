@@ -3,16 +3,17 @@ package selfmade.ebookConverter.controller;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
+import selfmade.ebookConverter.model.TextColour;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TrimAlgorithm {
 
-private String title;
-private String type;
-private String endMark;
-private String vocabulary;
+    private String title;
+    private String type;
+    private String endMark;
+    private String vocabulary;
     private ObservableList<Node> contentList;
 
     private List<String> texts = new ArrayList<>();
@@ -33,8 +34,8 @@ private String vocabulary;
             String buttonText = toggleButton.getText();
             texts.add(buttonText);
         }
-       //findAndPrintSpecialEntries();
-         getMarkings();
+        //findAndPrintSpecialEntries();
+        getMarkings();
     }
 
     private void findAndPrintSpecialEntries() {
@@ -53,9 +54,22 @@ private String vocabulary;
             ToggleButton toggleButton = (ToggleButton) node;
             String buttonText = toggleButton.getText();
             String styleString = node.lookup(".toggle-button").getStyle();
-            if (styleString.equals("-fx-background-color: #D9FFD9")) {
-                separatTextFragments(buttonText);
+            switch (styleString) {
+                case "-fx-background-color: #D9FFD9":
+                    endMark = buttonText;//text before endMark is added as unit
+                    System.out.println(endMark);
+                case "-fx-background-color: #FFD9D9":
+                    vocabulary = buttonText;  //word that is later translated
+                    System.out.println(vocabulary);
+                case "-fx-background-color: #FFFFD9":
+                    title = buttonText;//Only include books with this title
+                    System.out.println(title);
+                case "-fx-background-color: #D9E5FF":
+                    type = buttonText;//Only include text with this type
+                    System.out.println(type);
+
             }
+
         }
     }
 
