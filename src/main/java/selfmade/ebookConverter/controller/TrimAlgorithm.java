@@ -18,7 +18,7 @@ public class TrimAlgorithm {
     private ObservableList<Node> contentList;
 
     private List<String> texts = new ArrayList<>();
-    private List<String> entryList = new ArrayList<>();
+    private ArrayList<String> entryList = new ArrayList<>();
 
 
     public TrimAlgorithm(ObservableList<Node> content) {
@@ -45,7 +45,7 @@ public class TrimAlgorithm {
             String styleString = node.lookup(".toggle-button").getStyle();
             switch (styleString) {
                 case "-fx-background-color: #D9FFD9":
-                    endMark = buttonText;//text before endMark is added as unit
+                    endMark = buttonText.trim();//text before endMark is added as unit
                     break;
                 case "-fx-background-color: #FFD9D9":
                     vocabulary = buttonText;  //word that is later translated
@@ -60,31 +60,69 @@ public class TrimAlgorithm {
             }
         }
         extractVocabulary(endMark, vocabulary, titleToAdd, type);
-        divideBlocksAddToList(endMark);
+        divideBlocksAddToList(endMark, vocabulary);
     }
 
     private void extractVocabulary(String endMark, String vocabulary, StringBuilder titleToAdd, String type) {
         System.out.print(endMark + " " + vocabulary + " " + titleToAdd + " " + type);
         for (String text : texts) {
-            //    System.out.print(text);
+            if (endMark.equals(text)) {
+                System.out.println("Does");
+            }
         }
     }
 
-    private void divideBlocksAddToList(String endMark) {
-        StringBuilder entryBuilder = new StringBuilder();
+    private void divideBlocksAddToList(String endMark, String vocabulary) {
+        System.out.println("EndMark " + endMark + "!");
+        boolean found = false;
 
-        for (String text : texts) {
-            if (text.equals(endMark)) {
-                entryList.add(entryBuilder.toString());
-                entryBuilder.setLength(0);
-            } else {
-                entryBuilder.append(text).append(" ");
+        for (int i = 0; i < texts.size(); i++) {
+            if (texts.get(i).trim().equals(endMark)) {
+                System.out.println("Gefunden bei Index: " + i);
+                found = true;
+                break; // Wenn das Element gefunden wurde, beende die Schleife
+            }else{
+                System.out.println("Not found");
             }
+
+
         }
-        if (entryBuilder.length() > 0) {
-            entryList.add(entryBuilder.toString());
+        StringBuilder entryBuilder = new StringBuilder();
+  /*
+        for (String inputText : texts) {
+            int currentIndex = 0;
+
+          while (true) {
+                int targetIndex = inputText.indexOf(endMark, currentIndex);
+                System.out.println("currentIndex: " + currentIndex + ", targetIndex: " + targetIndex);
+
+                if (targetIndex == -1) {
+                    break;
+                }
+                String extractedText = inputText.substring(currentIndex, targetIndex);
+                System.out.println("Extracted Text: " + extractedText);
+
+                entryList.add(extractedText);
+                currentIndex = targetIndex + endMark.length();
+            }
+
+
+        for (String inputText : texts) {
+            int targetIndex = inputText.indexOf(endMark);
+            if (targetIndex != -1) {
+                String extractedText = inputText.substring(0, targetIndex);
+                entryList.add(extractedText);
+            }
+
         }
 
+        // Ausgabe der extrahierten Textteile
+        for (int i = 0; i < entryList.size(); i++) {
+            System.out.println("Index " + i + ": " + entryList.get(i));
+        }
+
+        System.out.println(entryList.get(3));
+         */
     }
 
 
