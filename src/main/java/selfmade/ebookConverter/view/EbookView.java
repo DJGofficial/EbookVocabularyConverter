@@ -40,11 +40,12 @@ public class EbookView implements Initializable {
     public FlowPane flowPane;
     @FXML
     Label createFileLabel;
+    @FXML
+            Label  messageLabel=new Label();
 
 
     FileController fileController;
     ButtonController buttonController;
-
     TrimAlgorithm trimAlgorithm;
 
     //Methods
@@ -59,6 +60,7 @@ public class EbookView implements Initializable {
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             fileController.userNameFile(name);
+            createFileLabel.setTextFill(Color.GREEN);
             createFileLabel.setText("Successfull created!");
         } else {
             createFileLabel.setTextFill(Color.RED);
@@ -74,8 +76,26 @@ public class EbookView implements Initializable {
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
-        trimAlgorithm= new TrimAlgorithm(content);
-        trimAlgorithm.getContentToTextFragments();
+        trimAlgorithm = new TrimAlgorithm(content);
+        messageLabel.setText("");
+
+        boolean[] result = trimAlgorithm.checkContent();
+        boolean hasEndMark = result[0];
+        boolean hasVocabulary = result[1];
+
+        if (hasEndMark && hasVocabulary) {
+            trimAlgorithm.getContentToTextFragments();
+        } else {
+            if (!hasEndMark) {
+                messageLabel.setTextFill(Color.RED);
+                messageLabel.setText("End-Mark fehlt!");
+            }
+            if (!hasVocabulary) {
+                messageLabel.setTextFill(Color.RED);
+                messageLabel.setText("Vokabel fehlt!");
+            }
+        }
+
     }
 
     @Override
