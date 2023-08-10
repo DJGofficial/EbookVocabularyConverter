@@ -41,7 +41,7 @@ public class EbookView implements Initializable {
     @FXML
     Label createFileLabel;
     @FXML
-            Label  messageLabel=new Label();
+    Label messageLabel = new Label();
 
 
     FileController fileController;

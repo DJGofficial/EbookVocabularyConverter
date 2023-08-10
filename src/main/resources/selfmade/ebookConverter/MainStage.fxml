@@ -47,16 +47,17 @@
                     <Insets />
                 </opaqueInsets>
             </TextField>
+         <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
          <HBox prefHeight="100.0" prefWidth="200.0">
             <children>
                     <ChoiceBox fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="95.0">
                   <HBox.margin>
-                     <Insets top="20.0" />
+                     <Insets />
                   </HBox.margin>
                </ChoiceBox>
                   <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" text="Done">
                   <HBox.margin>
-                     <Insets left="15.0" top="20.0" />
+                     <Insets left="15.0" />
                   </HBox.margin>
                   </Button>
             </children>

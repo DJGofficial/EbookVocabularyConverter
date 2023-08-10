@@ -79,6 +79,7 @@ public class TrimAlgorithm {
             }
         }
         extractVocabulary(endMark, vocabulary, titleToAdd, type);
+        textBlockStorage(endMark);
         runListDetermineDistance(endMark, vocabulary);
     }
 
@@ -90,7 +91,7 @@ public class TrimAlgorithm {
     private void runListDetermineDistance(String endMark, String vocabulary) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
-        int distanceIndex;
+        int distanceIndex = 0;
 
         boolean found = false;
         for (int i = 0; i < texts.size(); i++) {
@@ -110,10 +111,34 @@ public class TrimAlgorithm {
             }
 
         }
+        findVocabulary(distanceIndex);
 
-        StringBuilder entryBuilder = new StringBuilder();
 
+    }
 
+    private void findVocabulary(int distanceIndex) {
+        for (String block : entryList) {
+            String[] lines = block.split("\n");
+            String vorletzterString = lines[lines.length - distanceIndex];
+            System.out.println("Vokabel " + vorletzterString);
+        }
+    }
+
+    private void textBlockStorage(String endMark) {
+        StringBuilder currentBlock = new StringBuilder();
+
+        for (String line : texts) {
+            if (line.trim().equals(endMark)) {
+                entryList.add(currentBlock.toString());
+                currentBlock = new StringBuilder();
+            } else {
+                currentBlock.append(line).append("\n");
+            }
+        }
+        System.out.println("Size " + entryList.size());
+        System.out.println("Eintrag 40 " + entryList.get(40));
+        //  for (String block : entryList) {
+        //  }
     }
 
 
