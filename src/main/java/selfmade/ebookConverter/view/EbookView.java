@@ -79,7 +79,7 @@ public class EbookView implements Initializable {
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
-        trimAlgorithm = new TrimAlgorithm(content);
+        trimAlgorithm = new TrimAlgorithm(content,this);
         messageLabel.setText("");
 
         boolean[] result = trimAlgorithm.checkContent();
@@ -101,25 +101,27 @@ public class EbookView implements Initializable {
 
     }
 
+    @FXML
     public void fillFlowPaneWithVocabulary() {
-        //Label emptyLabel = new Label("This is a test");
-        // if (flowPane.getChildren()!=null)
-        //flowPane.getChildren().add(emptyLabel);
-        System.out.println("You are here");
+        // Label emptyLabel = new Label("This is a test");
+        // if (flowPane.getChildren() != null)
+        //   flowPane.getChildren().add(emptyLabel);
     }
 
     @FXML
     public void messageChange() {
+        //  EbookView ebookView = new EbookView();
         System.out.println("Reached messageChange");
         Platform.runLater(() -> {
+            messageLabel.setText("");
             messageLabel.setTextFill(Color.RED);
-            messageLabel.setText("Text Blöcke sind unterschiedlich");//, bitte nenne Titel oder Art");
+            messageLabel.setText("Text Blöcke sind unterschiedlich, bitte nenne Titel oder Art");
         });
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         fileController = new FileController();
 
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();

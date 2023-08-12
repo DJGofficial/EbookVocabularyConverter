@@ -21,10 +21,10 @@ public class TrimAlgorithm {
     private List<String> texts = new ArrayList<>();
     private ArrayList<String> entryList = new ArrayList<>();
 
-    EbookView ebookView = new EbookView();
+    EbookView ebookView;
 
-    public TrimAlgorithm(ObservableList<Node> content) {
-
+    public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
+        this.ebookView = ebookView;
         this.contentList = content;
 
     }
@@ -126,6 +126,7 @@ public class TrimAlgorithm {
                 String vorletzterString = lines[lines.length - distanceIndex];
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.messageChange();
+                break;
             }
         }
         ebookView.fillFlowPaneWithVocabulary();
