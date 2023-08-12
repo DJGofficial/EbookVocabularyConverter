@@ -17,7 +17,6 @@ public class ButtonController {
         buttonChoiceBoxStatus = value;
     }
     public String getButtonColour() {
-        System.out.println(buttonChoiceBoxStatus);
         if (buttonChoiceBoxStatus != null) {
             for (TextColour tC : TextColour.createTextColourList()) {
                 if (buttonChoiceBoxStatus.equals(tC.getName())) {

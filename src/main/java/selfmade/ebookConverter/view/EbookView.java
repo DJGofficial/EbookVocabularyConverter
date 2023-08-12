@@ -1,9 +1,11 @@
 package selfmade.ebookConverter.view;
 
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -13,6 +15,7 @@ import javafx.scene.layout.FlowPane;
 
 import javafx.scene.paint.Color;
 
+import selfmade.ebookConverter.MainStage;
 import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
@@ -95,6 +98,23 @@ public class EbookView implements Initializable {
                 messageLabel.setText("Vokabel fehlt!");
             }
         }
+
+    }
+
+    public void fillFlowPaneWithVocabulary() {
+        //Label emptyLabel = new Label("This is a test");
+        // if (flowPane.getChildren()!=null)
+        //flowPane.getChildren().add(emptyLabel);
+        System.out.println("You are here");
+    }
+
+    @FXML
+    public void messageChange() {
+        System.out.println("Reached messageChange");
+        Platform.runLater(() -> {
+            messageLabel.setTextFill(Color.RED);
+            messageLabel.setText("Text Blöcke sind unterschiedlich");//, bitte nenne Titel oder Art");
+        });
 
     }
 
