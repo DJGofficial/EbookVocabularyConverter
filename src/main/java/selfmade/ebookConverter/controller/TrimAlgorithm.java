@@ -1,5 +1,6 @@
 package selfmade.ebookConverter.controller;
 
+import javafx.scene.control.Button;
 import selfmade.ebookConverter.view.EbookView;
 
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ public class TrimAlgorithm {
     private ArrayList<String> entryList = new ArrayList<>();
 
     EbookView ebookView;
+    ButtonController buttonController;
 
     public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
         this.ebookView = ebookView;
@@ -120,16 +122,23 @@ public class TrimAlgorithm {
     }
 
     private void findVocabulary(int distanceIndex) {
+        buttonController=new ButtonController();
+        ArrayList<String> returnVocList= new ArrayList<>();
+        String pattern = "[^a-zA-Z0-9]";
+
         for (String block : entryList) {
             String[] lines = block.split("\n");
             try {
                 String vorletzterString = lines[lines.length - distanceIndex];
+                vorletzterString.replaceAll(pattern, "");
+                returnVocList.add(vorletzterString);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.messageChange();
                 break;
             }
         }
-        ebookView.fillFlowPaneWithVocabulary();
+        List<Button> buttonList=buttonController.createVocButton(returnVocList);
+       ebookView.fillFlowPaneWithVocabulary(buttonList);
     }
 
     private void textBlockStorage(String endMark) {

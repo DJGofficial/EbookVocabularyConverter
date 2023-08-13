@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 
 import javafx.scene.layout.FlowPane;
 
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 import selfmade.ebookConverter.MainStage;
@@ -24,6 +25,8 @@ import selfmade.ebookConverter.controller.ButtonController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -79,7 +82,7 @@ public class EbookView implements Initializable {
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
-        trimAlgorithm = new TrimAlgorithm(content,this);
+        trimAlgorithm = new TrimAlgorithm(content, this);
         messageLabel.setText("");
 
         boolean[] result = trimAlgorithm.checkContent();
@@ -102,21 +105,36 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    public void fillFlowPaneWithVocabulary() {
-        // Label emptyLabel = new Label("This is a test");
-        // if (flowPane.getChildren() != null)
-        //   flowPane.getChildren().add(emptyLabel);
+    public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
+        flowPane.getChildren().clear();
+        for (int i = 0; i < buttonList.size(); i++) {
+            Button button = buttonList.get(i);
+            flowPane.getChildren().add(button);
+
+            //Doesnt work
+            Region spacer = new Region();
+            spacer.setPrefHeight(10);
+            flowPane.getChildren().add(spacer);
+
+            button.setOnAction(event -> {
+                Button clickedButton = (Button) event.getSource();
+                int buttonIndex = buttonList.indexOf(clickedButton);
+
+                if (buttonIndex >= 0) {
+                    buttonList.remove(buttonIndex);
+                    fillFlowPaneWithVocabulary(buttonList);
+                }
+            });
+        }
+
     }
 
     @FXML
     public void messageChange() {
-        //  EbookView ebookView = new EbookView();
-        System.out.println("Reached messageChange");
-        Platform.runLater(() -> {
-            messageLabel.setText("");
-            messageLabel.setTextFill(Color.RED);
-            messageLabel.setText("Text Blöcke sind unterschiedlich, bitte nenne Titel oder Art");
-        });
+        messageLabel.setText("");
+        messageLabel.setTextFill(Color.RED);
+        messageLabel.setText("Bitte markiere Titel oder Art");
+
     }
 
     @Override
