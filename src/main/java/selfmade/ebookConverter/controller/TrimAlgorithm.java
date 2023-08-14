@@ -83,15 +83,55 @@ public class TrimAlgorithm {
                     break;
             }
         }
-        extractVocabulary(endMark, vocabulary, titleToAdd, type);
-        textBlockStorage(endMark);
+        //extractVocabulary(endMark, vocabulary, titleToAdd, type);
+        textBlockStorage(endMark, String.valueOf(titleToAdd), type);
+
+        //Process is divided with textBlockStorage
         runListDetermineDistance(endMark, vocabulary);
     }
 
+    private void textBlockStorage(String endMark, String title, String type) {
+        StringBuilder currentBlock = new StringBuilder();
+
+        for (String line : texts) {
+            if (line.trim().equals(endMark)) {
+                entryList.add(currentBlock.toString());
+                currentBlock = new StringBuilder();
+            } else {
+                currentBlock.append(line).append("\n");
+            }
+        }
+        System.out.println("Type " + type);
+        System.out.println("Title " + title);
+        for (int i = 0; i < entryList.size(); i++) {
+            String line = entryList.get(i);
+                   System.out.println(entryList.get(1));
+                if (line.trim().equals(type.trim())) {
+                    System.out.println("EntryList textblock " + entryList.indexOf(line));
+                }
+          /*  if (title != null && !type.isEmpty()) {
+                System.out.println("Title " + title);
+            }
+
+            if (type != null && !title.isEmpty()) {
+                System.out.println("Type " + type);
+            }
+
+           */
+
+        }
+        System.out.println("Size " + entryList.size());
+        //  for (String block : entryList) {
+        //  }
+    }
+
+/*
     private void extractVocabulary(String endMark, String vocabulary, StringBuilder titleToAdd, String type) {
         System.out.print(endMark + " " + vocabulary + " " + titleToAdd + " " + type);
 
     }
+
+ */
 
     private void runListDetermineDistance(String endMark, String vocabulary) {
         int vocabularyIndex = 0;
@@ -122,39 +162,23 @@ public class TrimAlgorithm {
     }
 
     private void findVocabulary(int distanceIndex) {
-        buttonController=new ButtonController();
-        ArrayList<String> returnVocList= new ArrayList<>();
+        buttonController = new ButtonController();
+        ArrayList<String> returnVocList = new ArrayList<>();
         String pattern = "[^a-zA-Z0-9]";
 
         for (String block : entryList) {
             String[] lines = block.split("\n");
             try {
                 String vorletzterString = lines[lines.length - distanceIndex];
-                vorletzterString.replaceAll(pattern, "");
-                returnVocList.add(vorletzterString);
+                String replacedRegex = vorletzterString.replaceAll(pattern, "");
+                returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.messageChange();
                 break;
             }
         }
-        List<Button> buttonList=buttonController.createVocButton(returnVocList);
-       ebookView.fillFlowPaneWithVocabulary(buttonList);
-    }
-
-    private void textBlockStorage(String endMark) {
-        StringBuilder currentBlock = new StringBuilder();
-
-        for (String line : texts) {
-            if (line.trim().equals(endMark)) {
-                entryList.add(currentBlock.toString());
-                currentBlock = new StringBuilder();
-            } else {
-                currentBlock.append(line).append("\n");
-            }
-        }
-        System.out.println("Size " + entryList.size());
-        //  for (String block : entryList) {
-        //  }
+        List<Button> buttonList = buttonController.createVocButton(returnVocList);
+        ebookView.fillFlowPaneWithVocabulary(buttonList);
     }
 
 
