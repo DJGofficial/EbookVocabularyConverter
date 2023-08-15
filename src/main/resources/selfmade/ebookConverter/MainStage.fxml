@@ -55,11 +55,16 @@
                      <Insets />
                   </HBox.margin>
                </ChoiceBox>
-                  <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" text="Done">
+                  <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="73.0" text="Done">
                   <HBox.margin>
                      <Insets left="15.0" />
                   </HBox.margin>
                   </Button>
+               <Button fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="96.0" text="Translate">
+                  <HBox.margin>
+                     <Insets left="75.0" />
+                  </HBox.margin>
+               </Button>
             </children>
          </HBox>
 
@@ -80,17 +85,26 @@
       <children>
             <VBox prefHeight="59.0" prefWidth="591.0">
                 <children>
-                    <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File">
-                  <VBox.margin>
-                     <Insets left="10.0" top="5.0" />
-                  </VBox.margin></Button>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                          <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File">
+                        <HBox.margin>
+                           <Insets left="15.0" top="5.0" />
+                        </HBox.margin>
+                     </Button>
+                          <Button fx:id="ankiButton" disable="true" mnemonicParsing="false" text="Anki">
+                        <HBox.margin>
+                           <Insets left="15.0" top="5.0" />
+                        </HBox.margin>
+                     </Button>
+                  </children>
+               </HBox>
                     <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
                         <VBox.margin>
-                            <Insets top="5.0" />
+                            <Insets left="15.0" right="15.0" top="5.0" />
                         </VBox.margin>
                     </TextField>
                <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="570.0" />
-                    <Button fx:id="ankiButton" mnemonicParsing="false" text="Anki" />
                 </children>
             </VBox>
       </children>

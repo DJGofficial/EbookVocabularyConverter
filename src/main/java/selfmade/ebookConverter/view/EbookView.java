@@ -17,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 import selfmade.ebookConverter.MainStage;
+import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
 import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
@@ -25,15 +26,13 @@ import selfmade.ebookConverter.controller.ButtonController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class EbookView implements Initializable {
 
     @FXML
-    Button fileButton, ankiButton, doneButton, createButton;
+    Button fileButton, ankiButton, doneButton, createButton, translateButton;
     @FXML
     TextField fileTextField, createFileTextField;
     @FXML
@@ -81,6 +80,7 @@ public class EbookView implements Initializable {
 
     @FXML
     private void doneButtonClicked() {
+        translateButton.setDisable(false);
         ObservableList<Node> content = flowPane.getChildren();
         trimAlgorithm = new TrimAlgorithm(content, this);
         messageLabel.setText("");
@@ -105,16 +105,28 @@ public class EbookView implements Initializable {
     }
 
     @FXML
+    private void translateButtonClicked() {
+        System.out.println("Translate Clicked");
+        GoogleTranslateAPIConnection connection;
+        HashMap<String, String> translation = new HashMap<>();
+        for (Node node : flowPane.getChildren()) {
+            if (node instanceof Button) {
+                Button button = (Button) node;
+                translation.put(button.getText(), null);
+            }
+        }
+        connection = new GoogleTranslateAPIConnection(translation);
+
+    }
+
+    @FXML
     public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
+        translateButton= new Button();
+        translateButton.setVisible(true);
         flowPane.getChildren().clear();
         for (int i = 0; i < buttonList.size(); i++) {
             Button button = buttonList.get(i);
             flowPane.getChildren().add(button);
-
-            //Doesnt work
-            Region spacer = new Region();
-            spacer.setPrefHeight(10);
-            flowPane.getChildren().add(spacer);
 
             button.setOnAction(event -> {
                 Button clickedButton = (Button) event.getSource();
