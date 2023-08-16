@@ -105,7 +105,7 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    private void translateButtonClicked() {
+    private void translateButtonClicked() throws IOException {
         System.out.println("Translate Clicked");
         GoogleTranslateAPIConnection connection;
         HashMap<String, String> translation = new HashMap<>();
