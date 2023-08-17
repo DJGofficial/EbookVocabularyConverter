@@ -121,7 +121,7 @@ public class EbookView implements Initializable {
 
     @FXML
     public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
-        translateButton= new Button();
+        translateButton = new Button();
         translateButton.setVisible(true);
         flowPane.getChildren().clear();
         for (int i = 0; i < buttonList.size(); i++) {
@@ -137,6 +137,25 @@ public class EbookView implements Initializable {
                     fillFlowPaneWithVocabulary(buttonList);
                 }
             });
+        }
+    }
+
+    @FXML
+    public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
+        flowPane.getChildren().clear();
+
+        for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
+            Button button = new Button(entry.getKey()+" "+entry.getValue());
+            button.setOnAction(event -> {
+                Button clickedButton = (Button) event.getSource();
+                int buttonIndex = buttonList.indexOf(clickedButton);
+
+                if (buttonIndex >= 0) {
+                    buttonList.remove(buttonIndex);
+                    fillFlowPaneWithVocabulary(buttonList);
+                }
+            });
+
         }
 
     }
@@ -175,6 +194,7 @@ public class EbookView implements Initializable {
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
+
 }
 
 

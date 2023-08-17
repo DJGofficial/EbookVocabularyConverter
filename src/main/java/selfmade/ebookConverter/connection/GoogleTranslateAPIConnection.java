@@ -7,51 +7,54 @@ import com.google.cloud.translate.Translate;
 
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+
+
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class GoogleTranslateAPIConnection {
     EbookView ebookView;
     String targetLanguage = "de";
 
-    // Translate translate = TranslateOptions.getDefaultInstance().getService();
-    // key="AIzaSyDhLLEqS-vNxTyZrW9S3AnEsuzqG8IF3No";
-    //Dienstkonto key="22e740ba2b5b462c9b9f9de75329e47dd99dda1b";
-    //projectid="ebookreaderapi";
-    public GoogleTranslateAPIConnection(HashMap vocList) throws IOException {
+    public GoogleTranslateAPIConnection(HashMap<?, ?> vocList) throws IOException {
         ebookView = new EbookView();
-        String textToTranslate = "Hello, world!";
-        String targetLanguage = "es"; // Spanish
+        translateAndReturnHashMap(vocList);
 
-        // Create a Translate instance
-        Translate translate = TranslateOptions.getDefaultInstance().getService();
+    }
 
-        // Translate the text
-        Translation translation = translate.translate(textToTranslate, Translate.TranslateOption.targetLanguage(targetLanguage));
+    public void translateAndReturnHashMap(HashMap<?, ?> vocList) {
+        HashMap<String, String> translatedMap = new HashMap<>();
 
-        // Print the translation
-        System.out.println("Original Text: " + textToTranslate);
-        System.out.println("Translated Text: " + translation.getTranslatedText());
+        for (Map.Entry<?, ?> entry : vocList.entrySet()) {
+            try {
+                Translate translate = TranslateOptions.getDefaultInstance().getService();
+                System.out.println("Entry.getKey "+ entry.getKey());
+                Translation translation = translate.translate(String.valueOf(entry.getKey()),
+                        Translate.TranslateOption.sourceLanguage("en"),
+                        Translate.TranslateOption.targetLanguage("de"));
+
+                String originalText = String.valueOf(entry.getKey());
+                String translatedText = (translation != null && translation.getTranslatedText() != null)
+                        ? translation.getTranslatedText()
+                        : "Translation failed for: " + entry.getValue();
+
+                translatedMap.put(originalText, translatedText);
+            } catch (Exception e) {
+               System.err.println("Error translating: " + e.getMessage());
+            }
+        }
+        for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
+            System.out.println("Original Text: " + entry.getKey());
+            System.out.println("Translated Text: " + entry.getValue());
+            System.out.println();
+        }
+        ebookView.fillFlowPaneTranslatedMap(translatedMap);
     }
 }
-//  Translation translation =
-           /*
-            translate.translate(
-                        "Hola Mundo!",
-                        Translate.TranslateOption.sourceLanguage("es"),
-                        Translate.TranslateOption.targetLanguage("de"),
-                        // Use "base" for standard edition, "nmt" for the premium model.
-                        Translate.TranslateOption.model("nmt"));
-
-
-
-        System.out.printf("TranslatedText:\nText: %s\n", translation.getTranslatedText());
-
-            */
-
 
 /*
         GoogleCredentials credentials = GoogleCredentials.getApplicationDefault();
