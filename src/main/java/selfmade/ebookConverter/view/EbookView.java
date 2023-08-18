@@ -53,6 +53,7 @@ public class EbookView implements Initializable {
     ButtonController buttonController;
     TrimAlgorithm trimAlgorithm;
 
+
     //Methods
     @FXML
     private void setChooseFileButton() throws IOException {
@@ -115,7 +116,7 @@ public class EbookView implements Initializable {
                 translation.put(button.getText(), null);
             }
         }
-        connection = new GoogleTranslateAPIConnection(translation);
+        connection = new GoogleTranslateAPIConnection(translation,this);
 
     }
 
@@ -148,14 +149,10 @@ public class EbookView implements Initializable {
             Button button = new Button(entry.getKey()+" "+entry.getValue());
             button.setOnAction(event -> {
                 Button clickedButton = (Button) event.getSource();
-                int buttonIndex = buttonList.indexOf(clickedButton);
+                flowPane.getChildren().remove(clickedButton);
 
-                if (buttonIndex >= 0) {
-                    buttonList.remove(buttonIndex);
-                    fillFlowPaneWithVocabulary(buttonList);
-                }
             });
-
+            flowPane.getChildren().add(button);
         }
 
     }

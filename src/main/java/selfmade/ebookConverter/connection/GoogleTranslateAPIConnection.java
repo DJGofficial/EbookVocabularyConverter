@@ -20,8 +20,8 @@ public class GoogleTranslateAPIConnection {
     EbookView ebookView;
     String targetLanguage = "de";
 
-    public GoogleTranslateAPIConnection(HashMap<?, ?> vocList) throws IOException {
-        ebookView = new EbookView();
+    public GoogleTranslateAPIConnection(HashMap<?, ?> vocList, EbookView ebookView) throws IOException {
+        this.ebookView = ebookView;
         translateAndReturnHashMap(vocList);
 
     }
@@ -32,7 +32,6 @@ public class GoogleTranslateAPIConnection {
         for (Map.Entry<?, ?> entry : vocList.entrySet()) {
             try {
                 Translate translate = TranslateOptions.getDefaultInstance().getService();
-                System.out.println("Entry.getKey "+ entry.getKey());
                 Translation translation = translate.translate(String.valueOf(entry.getKey()),
                         Translate.TranslateOption.sourceLanguage("en"),
                         Translate.TranslateOption.targetLanguage("de"));
@@ -44,7 +43,7 @@ public class GoogleTranslateAPIConnection {
 
                 translatedMap.put(originalText, translatedText);
             } catch (Exception e) {
-               System.err.println("Error translating: " + e.getMessage());
+                System.err.println("Error translating: " + e.getMessage());
             }
         }
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
