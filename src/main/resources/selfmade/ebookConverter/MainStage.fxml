@@ -92,7 +92,7 @@
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                          <Button fx:id="ankiButton" disable="true" mnemonicParsing="false" text="Anki">
+                          <Button fx:id="ankiButton" disable="true" mnemonicParsing="false" onAction="#ankiButtonClicked" text="Anki">
                         <HBox.margin>
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>

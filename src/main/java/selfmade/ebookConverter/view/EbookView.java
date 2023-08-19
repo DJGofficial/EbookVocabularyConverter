@@ -116,14 +116,12 @@ public class EbookView implements Initializable {
                 translation.put(button.getText(), null);
             }
         }
-        connection = new GoogleTranslateAPIConnection(translation,this);
+        connection = new GoogleTranslateAPIConnection(translation, this);
 
     }
 
     @FXML
     public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
-        translateButton = new Button();
-        translateButton.setVisible(true);
         flowPane.getChildren().clear();
         for (int i = 0; i < buttonList.size(); i++) {
             Button button = buttonList.get(i);
@@ -143,10 +141,10 @@ public class EbookView implements Initializable {
 
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
+        ankiButton.setDisable(false);
         flowPane.getChildren().clear();
-
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
-            Button button = new Button(entry.getKey()+" "+entry.getValue());
+            Button button = new Button(entry.getKey() + " " + entry.getValue());
             button.setOnAction(event -> {
                 Button clickedButton = (Button) event.getSource();
                 flowPane.getChildren().remove(clickedButton);
@@ -156,7 +154,10 @@ public class EbookView implements Initializable {
         }
 
     }
+    @FXML
+    public void ankiButtonClicked(){
 
+    }
     @FXML
     public void messageChange() {
         messageLabel.setText("");
