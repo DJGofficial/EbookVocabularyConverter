@@ -1,22 +1,24 @@
 package selfmade.ebookConverter.view;
 
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 
 import javafx.scene.layout.FlowPane;
 
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
-import selfmade.ebookConverter.MainStage;
+import javafx.stage.Stage;
 import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
 import selfmade.ebookConverter.controller.FileController;
@@ -156,11 +158,30 @@ public class EbookView implements Initializable {
         }
 
     }
+
     @FXML
-    public void ankiButtonClicked(){
-        ankiConnection=new AnkiConnection();
-ankiConnection.fetchDeckNames();
+    public void ankiButtonClicked() {
+        ankiConnection = new AnkiConnection();
+        ObservableList<String> deckList = ankiConnection.fetchDeckNames();
+        ankiButton.setOnAction(new EventHandler<ActionEvent>() {
+                                   public void handle(ActionEvent event) {
+                                       Parent root;
+                                       try {
+                                           root = FXMLLoader.load(getClass().getClassLoader().getResource("selfmade.ebookConverter.view.AnkiDeckChoose"));//, resources);
+                                           Stage stage = new Stage();
+                                           stage.setTitle("My New Stage Title");
+                                           stage.setScene(new Scene(root, 450, 450));
+                                           stage.show();
+                                           // Hide this current window (if this is what you want)
+                                           //((Node) (event.getSource())).getScene().getWindow().hide();
+                                       } catch (IOException e) {
+                                           e.printStackTrace();
+                                       }
+                                   }
+                               }
+        );
     }
+
     @FXML
     public void messageChange() {
         messageLabel.setText("");

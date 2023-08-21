@@ -1,17 +1,13 @@
 package selfmade.ebookConverter.connection;
 
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 
 
 public class AnkiConnection {
@@ -54,10 +50,14 @@ public class AnkiConnection {
                 }
 
                 in.close();
-
-                // Parse JSON response and populate deckNames list
-                // JSON parsing code goes here...
+                String jsonString = response.toString();
+                jsonString = jsonString.substring(1, jsonString.length() - 1); // Remove enclosing []
+                String[] deckNameArray = jsonString.split(",");
+                for (String deckName : deckNameArray) {
+                    deckNames.add(deckName.replaceAll("\"", ""));
+                }
             }
+
         } catch (Exception e) {
             //message to Ebookview is missing
             e.printStackTrace();
@@ -65,6 +65,7 @@ public class AnkiConnection {
         System.out.println(deckNames);
         return deckNames;
     }
+
     public static void addCard(String deckName, String modelName, String front, String back) throws IOException {
         try {
             URL url = new URL(ANKI_CONNECT_URL);
