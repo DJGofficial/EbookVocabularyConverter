@@ -17,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 
 import selfmade.ebookConverter.MainStage;
+import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
 import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.controller.TrimAlgorithm;
@@ -52,6 +53,7 @@ public class EbookView implements Initializable {
     FileController fileController;
     ButtonController buttonController;
     TrimAlgorithm trimAlgorithm;
+    AnkiConnection ankiConnection;
 
 
     //Methods
@@ -156,7 +158,8 @@ public class EbookView implements Initializable {
     }
     @FXML
     public void ankiButtonClicked(){
-
+        ankiConnection=new AnkiConnection();
+ankiConnection.fetchDeckNames();
     }
     @FXML
     public void messageChange() {

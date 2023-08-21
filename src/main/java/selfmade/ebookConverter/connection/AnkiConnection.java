@@ -5,10 +5,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+
 
 public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
@@ -24,6 +28,43 @@ public class AnkiConnection {
         addCard(deckName, modelName, front, back);
     }
 
+    public ObservableList<String> fetchDeckNames() {
+        ObservableList<String> deckNames = FXCollections.observableArrayList();
+
+        try {
+            URL url = new URL(ANKI_CONNECT_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+
+            OutputStream os = connection.getOutputStream();
+            String request = "{\"action\": \"deckNames\", \"version\": 6}";
+            os.write(request.getBytes());
+            os.flush();
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                in.close();
+
+                // Parse JSON response and populate deckNames list
+                // JSON parsing code goes here...
+            }
+        } catch (Exception e) {
+            //message to Ebookview is missing
+            e.printStackTrace();
+        }
+        System.out.println(deckNames);
+        return deckNames;
+    }
     public static void addCard(String deckName, String modelName, String front, String back) throws IOException {
         try {
             URL url = new URL(ANKI_CONNECT_URL);
