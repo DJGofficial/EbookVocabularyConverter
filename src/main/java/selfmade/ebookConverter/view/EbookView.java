@@ -1,6 +1,7 @@
 package selfmade.ebookConverter.view;
 
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -160,27 +161,82 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    public void ankiButtonClicked() {
+    public void ankiButtonClicked(ActionEvent event) throws Exception {//ActionEvent event) {
         ankiConnection = new AnkiConnection();
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
+      //  AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose(deckList);
+        /*
+        try {
+            FXMLLoader loader = new FXMLLoader(AnkiDeckChoose.class.getResource("AnkiDeckChoose.fxml"));//getClass().getResource("selfmade/ebookConverter/MainStage.fxml"));
+            Parent root = loader.load();
+
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.setTitle("Neues Fenster");
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+         */
+        //ankiDeckChoose.initialize(URL url,ResourceBundle resourceBundle);
+/*
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/selfmade/ebookConverter/AnkiDeckChoose.fxml"));
+        Parent root = loader.load();
+
+        // Erstelle ein neues Fenster und setze die Scene
+        Stage stage = new Stage();
+        stage.setTitle("Anki Deck Chooser");
+        stage.setScene(new Scene(root));
+
+        // Zeige das Fenster an
+        stage.show();
+
+ */
+    }
+    // Button clickedButton = (Button) event.getSource();
+/*
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("selfmade/ebookConverter/AnkiDeckChoose.fxml"));
+           Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("New Window Title");
+            stage.setScene(new Scene(root, 450, 450));
+            stage.show();
+
+            // Schließe das aktuelle Fenster (wenn gewünscht)
+       //     Stage currentStage = (Stage) clickedButton.getScene().getWindow();
+         //   currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        /*
+
         ankiButton.setOnAction(new EventHandler<ActionEvent>() {
                                    public void handle(ActionEvent event) {
                                        Parent root;
                                        try {
-                                           root = FXMLLoader.load(getClass().getClassLoader().getResource("selfmade.ebookConverter.view.AnkiDeckChoose"));//, resources);
+                                           URL resourceURL = getClass().getClassLoader().getResource("/home/E_Little/IdeaProjects/EbookVocabularyConverter/src/main/resources/selfmade/ebookConverter/AnkiDeckChoose.fxml");
+                                           if (resourceURL == null) {
+                                               System.out.println("Resource not found!");
+                                               return;
+                                           }
+
+                                           root = FXMLLoader.load(resourceURL);
                                            Stage stage = new Stage();
                                            stage.setTitle("My New Stage Title");
                                            stage.setScene(new Scene(root, 450, 450));
                                            stage.show();
-                                           // Hide this current window (if this is what you want)
-                                           //((Node) (event.getSource())).getScene().getWindow().hide();
                                        } catch (IOException e) {
                                            e.printStackTrace();
                                        }
                                    }
                                }
-        );
-    }
+
+        );*/
+
 
     @FXML
     public void messageChange() {
@@ -216,6 +272,7 @@ public class EbookView implements Initializable {
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
+
 
 }
 
