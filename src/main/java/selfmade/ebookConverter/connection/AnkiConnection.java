@@ -4,6 +4,7 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -13,6 +14,12 @@ import java.net.URL;
 public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
+
+    EbookView ebookView= new EbookView();
+
+    public AnkiConnection(EbookView ebookView) {
+        this.ebookView = ebookView;
+    }
 
     public static void main(String[] args) throws IOException {
         String deckName = "ZZDeck";
@@ -59,7 +66,8 @@ public class AnkiConnection {
             }
 
         } catch (Exception e) {
-            //message to Ebookview is missing
+            System.out.println("CachException arrived");
+            ebookView.setBottomLabelMessage("Please connect to Anki, see ... for further help");
             e.printStackTrace();
         }
         System.out.println(deckNames);

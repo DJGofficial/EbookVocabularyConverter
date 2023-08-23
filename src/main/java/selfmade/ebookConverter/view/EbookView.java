@@ -48,7 +48,7 @@ public class EbookView implements Initializable {
     @FXML
     public FlowPane flowPane;
     @FXML
-    Label createFileLabel;
+    Label bottomMessageLabel = new Label();
     @FXML
     Label messageLabel = new Label();
 
@@ -67,21 +67,28 @@ public class EbookView implements Initializable {
 
     @FXML
     private void setCreateButton() {
-        createFileLabel.setText("");
+        bottomMessageLabel.setText("");
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             fileController.userNameFile(name);
-            createFileLabel.setTextFill(Color.GREEN);
-            createFileLabel.setText("Successfull created!");
+            bottomMessageLabel.setTextFill(Color.GREEN);
+            bottomMessageLabel.setText("Successfull created!");
         } else {
-            createFileLabel.setTextFill(Color.RED);
-            createFileLabel.setText("Please enter a name for your file");
+            bottomMessageLabel.setTextFill(Color.RED);
+            bottomMessageLabel.setText("Please enter a name for your file");
         }
     }
 
     @FXML
     private void createButtonText() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
+    }
+
+    @FXML
+    public void setBottomLabelMessage(String message) {
+        bottomMessageLabel.setTextFill(Color.RED);
+        bottomMessageLabel.setText(message);
+
     }
 
     @FXML
@@ -112,7 +119,6 @@ public class EbookView implements Initializable {
 
     @FXML
     private void translateButtonClicked() throws IOException {
-        System.out.println("Translate Clicked");
         GoogleTranslateAPIConnection connection;
         HashMap<String, String> translation = new HashMap<>();
         for (Node node : flowPane.getChildren()) {
@@ -162,81 +168,11 @@ public class EbookView implements Initializable {
 
     @FXML
     public void ankiButtonClicked(ActionEvent event) throws Exception {//ActionEvent event) {
-        ankiConnection = new AnkiConnection();
+        ankiConnection = new AnkiConnection(this);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
-      //  AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose(deckList);
-        /*
-        try {
-            FXMLLoader loader = new FXMLLoader(AnkiDeckChoose.class.getResource("AnkiDeckChoose.fxml"));//getClass().getResource("selfmade/ebookConverter/MainStage.fxml"));
-            Parent root = loader.load();
-
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.setTitle("Neues Fenster");
-            newStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-         */
-        //ankiDeckChoose.initialize(URL url,ResourceBundle resourceBundle);
-/*
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/selfmade/ebookConverter/AnkiDeckChoose.fxml"));
-        Parent root = loader.load();
-
-        // Erstelle ein neues Fenster und setze die Scene
-        Stage stage = new Stage();
-        stage.setTitle("Anki Deck Chooser");
-        stage.setScene(new Scene(root));
-
-        // Zeige das Fenster an
-        stage.show();
-
- */
+        AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
+        ankiDeckChoose.callWindowAddDeckList(deckList);
     }
-    // Button clickedButton = (Button) event.getSource();
-/*
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("selfmade/ebookConverter/AnkiDeckChoose.fxml"));
-           Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("New Window Title");
-            stage.setScene(new Scene(root, 450, 450));
-            stage.show();
-
-            // Schließe das aktuelle Fenster (wenn gewünscht)
-       //     Stage currentStage = (Stage) clickedButton.getScene().getWindow();
-         //   currentStage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-        /*
-
-        ankiButton.setOnAction(new EventHandler<ActionEvent>() {
-                                   public void handle(ActionEvent event) {
-                                       Parent root;
-                                       try {
-                                           URL resourceURL = getClass().getClassLoader().getResource("/home/E_Little/IdeaProjects/EbookVocabularyConverter/src/main/resources/selfmade/ebookConverter/AnkiDeckChoose.fxml");
-                                           if (resourceURL == null) {
-                                               System.out.println("Resource not found!");
-                                               return;
-                                           }
-
-                                           root = FXMLLoader.load(resourceURL);
-                                           Stage stage = new Stage();
-                                           stage.setTitle("My New Stage Title");
-                                           stage.setScene(new Scene(root, 450, 450));
-                                           stage.show();
-                                       } catch (IOException e) {
-                                           e.printStackTrace();
-                                       }
-                                   }
-                               }
-
-        );*/
-
 
     @FXML
     public void messageChange() {

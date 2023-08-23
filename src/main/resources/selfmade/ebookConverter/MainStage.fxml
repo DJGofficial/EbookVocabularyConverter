@@ -99,12 +99,8 @@
                      </Button>
                   </children>
                </HBox>
-                    <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
-                        <VBox.margin>
-                            <Insets left="15.0" right="15.0" top="5.0" />
-                        </VBox.margin>
-                    </TextField>
-               <Label fx:id="createFileLabel" prefHeight="18.0" prefWidth="570.0" />
+               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0" />
+                    <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name..." />
                 </children>
             </VBox>
       </children>

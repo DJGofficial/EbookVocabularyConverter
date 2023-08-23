@@ -12,9 +12,10 @@ import selfmade.ebookConverter.view.AnkiDeckChoose;
 import java.io.IOException;
 
 public class MainStage extends Application {
+  //  private  Stage newStage= new Stage();
+
     @Override
     public void start(Stage stage) throws IOException {
-        Stage newStage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainStage.class.getResource("MainStage.fxml"));
         Parent root = fxmlLoader.load();
@@ -24,13 +25,27 @@ public class MainStage extends Application {
         stage.setScene(scene);
         stage.show();
 
+
+
+    }
+
+    public void showNewStage(){
+        Stage newStage= new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AnkiDeckChoose.fxml"));
-        Parent secondRoot = loader.load();
+        Parent secondRoot = null;
+        try {
+            secondRoot = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Scene secondScene= new Scene(secondRoot);
         newStage.setScene(secondScene);
         newStage.setTitle("Neues Fenster");
         newStage.show();
+
+
+        //newStage.show();
     }
 
     public static void main(String[] args) {
