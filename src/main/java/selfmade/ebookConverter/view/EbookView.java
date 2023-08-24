@@ -42,8 +42,6 @@ public class EbookView implements Initializable {
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
     @FXML
-    ChoiceBoxItems choiceBoxItems;
-    @FXML
     ScrollPane scrollPane;
     @FXML
     public FlowPane flowPane;
@@ -53,6 +51,7 @@ public class EbookView implements Initializable {
     Label messageLabel = new Label();
 
 
+    ChoiceBoxItems choiceBoxItems;
     FileController fileController;
     ButtonController buttonController;
     TrimAlgorithm trimAlgorithm;
@@ -167,11 +166,19 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    public void ankiButtonClicked(ActionEvent event) throws Exception {//ActionEvent event) {
+    public void ankiButtonClicked() throws Exception {
+        AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
+        choiceBoxItems= new ChoiceBoxItems();
+
         ankiConnection = new AnkiConnection(this);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
-        AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
-        ankiDeckChoose.callWindowAddDeckList(deckList);
+       if (deckList!=null&& !deckList.isEmpty()){
+           System.out.println("callWindowAddDeckList is called");
+         //  choiceBoxItems.setDeckList(deckList);
+          // ankiDeckChoose.choiceBoxAnkiDecks.getItems().addAll(deckList);
+          ankiDeckChoose.callWindowAddDeckList(deckList);//choiceBoxItems.getDeckList());
+
+       }
     }
 
     @FXML

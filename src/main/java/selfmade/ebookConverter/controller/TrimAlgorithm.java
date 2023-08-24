@@ -125,13 +125,6 @@ public class TrimAlgorithm {
         //  }
     }
 
-/*
-    private void extractVocabulary(String endMark, String vocabulary, StringBuilder titleToAdd, String type) {
-        System.out.print(endMark + " " + vocabulary + " " + titleToAdd + " " + type);
-
-    }
-
- */
 
     private void runListDetermineDistance(String endMark, String vocabulary) {
         int vocabularyIndex = 0;

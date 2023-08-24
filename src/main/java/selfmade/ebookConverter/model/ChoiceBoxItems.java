@@ -10,10 +10,21 @@ public class ChoiceBoxItems {
     private ObservableList<String> secondItems;
     private static ObservableList<String> thirdItems;
 
+    private ObservableList<String> deckList;
+
+
     public ChoiceBoxItems() {
         firstItems = FXCollections.observableArrayList("Anki");
         secondItems = FXCollections.observableArrayList();
         thirdItems = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<String> getDeckList() {
+        return deckList;
+    }
+
+    public void setDeckList(ObservableList<String> deckList) {
+        this.deckList = deckList;
     }
 
     public ObservableList<String> getFirstItems() {

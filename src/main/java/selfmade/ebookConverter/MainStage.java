@@ -12,8 +12,6 @@ import selfmade.ebookConverter.view.AnkiDeckChoose;
 import java.io.IOException;
 
 public class MainStage extends Application {
-  //  private  Stage newStage= new Stage();
-
     @Override
     public void start(Stage stage) throws IOException {
 

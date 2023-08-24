@@ -57,20 +57,25 @@ public class AnkiConnection {
                 }
 
                 in.close();
+
                 String jsonString = response.toString();
                 jsonString = jsonString.substring(1, jsonString.length() - 1); // Remove enclosing []
                 String[] deckNameArray = jsonString.split(",");
-                for (String deckName : deckNameArray) {
-                    deckNames.add(deckName.replaceAll("\"", ""));
+
+                if (deckNameArray.length >= 2) {
+                    deckNames.add(deckNameArray[1].replaceAll("\"", "").trim());  // Set the second entry as the first
+                    for (int i = 2; i < deckNameArray.length; i++) {
+                        deckNames.add(deckNameArray[i].replaceAll("\"", "").trim());  // Add the remaining entries
+                    }
                 }
+
             }
 
         } catch (Exception e) {
-            System.out.println("CachException arrived");
             ebookView.setBottomLabelMessage("Please connect to Anki, see ... for further help");
             e.printStackTrace();
         }
-        System.out.println(deckNames);
+        System.out.println(deckNames.get(0));
         return deckNames;
     }
 
