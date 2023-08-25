@@ -44,7 +44,9 @@ public class EbookView implements Initializable {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    public FlowPane flowPane;
+    FlowPane flowPane;
+    @FXML
+    ProgressBar progressBar= new ProgressBar(0);
     @FXML
     Label bottomMessageLabel = new Label();
     @FXML
@@ -180,7 +182,6 @@ public class EbookView implements Initializable {
 
        }
     }
-
     @FXML
     public void messageChange() {
         messageLabel.setText("");

@@ -9,6 +9,7 @@ import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
 
+import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 public class GoogleTranslateAPIConnection {
     EbookView ebookView;
+    TextAttributesObject textAttributesObject= new TextAttributesObject<>();
     String targetLanguage = "de";
 
     public GoogleTranslateAPIConnection(HashMap<?, ?> vocList, EbookView ebookView) throws IOException {
@@ -58,6 +60,8 @@ public class GoogleTranslateAPIConnection {
         testMap.put("deutsch2","englisch2");
         testMap.put("deutsch3","englisch3");
         ebookView.fillFlowPaneTranslatedMap(testMap);//translatedMap);
+        textAttributesObject.setTranslatedMap(testMap);//translatedMap);
+
     }
 }
 

@@ -93,7 +93,7 @@ public class AnkiConnection {
 
             JsonObject notes = new JsonObject();
             notes.addProperty("deckName", deckName);
-            notes.addProperty("modelName", "Basic");
+            notes.addProperty("modelName", modelName);
 
             JsonObject fields = new JsonObject();
             fields.add("Front", new JsonPrimitive(front));

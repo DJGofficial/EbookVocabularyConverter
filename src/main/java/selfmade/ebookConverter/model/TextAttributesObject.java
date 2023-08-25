@@ -1,5 +1,7 @@
 package selfmade.ebookConverter.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class TextAttributesObject<T> {
@@ -8,16 +10,29 @@ public class TextAttributesObject<T> {
     private T modelName;
     private T front;
     private T back;
-    private boolean note;
-    private boolean bookmark;
+
+    static HashMap<String, String> translatedMap;
+   // private boolean note;
+   // private boolean bookmark;
 
     public TextAttributesObject(T deckName, T modelName, T front, T back, boolean note, boolean bookmark) {
         this.deckName = deckName;
         this.modelName = modelName;
         this.front = front;
         this.back = back;
-        this.note = note;
-        this.bookmark = bookmark;
+       // this.note = note;
+       // this.bookmark = bookmark;
+    }
+
+    public TextAttributesObject() {
+    }
+
+    public static HashMap<String, String> getTranslatedMap() {
+        return translatedMap;
+    }
+
+    public static void setTranslatedMap(HashMap<String, String> transMap) {
+        translatedMap = transMap;
     }
 
     public T getDeckName() {
@@ -52,7 +67,7 @@ public class TextAttributesObject<T> {
         this.back = back;
     }
 
-    public boolean hasNote() {
+  /*  public boolean hasNote() {
         return note;
     }
 
@@ -68,6 +83,8 @@ public class TextAttributesObject<T> {
         this.bookmark = bookmark;
     }
 
+
+   */
     @Override
     public String toString() {
         return "Text Attributes{" +
@@ -75,8 +92,10 @@ public class TextAttributesObject<T> {
                 ", modelName=" + modelName +
                 ", front=" + front +
                 ", back=" + back +
-                ", note=" + note +
+              /*  ", note=" + note +
                 ", bookmark=" + bookmark +
+
+               */
                 '}';
     }
 }

@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="root" prefHeight="48.0" prefWidth="177.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
+<AnchorPane fx:id="root" prefHeight="45.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
    <children>
-      <ChoiceBox fx:id="choiceBoxAnkiDecks" prefWidth="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0" />
+      <HBox prefHeight="0.0" prefWidth="200.0">
+         <children>
+            <ChoiceBox fx:id="choiceBoxAnkiDecks" prefWidth="150.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </ChoiceBox>
+            <Button fx:id="deckConfirmButton" mnemonicParsing="false" onAction="#deckConfirmButtonClicked" text="Ok">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
