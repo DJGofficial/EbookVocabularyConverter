@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="root" prefHeight="45.0" prefWidth="202.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
+<AnchorPane id="buttonStyle" fx:id="root" prefHeight="45.0" prefWidth="202.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
    <children>
       <HBox prefHeight="0.0" prefWidth="200.0">
          <children>
@@ -18,7 +18,7 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </ChoiceBox>
-            <Button fx:id="deckConfirmButton" mnemonicParsing="false" onAction="#deckConfirmButtonClicked" text="Ok">
+            <Button fx:id="deckConfirmButton" mnemonicParsing="false" text="Ok">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

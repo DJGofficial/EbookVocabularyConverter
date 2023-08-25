@@ -18,6 +18,7 @@ public class MainStage extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainStage.class.getResource("MainStage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
+     // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle("Ebook Vocabulary Converter");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
@@ -38,6 +39,7 @@ public class MainStage extends Application {
         }
 
         Scene secondScene= new Scene(secondRoot);
+        //secondScene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         newStage.setScene(secondScene);
         newStage.setTitle("Neues Fenster");
         newStage.show();

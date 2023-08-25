@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="446.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
+<AnchorPane id="background" prefHeight="446.0" prefWidth="573.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
     <HBox layoutY="1.0" prefHeight="83.0" prefWidth="573.0">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -21,10 +22,10 @@
         <VBox prefHeight="258.0" prefWidth="98.0">
             <children>
 
-                <Button fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Choose File" />
-                <ChoiceBox fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0">
+                <Button id="buttonStyle" fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Datei wählen" />
+                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0" stylesheets="@styles.css">
                     <VBox.margin>
-                        <Insets top="20.0" />
+                        <Insets bottom="2.0" top="20.0" />
                     </VBox.margin>
                 </ChoiceBox>
             </children>
@@ -32,9 +33,9 @@
         </VBox>
         <VBox prefHeight="335.0" prefWidth="105.0">
             <children>
-                <ChoiceBox fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="86.0">
+                <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="86.0">
                     <VBox.margin>
-                        <Insets top="45.0" />
+                        <Insets left="4.0" top="45.0" />
                     </VBox.margin>
                 </ChoiceBox>
             </children>
@@ -42,7 +43,7 @@
         </VBox>
         <VBox prefHeight="65.0" prefWidth="297.0">
 
-            <TextField fx:id="fileTextField" prefHeight="26.0" prefWidth="240.0">
+            <TextField id="textField" fx:id="fileTextField" prefHeight="26.0" prefWidth="240.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
@@ -50,19 +51,19 @@
          <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
          <HBox prefHeight="100.0" prefWidth="200.0">
             <children>
-                    <ChoiceBox fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="95.0">
+                    <ChoiceBox id="buttonStyle" fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="142.0">
                   <HBox.margin>
-                     <Insets />
+                     <Insets top="1.0" />
                   </HBox.margin>
                </ChoiceBox>
-                  <Button fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="73.0" text="Done">
+                  <Button id="buttonStyle" fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="124.0" text="Fertig">
                   <HBox.margin>
                      <Insets left="15.0" />
                   </HBox.margin>
                   </Button>
-               <Button fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="96.0" text="Translate">
+               <Button id="buttonStyle " fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="165.0" text="Übersetzen">
                   <HBox.margin>
-                     <Insets left="75.0" />
+                     <Insets left="20.0" />
                   </HBox.margin>
                </Button>
             </children>
@@ -74,33 +75,41 @@
     </HBox>
     <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
 
-        <ScrollPane fx:id="scrollPane" prefHeight="276.0" prefWidth="591.0" vbarPolicy="ALWAYS">
+        <ScrollPane fx:id="scrollPane" prefHeight="276.0" prefWidth="591.0" style="-fx-background-color: #545454;" vbarPolicy="ALWAYS">
             <content>
-                <FlowPane fx:id="flowPane" prefHeight="274.0" prefWidth="575.0" />
+                <FlowPane id="flowpane" fx:id="flowPane" prefHeight="274.0" prefWidth="575.0" />
             </content>
         </ScrollPane>
 
     </Pane>
-    <HBox layoutY="376.0" prefHeight="103.0" prefWidth="591.0">
+    <HBox id="#buttonStyle" layoutY="376.0" prefHeight="103.0" prefWidth="591.0">
       <children>
             <VBox prefHeight="59.0" prefWidth="591.0">
                 <children>
                <HBox prefHeight="100.0" prefWidth="200.0">
                   <children>
-                          <Button fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="98.0" text="Create File">
+                          <Button id="buttonStyle" fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="119.0" text="Datei erstellen">
+                        <HBox.margin>
+                           <Insets left="5.0" top="5.0" />
+                        </HBox.margin>
+                     </Button>
+                          <Button id="buttonStyle" fx:id="ankiButton" disable="true" mnemonicParsing="false" onAction="#ankiButtonClicked" text="Anki">
                         <HBox.margin>
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                          <Button fx:id="ankiButton" disable="true" mnemonicParsing="false" onAction="#ankiButtonClicked" text="Anki">
+                     <ProgressBar fx:id="progressBar" prefHeight="20.0" prefWidth="382.0" progress="0.0" visible="false">
                         <HBox.margin>
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
-                     </Button>
+                     </ProgressBar>
                   </children>
                </HBox>
                <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0" />
-                    <TextField fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name..." />
+                    <TextField id="textField" fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
+                  <VBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" />
+                  </VBox.margin></TextField>
                 </children>
             </VBox>
       </children>

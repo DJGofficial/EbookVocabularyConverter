@@ -1,0 +1,18 @@
+#buttonStyle {
+    -fx-background-color: #8C8C8C;
+    -fx-text-fill: #E0E0E0;
+    -font-family: 'Noto Sans Multani', sans-serif;
+}
+#background{
+-fx-background-color:#4D4D4D;
+}
+#flowpane{
+-fx-background-color:#E0E0E0;
+}
+#labelStyle {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+#textField{
+-fx-background-color:#E0E0E0;
+}
