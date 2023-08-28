@@ -36,7 +36,8 @@ public class AnkiController {
                 ankiConnection.addCard(textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
             }
         } catch (IOException e) {
-            // Handle the exception as needed
+            System.out.println("Hier muss nochirgendwas hin");
+            //? Hier muss noch irgendwas hin
             e.printStackTrace();
         }
     }

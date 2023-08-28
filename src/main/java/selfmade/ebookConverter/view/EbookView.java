@@ -36,7 +36,7 @@ import java.util.*;
 public class EbookView implements Initializable {
 
     @FXML
-    Button fileButton, ankiButton, doneButton, createButton, translateButton;
+    Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton;
     @FXML
     TextField fileTextField, createFileTextField;
     @FXML
@@ -45,8 +45,6 @@ public class EbookView implements Initializable {
     ScrollPane scrollPane;
     @FXML
     FlowPane flowPane;
-    @FXML
-    ProgressBar progressBar= new ProgressBar(0);
     @FXML
     Label bottomMessageLabel = new Label();
     @FXML
@@ -78,6 +76,10 @@ public class EbookView implements Initializable {
             bottomMessageLabel.setTextFill(Color.RED);
             bottomMessageLabel.setText("Please enter a name for your file");
         }
+    }
+    @FXML
+    public void deleteButtonClicked(){
+        flowPane.getChildren().clear();
     }
 
     @FXML

@@ -18,7 +18,7 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </ChoiceBox>
-            <Button fx:id="deckConfirmButton" mnemonicParsing="false" text="Ok">
+            <Button fx:id="deckConfirmButton" mnemonicParsing="false" onAction="#deckConfirmButtonClicked" text="Ok">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

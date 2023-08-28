@@ -29,15 +29,15 @@ public class AnkiDeckChoose implements Initializable {
     ChoiceBox<String> choiceBoxAnkiDecks = new ChoiceBox<>();
 
     @FXML
-    Button deckConfirmButton;
+    Button deckConfirmButton= new Button();
 
     private static ObservableList<String> deckListLocal = FXCollections.observableArrayList();
 
     MainStage mainStage = new MainStage();
 
-AnkiConnection ankiConnection;
-AnkiController ankiController= new AnkiController();
-TextAttributesObject textAttributesObject=new TextAttributesObject<>();
+    AnkiConnection ankiConnection;
+    AnkiController ankiController = new AnkiController();
+    TextAttributesObject textAttributesObject = new TextAttributesObject<>();
     //EbookView ebookView;
 
     @FXML
@@ -49,7 +49,9 @@ TextAttributesObject textAttributesObject=new TextAttributesObject<>();
 
     @FXML
     private void deckConfirmButtonClicked() {
-        ankiController.createAndAddCards(ankiConnection,choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
+        ankiController.createAndAddCards(ankiConnection, choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
+        Stage currentStage = (Stage) deckConfirmButton.getScene().getWindow();
+        currentStage.close();
     }
 
     @Override
