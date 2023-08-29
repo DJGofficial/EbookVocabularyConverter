@@ -5,25 +5,28 @@ import javafx.scene.paint.Color;
 import selfmade.ebookConverter.view.EbookView;
 
 public class MessageController {
-    /*public MessageController(EbookView ebookView) {
+
+
+    EbookView ebookView;
+    public MessageController(EbookView ebookView) {
         this.ebookView = ebookView;
     }
 
-     */
+
 
     public Label showSuccessMessage(Label label,String message) {
-        Label retLabel = new Label();
-        retLabel.setTextFill(Color.GREEN);
-        retLabel.setText(message);
-        return retLabel;
+
+        label.setTextFill(Color.GREEN);
+        label.setText(message);
+        return label;
 
     }
 
     public Label showErrorMessage(Label label,String message) {
-        Label retLabel = new Label();
-        retLabel.setTextFill(Color.RED);
-        retLabel.setText(message);
-        return retLabel;
+
+        label.setTextFill(Color.RED);
+        label.setText(message);
+        return label;
     }
 }
 

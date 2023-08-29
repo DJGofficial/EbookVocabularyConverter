@@ -48,7 +48,7 @@ public class EbookView implements Initializable {
     ButtonController buttonController;
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
-    MessageController messageController= new MessageController();
+    MessageController messageController = new MessageController(this);
 
     //Methods
     @FXML
@@ -62,9 +62,9 @@ public class EbookView implements Initializable {
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             fileController.userNameFile(name);
-            messageController.showSuccessMessage( bottomMessageLabel,"Successfully created!");
+            messageController.showSuccessMessage(bottomMessageLabel, "Successfully created!");
         } else {
-            messageController.showErrorMessage( bottomMessageLabel,"Please enter a name for your file");
+            messageController.showErrorMessage(bottomMessageLabel, "Please enter a name for your file");
         }
     }
 
@@ -77,7 +77,6 @@ public class EbookView implements Initializable {
     private void createButtonText() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
     }
-
 
 
     @FXML
@@ -95,10 +94,10 @@ public class EbookView implements Initializable {
             trimAlgorithm.getContentToTextFragments();
         } else {
             if (!hasEndMark) {
-                messageController.showErrorMessage(messageLabel,"End-Mark fehlt!");
+                messageController.showErrorMessage(messageLabel, "End-Mark fehlt!");
             }
             if (!hasVocabulary) {
-                messageController.showErrorMessage(messageLabel,"Vokabel fehlt!");
+                messageController.showErrorMessage(messageLabel, "Vokabel fehlt!");
             }
         }
 
@@ -136,7 +135,8 @@ public class EbookView implements Initializable {
             });
         }
     }
-//? fillFlowPaneTranslatedMap sollte man in Button Controller verschieben
+
+    //? fillFlowPaneTranslatedMap sollte man in Button Controller verschieben
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
@@ -172,25 +172,30 @@ public class EbookView implements Initializable {
  */
         }
     }
+
     //Getter and Setter
     @FXML
     public void setMessageLabel(String message) {
-       //Not sure yet if I need this
+        //Not sure yet if I need this
 
-        messageController.showErrorMessage(messageLabel,message);
+        messageController.showErrorMessage(messageLabel, message);
 
     }
+
     @FXML
     public void setBottomLabelMessage(String message, Boolean value) {
-
-        if (value==false) {
-           messageController.showErrorMessage(bottomMessageLabel,message);
-       } else  {
-           messageController.showSuccessMessage(bottomMessageLabel,message);
-       }
+       bottomMessageLabel= new Label();
+        System.out.println("Message "+message);
+        System.out.println("Boolean "+value);
+            messageController.showSuccessMessage(bottomMessageLabel, message);
+        if (value == false) {
+            messageController.showErrorMessage(bottomMessageLabel, message);
+        //} else {
+        }
 
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
