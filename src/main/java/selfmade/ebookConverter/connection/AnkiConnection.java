@@ -4,6 +4,8 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import selfmade.ebookConverter.controller.MessageController;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;
@@ -15,12 +17,17 @@ public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
-    EbookView ebookView= new EbookView();
+    EbookView ebookView = new EbookView();
+    MessageController messageController;
 
     public AnkiConnection(EbookView ebookView) {
         this.ebookView = ebookView;
     }
 
+    public AnkiConnection() {
+        this.ebookView= new EbookView();
+    }
+/*
     public static void main(String[] args) throws IOException {
         String deckName = "ZZDeck";
         String modelName = "Basic";
@@ -28,8 +35,10 @@ public class AnkiConnection {
         String back = "there";
 
         createDeck(deckName);
-        addCard(deckName, modelName, front, back);
+       // addCard(deckName, modelName, front, back);
     }
+
+ */
 
     public ObservableList<String> fetchDeckNames() {
         ObservableList<String> deckNames = FXCollections.observableArrayList();
@@ -72,14 +81,14 @@ public class AnkiConnection {
             }
 
         } catch (Exception e) {
-            ebookView.setBottomLabelMessage("Please connect to Anki, see ... for further help");
+            ebookView.setBottomLabelMessage("Bitte stelle Verbindung mit Anki über AnkiConnect her",false);
             e.printStackTrace();
         }
         System.out.println(deckNames.get(0));
         return deckNames;
     }
 
-    public static void addCard(String deckName, String modelName, String front, String back) throws IOException {
+    public void addCard(String deckName, String modelName, String front, String back) throws IOException {
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -131,12 +140,25 @@ public class AnkiConnection {
                 }
                 reader.close();
 
-
                 JsonParser parser = new JsonParser();
                 JsonElement responseElement = parser.parse(responseBuilder.toString());
-                // if (responseElement.isJsonObject()) {
-                System.out.println(responseElement.getAsJsonObject());
+                JsonObject responseObject = responseElement.getAsJsonObject();
+                JsonElement resultElement = responseObject.get("result");
+                JsonElement errorElement = responseObject.get("error");
 
+                if (resultElement != null && !resultElement.isJsonNull()) {
+                    // Erfolgreiche Nachricht
+                    ebookView.setBottomLabelMessage("Erfolgreich: " + resultElement.getAsString(),true);
+                    System.out.println("Erfolgreich: " + resultElement.getAsString());
+                } else if (errorElement != null && !errorElement.isJsonNull()) {
+                    // Fehlgeschlagene Nachricht
+                    String errorMessage = errorElement.getAsString();
+                    ebookView.setBottomLabelMessage("Fehlgeschlagen: " + errorMessage,false);
+                    System.out.println("Fehler: " + errorMessage);
+                }
+                System.out.println(responseElement.getAsJsonObject());
+                //?{"result":null,"error":"cannot create note because it is a duplicate"} <--If not successfull
+                //? {"result":1693296648055,"error":null} <--successfull
                 writer.close();
                 outputStream.close();
                 connection.disconnect();

@@ -1,28 +1,20 @@
 package selfmade.ebookConverter.view;
 
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-
-
 import javafx.scene.layout.FlowPane;
-
 import javafx.scene.paint.Color;
 
-import javafx.stage.Stage;
+
 import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
 import selfmade.ebookConverter.controller.FileController;
+import selfmade.ebookConverter.controller.MessageController;
 import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.controller.ButtonController;
@@ -56,7 +48,7 @@ public class EbookView implements Initializable {
     ButtonController buttonController;
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
-
+    MessageController messageController= new MessageController();
 
     //Methods
     @FXML
@@ -70,15 +62,14 @@ public class EbookView implements Initializable {
         String name = createFileTextField.getText();
         if (!name.isEmpty()) {
             fileController.userNameFile(name);
-            bottomMessageLabel.setTextFill(Color.GREEN);
-            bottomMessageLabel.setText("Successfull created!");
+            messageController.showSuccessMessage( bottomMessageLabel,"Successfully created!");
         } else {
-            bottomMessageLabel.setTextFill(Color.RED);
-            bottomMessageLabel.setText("Please enter a name for your file");
+            messageController.showErrorMessage( bottomMessageLabel,"Please enter a name for your file");
         }
     }
+
     @FXML
-    public void deleteButtonClicked(){
+    public void deleteButtonClicked() {
         flowPane.getChildren().clear();
     }
 
@@ -87,16 +78,10 @@ public class EbookView implements Initializable {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
     }
 
-    @FXML
-    public void setBottomLabelMessage(String message) {
-        bottomMessageLabel.setTextFill(Color.RED);
-        bottomMessageLabel.setText(message);
 
-    }
 
     @FXML
     private void doneButtonClicked() {
-        translateButton.setDisable(false);
         ObservableList<Node> content = flowPane.getChildren();
         trimAlgorithm = new TrimAlgorithm(content, this);
         messageLabel.setText("");
@@ -106,15 +91,14 @@ public class EbookView implements Initializable {
         boolean hasVocabulary = result[1];
 
         if (hasEndMark && hasVocabulary) {
+            translateButton.setDisable(false);
             trimAlgorithm.getContentToTextFragments();
         } else {
             if (!hasEndMark) {
-                messageLabel.setTextFill(Color.RED);
-                messageLabel.setText("End-Mark fehlt!");
+                messageController.showErrorMessage(messageLabel,"End-Mark fehlt!");
             }
             if (!hasVocabulary) {
-                messageLabel.setTextFill(Color.RED);
-                messageLabel.setText("Vokabel fehlt!");
+                messageController.showErrorMessage(messageLabel,"Vokabel fehlt!");
             }
         }
 
@@ -152,7 +136,7 @@ public class EbookView implements Initializable {
             });
         }
     }
-
+//? fillFlowPaneTranslatedMap sollte man in Button Controller verschieben
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
@@ -172,26 +156,41 @@ public class EbookView implements Initializable {
     @FXML
     public void ankiButtonClicked() throws Exception {
         AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
-        choiceBoxItems= new ChoiceBoxItems();
+        choiceBoxItems = new ChoiceBoxItems();
 
         ankiConnection = new AnkiConnection(this);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
-       if (deckList!=null&& !deckList.isEmpty()){
-           System.out.println("callWindowAddDeckList is called");
-         //  choiceBoxItems.setDeckList(deckList);
-          // ankiDeckChoose.choiceBoxAnkiDecks.getItems().addAll(deckList);
-          ankiDeckChoose.callWindowAddDeckList(deckList);//choiceBoxItems.getDeckList());
+        if (deckList != null && !deckList.isEmpty()) {
+            ankiDeckChoose.callWindowAddDeckList(deckList);
+/*
+            messageController.showSuccessMessage(bottomMessageLabel,"Decks successfull added");
 
-       }
+        }else{
+            messageController.showErrorMessage(bottomMessageLabel,"Could not transfer Cards");
+        }
+
+ */
+        }
+    }
+    //Getter and Setter
+    @FXML
+    public void setMessageLabel(String message) {
+       //Not sure yet if I need this
+
+        messageController.showErrorMessage(messageLabel,message);
+
     }
     @FXML
-    public void messageChange() {
-        messageLabel.setText("");
-        messageLabel.setTextFill(Color.RED);
-        messageLabel.setText("Bitte markiere Titel oder Art");
+    public void setBottomLabelMessage(String message, Boolean value) {
+
+        if (value==false) {
+           messageController.showErrorMessage(bottomMessageLabel,message);
+       } else  {
+           messageController.showSuccessMessage(bottomMessageLabel,message);
+       }
+
 
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
