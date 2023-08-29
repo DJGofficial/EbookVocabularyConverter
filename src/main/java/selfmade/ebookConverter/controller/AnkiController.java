@@ -3,6 +3,7 @@ package selfmade.ebookConverter.controller;
 import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.AnkiDeckChoose;
+import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +13,14 @@ import java.util.Map;
 
 public class AnkiController {
 
+    AnkiConnection ankiConnection;//= new AnkiConnection();
+    EbookView ebookView;
     public AnkiController() {
+        ebookView= new EbookView();
     }
 
     public void createAndAddCards(AnkiConnection ankiConnection, String deckName, HashMap<String, String> translatedMap) {
+        ankiConnection= new AnkiConnection();
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
         }
