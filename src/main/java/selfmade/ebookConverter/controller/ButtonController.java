@@ -1,17 +1,17 @@
 package selfmade.ebookConverter.controller;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import selfmade.ebookConverter.model.TextColour;
+import selfmade.ebookConverter.view.EbookView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ButtonController {
 
@@ -20,6 +20,8 @@ public class ButtonController {
     private static String buttonChoiceBoxStatus;
 
     static TextColour textColour = new TextColour();
+
+    EbookView ebookView;
 
     public ButtonController() {
     }
@@ -43,6 +45,25 @@ public class ButtonController {
         List<Button> buttons = new ArrayList<>();
         for (String vocabulary : vocList) {
             Button button = new Button(vocabulary);
+            button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
+            button.setBorder(createStyledButton());
+            buttons.add(button);
+
+        }
+
+        return buttons;
+    }
+
+    public List<Button> createTranslatedButton(FlowPane flowPane, HashMap<String, String> transVocList) {
+        List<Button> buttons = new ArrayList<>();
+        for (Map.Entry<String, String> entry : transVocList.entrySet()) {
+            Button button = new Button(entry.getKey() + " " + entry.getValue());
+            button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
+            button.setBorder(createStyledButton());
+            button.setOnAction(event -> {
+                Button clickedButton = (Button) event.getSource();
+                flowPane.getChildren().remove(clickedButton);
+            });
 
             buttons.add(button);
 
@@ -50,5 +71,15 @@ public class ButtonController {
 
         return buttons;
     }
-}
 
+    public Border createStyledButton() {
+        return new Border(
+                new BorderStroke(
+                        Color.BLACK,
+                        BorderStrokeStyle.SOLID,
+                        null,
+                        new BorderWidths(2)
+                )
+        );
+    }
+}

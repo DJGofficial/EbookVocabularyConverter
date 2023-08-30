@@ -45,9 +45,10 @@ public class EbookView implements Initializable {
 
     ChoiceBoxItems choiceBoxItems;
     FileController fileController;
-    ButtonController buttonController;
+    ButtonController buttonController= new ButtonController();
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
+    //? eventuell braucht man das this nicht
     MessageController messageController = new MessageController(this);
 
     //Methods
@@ -117,9 +118,11 @@ public class EbookView implements Initializable {
 
     }
 
+    //? Must move to ButtonController
     @FXML
     public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
         flowPane.getChildren().clear();
+
         for (int i = 0; i < buttonList.size(); i++) {
             Button button = buttonList.get(i);
             flowPane.getChildren().add(button);
@@ -136,21 +139,11 @@ public class EbookView implements Initializable {
         }
     }
 
-    //? fillFlowPaneTranslatedMap sollte man in Button Controller verschieben
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
         flowPane.getChildren().clear();
-        for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
-            Button button = new Button(entry.getKey() + " " + entry.getValue());
-            button.setOnAction(event -> {
-                Button clickedButton = (Button) event.getSource();
-                flowPane.getChildren().remove(clickedButton);
-
-            });
-            flowPane.getChildren().add(button);
-        }
-
+        flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane,translatedMap));
     }
 
     @FXML
@@ -162,38 +155,27 @@ public class EbookView implements Initializable {
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
         if (deckList != null && !deckList.isEmpty()) {
             ankiDeckChoose.callWindowAddDeckList(deckList);
-/*
-            messageController.showSuccessMessage(bottomMessageLabel,"Decks successfull added");
-
-        }else{
-            messageController.showErrorMessage(bottomMessageLabel,"Could not transfer Cards");
+            messageController.showSuccessMessage(bottomMessageLabel, "Decks successfull added");
+        } else {
+            messageController.showErrorMessage(bottomMessageLabel, "Could not transfer Cards");
         }
 
- */
-        }
     }
 
     //Getter and Setter
     @FXML
     public void setMessageLabel(String message) {
         //Not sure yet if I need this
-
         messageController.showErrorMessage(messageLabel, message);
-
     }
 
     @FXML
     public void setBottomLabelMessage(String message, Boolean value) {
-       bottomMessageLabel= new Label();
-        System.out.println("Message "+message);
-        System.out.println("Boolean "+value);
-            messageController.showSuccessMessage(bottomMessageLabel, message);
         if (value == false) {
             messageController.showErrorMessage(bottomMessageLabel, message);
-        //} else {
+        } else {
+            messageController.showSuccessMessage(bottomMessageLabel, message);
         }
-
-
     }
 
     @Override

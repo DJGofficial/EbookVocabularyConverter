@@ -24,9 +24,7 @@ public class MainStage extends Application {
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
-
-
-
+        stage.setResizable(false);
     }
 
     public void showNewStage(){

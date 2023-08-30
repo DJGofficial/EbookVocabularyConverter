@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="background" prefHeight="446.0" prefWidth="573.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
-    <HBox layoutY="1.0" prefHeight="83.0" prefWidth="573.0">
+    <HBox layoutY="1.0" prefHeight="114.0" prefWidth="591.0">
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
         </padding>
@@ -40,12 +40,15 @@
             </children>
 
         </VBox>
-        <VBox prefHeight="65.0" prefWidth="297.0">
+        <VBox prefHeight="73.0" prefWidth="350.0">
 
-            <TextField id="textField" fx:id="fileTextField" prefHeight="26.0" prefWidth="240.0">
+            <TextField id="textField" fx:id="fileTextField" prefHeight="19.0" prefWidth="368.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
             </TextField>
          <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
          <HBox prefHeight="100.0" prefWidth="200.0">
@@ -97,9 +100,9 @@
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                     <Button id="buttonStyle" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Löschen">
+                     <Button id="buttonStyle" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Löschen">
                         <HBox.margin>
-                           <Insets left="325.0" top="5.0" />
+                           <Insets left="315.0" top="5.0" />
                         </HBox.margin>
                      </Button>
                   </children>
