@@ -45,7 +45,7 @@ public class EbookView implements Initializable {
 
     ChoiceBoxItems choiceBoxItems;
     FileController fileController;
-    ButtonController buttonController= new ButtonController();
+    ButtonController buttonController = new ButtonController();
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
     //? eventuell braucht man das this nicht
@@ -118,32 +118,17 @@ public class EbookView implements Initializable {
 
     }
 
-    //? Must move to ButtonController
     @FXML
-    public void fillFlowPaneWithVocabulary(List<Button> buttonList) {
+    public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
-
-        for (int i = 0; i < buttonList.size(); i++) {
-            Button button = buttonList.get(i);
-            flowPane.getChildren().add(button);
-
-            button.setOnAction(event -> {
-                Button clickedButton = (Button) event.getSource();
-                int buttonIndex = buttonList.indexOf(clickedButton);
-
-                if (buttonIndex >= 0) {
-                    buttonList.remove(buttonIndex);
-                    fillFlowPaneWithVocabulary(buttonList);
-                }
-            });
-        }
+        buttonController.createVocButton(flowPane,buttonList);
     }
 
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
         flowPane.getChildren().clear();
-        flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane,translatedMap));
+        flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane, translatedMap));
     }
 
     @FXML

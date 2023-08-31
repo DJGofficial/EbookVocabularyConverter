@@ -12,17 +12,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" prefHeight="446.0" prefWidth="573.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
-    <HBox layoutY="1.0" prefHeight="114.0" prefWidth="591.0">
+<AnchorPane id="background" prefHeight="454.0" prefWidth="650.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
+    <HBox layoutY="2.0" prefHeight="113.0" prefWidth="650.0">
         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" top="20.0" />
         </padding>
 
-        <VBox prefHeight="258.0" prefWidth="98.0">
+        <VBox prefHeight="74.0" prefWidth="114.0">
             <children>
 
                 <Button id="buttonStyle" fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Datei wählen" />
-                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="86.0" stylesheets="@styles.css">
+                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="100.0" stylesheets="@styles.css">
                     <VBox.margin>
                         <Insets bottom="2.0" top="20.0" />
                     </VBox.margin>
@@ -30,65 +30,68 @@
             </children>
 
         </VBox>
-        <VBox prefHeight="335.0" prefWidth="105.0">
+        <VBox prefHeight="69.0" prefWidth="106.0">
             <children>
-                <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="86.0">
+                <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="100.0">
                     <VBox.margin>
-                        <Insets left="4.0" top="45.0" />
+                        <Insets top="45.0" />
                     </VBox.margin>
                 </ChoiceBox>
             </children>
 
         </VBox>
-        <VBox prefHeight="73.0" prefWidth="350.0">
+        <VBox prefHeight="63.0" prefWidth="411.0">
 
-            <TextField id="textField" fx:id="fileTextField" prefHeight="19.0" prefWidth="368.0">
+            <TextField id="textField" fx:id="fileTextField" prefHeight="26.0" prefWidth="377.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             <VBox.margin>
-               <Insets />
+               <Insets right="5.0" />
             </VBox.margin>
             </TextField>
          <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
-         <HBox prefHeight="100.0" prefWidth="200.0">
+         <HBox prefHeight="30.0" prefWidth="319.0">
             <children>
-                    <ChoiceBox id="buttonStyle" fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="142.0">
+                    <ChoiceBox id="buttonStyle" fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="100.0">
                   <HBox.margin>
-                     <Insets top="1.0" />
+                     <Insets left="10.0" top="1.0" />
                   </HBox.margin>
                </ChoiceBox>
                   <Button id="buttonStyle" fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="124.0" text="Fertig">
                   <HBox.margin>
-                     <Insets left="15.0" />
+                     <Insets left="55.0" />
                   </HBox.margin>
                   </Button>
-               <Button id="buttonStyle " fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="165.0" text="Übersetzen">
+               <Button id="buttonStyle " fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="110.0" text="Übersetzen">
                   <HBox.margin>
-                     <Insets left="20.0" />
+                     <Insets left="10.0" right="5.0" />
                   </HBox.margin>
                </Button>
             </children>
          </HBox>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
 
         </VBox>
 
 
     </HBox>
-    <Pane layoutY="100.0" prefHeight="276.0" prefWidth="573.0">
+    <Pane layoutY="99.0" prefHeight="277.0">
 
-        <ScrollPane fx:id="scrollPane" prefHeight="276.0" prefWidth="591.0" style="-fx-background-color: #545454;" vbarPolicy="ALWAYS">
+        <ScrollPane fx:id="scrollPane" prefHeight="276.0" prefWidth="650.0" style="-fx-background-color: #545454;" vbarPolicy="ALWAYS">
             <content>
-                <FlowPane id="flowpane" fx:id="flowPane" prefHeight="274.0" prefWidth="575.0" />
+                <FlowPane id="flowpane" fx:id="flowPane" prefHeight="274.0" prefWidth="646.0" />
             </content>
         </ScrollPane>
 
     </Pane>
-    <HBox id="#buttonStyle" layoutY="376.0" prefHeight="103.0" prefWidth="591.0">
+    <HBox id="#buttonStyle" layoutY="373.0" prefHeight="106.0" prefWidth="650.0">
       <children>
-            <VBox prefHeight="59.0" prefWidth="591.0">
+            <VBox prefHeight="106.0" prefWidth="652.0">
                 <children>
-               <HBox prefHeight="100.0" prefWidth="200.0">
+               <HBox prefHeight="57.0" prefWidth="643.0">
                   <children>
                           <Button id="buttonStyle" fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="119.0" text="Datei erstellen">
                         <HBox.margin>
@@ -102,13 +105,16 @@
                      </Button>
                      <Button id="buttonStyle" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Löschen">
                         <HBox.margin>
-                           <Insets left="315.0" top="5.0" />
+                           <Insets left="380.0" top="5.0" />
                         </HBox.margin>
                      </Button>
                   </children>
+                  <VBox.margin>
+                     <Insets left="10.0" />
+                  </VBox.margin>
                </HBox>
                <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0" />
-                    <TextField id="textField" fx:id="createFileTextField" prefHeight="26.0" prefWidth="294.0" promptText="Please enter name...">
+                    <TextField id="textField" fx:id="createFileTextField" prefHeight="0.0" prefWidth="529.0" promptText="Please enter name...">
                   <VBox.margin>
                      <Insets bottom="5.0" left="5.0" right="5.0" />
                   </VBox.margin></TextField>

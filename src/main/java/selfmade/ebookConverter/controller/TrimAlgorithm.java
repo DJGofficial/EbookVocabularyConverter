@@ -170,8 +170,10 @@ public class TrimAlgorithm {
                 break;
             }
         }
-        List<Button> buttonList = buttonController.createVocButton(returnVocList);
-        ebookView.fillFlowPaneWithVocabulary(buttonList);
+
+        ebookView.fillFlowPaneWithVocabulary(returnVocList);
+        // List<Button> buttonList = buttonController.createVocButton(returnVocList);
+       // ebookView.fillFlowPaneWithVocabulary(buttonList);
     }
 
 

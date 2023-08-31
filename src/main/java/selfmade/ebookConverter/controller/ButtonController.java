@@ -1,6 +1,5 @@
 package selfmade.ebookConverter.controller;
 
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -41,14 +40,19 @@ public class ButtonController {
         return null;
     }
 
-    public List<Button> createVocButton(ArrayList<String> vocList) {
+    public List<Button> createVocButton(FlowPane flowPane, ArrayList<String> vocList) {
         List<Button> buttons = new ArrayList<>();
         for (String vocabulary : vocList) {
             Button button = new Button(vocabulary);
             button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
             button.setBorder(createStyledButton());
-            buttons.add(button);
 
+            flowPane.getChildren().add(button);//buttons.add(button);
+            button.setOnAction(event -> {
+                Button clickedButton = (Button) event.getSource();
+                flowPane.getChildren().remove(clickedButton);
+
+            });
         }
 
         return buttons;
@@ -73,11 +77,12 @@ public class ButtonController {
     }
 
     public Border createStyledButton() {
+        CornerRadii cornerRadii = new CornerRadii(10);
         return new Border(
                 new BorderStroke(
                         Color.BLACK,
                         BorderStrokeStyle.SOLID,
-                        null,
+                        cornerRadii,
                         new BorderWidths(2)
                 )
         );
