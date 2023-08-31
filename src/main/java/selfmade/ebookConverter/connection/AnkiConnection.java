@@ -62,19 +62,22 @@ public class AnkiConnection {
                 StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
+                System.out.println("INPUTLINE "+inputLine);
                     response.append(inputLine);
+                    System.out.println("After respond append "+response);
+
                 }
 
                 in.close();
 
                 String jsonString = response.toString();
-                jsonString = jsonString.substring(1, jsonString.length() - 1); // Remove enclosing []
+                //jsonString = jsonString.substring(1, jsonString.length() ); // Remove enclosing []
                 String[] deckNameArray = jsonString.split(",");
 
                 if (deckNameArray.length >= 2) {
                     deckNames.add(deckNameArray[1].replaceAll("\"", "").trim());  // Set the second entry as the first
-                    for (int i = 2; i < deckNameArray.length; i++) {
-                        deckNames.add(deckNameArray[i].replaceAll("\"", "").trim());  // Add the remaining entries
+                    for (int i = 2; i < deckNameArray.length-1; i++) {
+                        deckNames.add(deckNameArray[i].replaceAll("[\\[\\]\"]", "").trim());
                     }
                 }
 
