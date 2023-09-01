@@ -15,12 +15,15 @@ public class AnkiController {
 
     AnkiConnection ankiConnection;//= new AnkiConnection();
     EbookView ebookView;
+    AnkiDeckChoose ankiDeckChoose;
     public AnkiController() {
+        ankiConnection= new AnkiConnection();
         ebookView= new EbookView();
+        ankiDeckChoose= new AnkiDeckChoose();
     }
 
-    public void createAndAddCards(AnkiConnection ankiConnection, String deckName, HashMap<String, String> translatedMap) {
-        ankiConnection= new AnkiConnection();
+    public void createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
+      //ankiConnection= new AnkiConnection();
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
         }
@@ -38,7 +41,11 @@ public class AnkiController {
 
         try {
             for (TextAttributesObject<String> textAttributes : cardList) {
-                ankiConnection.addCard(textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
+             //   if (ankiDeckChoose == null) {
+                    ankiConnection.addCard(textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
+               // }
+              //  System.out.println("AnkiDeckChoose is null");
+                //? maybe a message
             }
         } catch (IOException e) {
             System.out.println("Hier muss nochirgendwas hin");

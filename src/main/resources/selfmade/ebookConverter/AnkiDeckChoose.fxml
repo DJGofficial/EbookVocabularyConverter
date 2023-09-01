@@ -3,12 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane id="buttonStyle" fx:id="root" prefHeight="45.0" prefWidth="202.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
    <children>
-      <HBox prefHeight="0.0" prefWidth="200.0">
+      <HBox prefHeight="50.0" prefWidth="362.0">
          <children>
             <ChoiceBox fx:id="choiceBoxAnkiDecks" prefWidth="150.0">
                <opaqueInsets>
@@ -28,5 +31,17 @@
             </Button>
          </children>
       </HBox>
+      <VBox layoutY="38.0" prefHeight="355.0" prefWidth="362.0">
+         <children>
+            <ScrollPane prefHeight="346.0" prefWidth="363.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <content>
+                  <TextFlow fx:id="textFlow" prefHeight="343.0" prefWidth="349.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

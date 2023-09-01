@@ -1,6 +1,7 @@
 package selfmade.ebookConverter.controller;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import selfmade.ebookConverter.view.EbookView;
 
@@ -28,5 +29,7 @@ public class MessageController {
         label.setText(message);
         return label;
     }
+
+
 }
 

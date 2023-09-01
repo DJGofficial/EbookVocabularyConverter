@@ -23,6 +23,7 @@ public class ButtonController {
     EbookView ebookView;
 
     public ButtonController() {
+
     }
 
     public static void setButtonChoiceBoxStatus(String value) {

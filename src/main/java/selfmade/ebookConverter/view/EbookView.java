@@ -133,17 +133,20 @@ public class EbookView implements Initializable {
 
     @FXML
     public void ankiButtonClicked() throws Exception {
+        bottomMessageLabel.setText("");
         AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
         choiceBoxItems = new ChoiceBoxItems();
 
         ankiConnection = new AnkiConnection(this);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
+
         if (deckList != null && !deckList.isEmpty()) {
             ankiDeckChoose.callWindowAddDeckList(deckList);
-            messageController.showSuccessMessage(bottomMessageLabel, "Decks successfull added");
         } else {
-            messageController.showErrorMessage(bottomMessageLabel, "Could not transfer Cards");
+            messageController.showErrorMessage(bottomMessageLabel, "Bitte stelle Verbindung mit Anki über AnkiConnect her");
         }
+
+
 
     }
 

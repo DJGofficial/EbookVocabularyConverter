@@ -4,8 +4,8 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import selfmade.ebookConverter.controller.MessageController;
+import selfmade.ebookConverter.view.AnkiDeckChoose;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;
@@ -17,15 +17,22 @@ public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
-    EbookView ebookView = new EbookView();
+    EbookView ebookView;// = new EbookView();
     MessageController messageController;
+   AnkiDeckChoose ankiDeckChoose;
+    ;
 
     public AnkiConnection(EbookView ebookView) {
         this.ebookView = ebookView;
     }
 
+    public AnkiConnection(AnkiDeckChoose ankiDeckChoose) {
+        this.ankiDeckChoose = ankiDeckChoose;
+    }
+
     public AnkiConnection() {
-        this.ebookView= new EbookView();
+        this.ebookView = new EbookView();
+        this.ankiDeckChoose = new AnkiDeckChoose();
     }
 /*
     public static void main(String[] args) throws IOException {
@@ -62,21 +69,17 @@ public class AnkiConnection {
                 StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
-                System.out.println("INPUTLINE "+inputLine);
                     response.append(inputLine);
-                    System.out.println("After respond append "+response);
-
                 }
 
                 in.close();
 
                 String jsonString = response.toString();
-                //jsonString = jsonString.substring(1, jsonString.length() ); // Remove enclosing []
                 String[] deckNameArray = jsonString.split(",");
 
                 if (deckNameArray.length >= 2) {
                     deckNames.add(deckNameArray[1].replaceAll("\"", "").trim());  // Set the second entry as the first
-                    for (int i = 2; i < deckNameArray.length-1; i++) {
+                    for (int i = 2; i < deckNameArray.length - 1; i++) {
                         deckNames.add(deckNameArray[i].replaceAll("[\\[\\]\"]", "").trim());
                     }
                 }
@@ -84,7 +87,7 @@ public class AnkiConnection {
             }
 
         } catch (Exception e) {
-            ebookView.setBottomLabelMessage("Bitte stelle Verbindung mit Anki über AnkiConnect her",false);
+            ebookView.setBottomLabelMessage("Bitte stelle Verbindung mit Anki über AnkiConnect her", false);
             e.printStackTrace();
         }
         System.out.println(deckNames.get(0));
@@ -92,6 +95,7 @@ public class AnkiConnection {
     }
 
     public void addCard(String deckName, String modelName, String front, String back) throws IOException {
+        //ebookView= new EbookView();
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -114,16 +118,6 @@ public class AnkiConnection {
             notes.add("fields", fields);
             params.add("note", notes);
             request.add("params", params);
-
-            // JsonObject note = new JsonObject();
-            // note.addProperty("deckName", deckName);
-            // note.addProperty("modelName", modelName);
-
-            //  JsonObject fields = new JsonObject();
-            // fields.add("Front", new JsonPrimitive(front));
-            // fields.add("Back", new JsonPrimitive(back));
-            // note.add("fields", fields);
-
 
             OutputStream outputStream = connection.getOutputStream();
             OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
@@ -151,13 +145,17 @@ public class AnkiConnection {
 
                 if (resultElement != null && !resultElement.isJsonNull()) {
                     // Erfolgreiche Nachricht
-                    ebookView.setBottomLabelMessage("Erfolgreich: " + resultElement.getAsString(),true);
+                    ankiDeckChoose.setTextArea("Fehlgeschlagen: " + resultElement.getAsString());
+                    // ebookView.setBottomLabelMessage("Erfolgreich: " + resultElement.getAsString(),true);
                     System.out.println("Erfolgreich: " + resultElement.getAsString());
+
                 } else if (errorElement != null && !errorElement.isJsonNull()) {
                     // Fehlgeschlagene Nachricht
                     String errorMessage = errorElement.getAsString();
-                    ebookView.setBottomLabelMessage("Fehlgeschlagen: " + errorMessage,false);
+                    ankiDeckChoose.setTextArea("Fehlgeschlagen: " + errorMessage);
+                    //ebookView.setBottomLabelMessage("Fehlgeschlagen: " + errorMessage,false);
                     System.out.println("Fehler: " + errorMessage);
+
                 }
                 System.out.println(responseElement.getAsJsonObject());
                 //?{"result":null,"error":"cannot create note because it is a duplicate"} <--If not successfull
