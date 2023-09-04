@@ -22,25 +22,31 @@ import selfmade.ebookConverter.model.TextAttributesObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AnkiDeckChoose implements Initializable {
-    @FXML
-    AnchorPane root;
-    @FXML
-    ChoiceBox<String> choiceBoxAnkiDecks = new ChoiceBox<>();
-    @FXML
-    private TextField textField;//= new TextField();
-  //  static TextFlow textFlow = new TextFlow();
 
     @FXML
-    Button deckConfirmButton = new Button();
+    private Button deckConfirmButton;
+
+    @FXML
+    private AnchorPane root;
+
+    @FXML
+    private Text text;
+    @FXML
+    private TextArea textArea;
+    @FXML
+    private TextField textField;
+    @FXML
+    ChoiceBox<String> choiceBoxAnkiDecks = new ChoiceBox<>();
+
 
     private static ObservableList<String> deckListLocal = FXCollections.observableArrayList();
     @FXML
     MainStage mainStage = new MainStage();
-    @FXML
-    AnkiController ankiController = new AnkiController();
+    AnkiController ankiController;
 
     @FXML
     AnkiConnection ankiConnection;
@@ -55,14 +61,17 @@ public class AnkiDeckChoose implements Initializable {
 
     @FXML
     private void deckConfirmButtonClicked() throws IOException {
-       // textFlow.getChildren().add("Endlich klappt es");
-        ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
+        ArrayList<String> texter = ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
         // Stage currentStage = (Stage) deckConfirmButton.getScene().getWindow();
         // currentStage.close();
+        for (String entry : texter) {
+            System.out.println(entry);
+            textArea.setText(entry + "\n");
+        }
     }
 
     @FXML
-    public  void setTextArea(String message) throws IOException {
+    public void setTextArea(String message) throws IOException {
         System.out.println("Message " + message);
        /* Text text = new Text();
         String newText = message;
@@ -80,16 +89,18 @@ public class AnkiDeckChoose implements Initializable {
         textFlow.getChildren().add(text);
 
         */
-        textField.setText(message);
+        this.textField.setText(message);
+        this.text.setText(message);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBoxAnkiDecks.getItems().addAll(this.deckListLocal);
-        textField= new TextField("Ratatatatata");
+        ankiController = new AnkiController();
+
     }
 //AnkiDeckChoose ankiDeckChoose= new AnkiDeckChoose();
-    }
+}
 
 
 

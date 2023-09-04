@@ -11,6 +11,7 @@ import selfmade.ebookConverter.view.EbookView;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class AnkiConnection {
@@ -26,13 +27,15 @@ public class AnkiConnection {
         this.ebookView = ebookView;
     }
 
-    public AnkiConnection(AnkiDeckChoose ankiDeckChoose) {
+    /*public AnkiConnection(AnkiDeckChoose ankiDeckChoose) {
         this.ankiDeckChoose = ankiDeckChoose;
     }
 
+     */
+
     public AnkiConnection() {
         this.ebookView = new EbookView();
-        this.ankiDeckChoose = new AnkiDeckChoose();
+       // this.ankiDeckChoose = new AnkiDeckChoose();
     }
 /*
     public static void main(String[] args) throws IOException {
@@ -94,8 +97,8 @@ public class AnkiConnection {
         return deckNames;
     }
 
-    public void addCard(String deckName, String modelName, String front, String back) throws IOException {
-        //ebookView= new EbookView();
+    public ArrayList<String> addCard(AnkiDeckChoose ankiDeckChoose, String deckName, String modelName, String front, String back) throws IOException {
+        ArrayList<String> answerRequestList = new ArrayList<>();
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -145,16 +148,19 @@ public class AnkiConnection {
 
                 if (resultElement != null && !resultElement.isJsonNull()) {
                     // Erfolgreiche Nachricht
-                    ankiDeckChoose.setTextArea("Fehlgeschlagen: " + resultElement.getAsString());
-                    // ebookView.setBottomLabelMessage("Erfolgreich: " + resultElement.getAsString(),true);
-                    System.out.println("Erfolgreich: " + resultElement.getAsString());
+                 answerRequestList.add("Erfolgreich: " + resultElement.getAsString()+" "+front);
+                    //   return ("Fehlgeschlagen: " + resultElement.getAsString());
+
+                   // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + resultElement.getAsString());
+                   // System.out.println("Erfolgreich: " + resultElement.getAsString());
 
                 } else if (errorElement != null && !errorElement.isJsonNull()) {
                     // Fehlgeschlagene Nachricht
                     String errorMessage = errorElement.getAsString();
-                    ankiDeckChoose.setTextArea("Fehlgeschlagen: " + errorMessage);
-                    //ebookView.setBottomLabelMessage("Fehlgeschlagen: " + errorMessage,false);
-                    System.out.println("Fehler: " + errorMessage);
+                   answerRequestList.add("Fehlgeschlagen: " + errorMessage+" "+front);
+                    //return ("Fehlgeschlagen: " + line+errorMessage);
+                    // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + errorMessage);
+                  //  System.out.println("Fehler: " + errorMessage);
 
                 }
                 System.out.println(responseElement.getAsJsonObject());
@@ -167,6 +173,7 @@ public class AnkiConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return answerRequestList;
     }
 
     public static void createDeck(String deckName) throws IOException {

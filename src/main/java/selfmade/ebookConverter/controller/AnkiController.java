@@ -22,8 +22,8 @@ public class AnkiController {
         ankiDeckChoose= new AnkiDeckChoose();
     }
 
-    public void createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
-      //ankiConnection= new AnkiConnection();
+    public ArrayList createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
+        //ankiConnection= new AnkiConnection();
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
         }
@@ -39,12 +39,14 @@ public class AnkiController {
             cardList.add(textAttributes);
         }
 
+        ArrayList retValList = null;
         try {
             for (TextAttributesObject<String> textAttributes : cardList) {
-             //   if (ankiDeckChoose == null) {
-                    ankiConnection.addCard(textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
-               // }
-              //  System.out.println("AnkiDeckChoose is null");
+                //   if (ankiDeckChoose == null) {
+                retValList = ankiConnection.addCard(ankiDeckChoose, textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
+                return retValList;
+                // }
+                //  System.out.println("AnkiDeckChoose is null");
                 //? maybe a message
             }
         } catch (IOException e) {
@@ -52,5 +54,6 @@ public class AnkiController {
             //? Hier muss noch irgendwas hin
             e.printStackTrace();
         }
+        return retValList;
     }
 }
