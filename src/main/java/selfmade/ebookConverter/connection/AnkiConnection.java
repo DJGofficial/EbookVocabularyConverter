@@ -97,8 +97,8 @@ public class AnkiConnection {
         return deckNames;
     }
 
-    public ArrayList<String> addCard(AnkiDeckChoose ankiDeckChoose, String deckName, String modelName, String front, String back) throws IOException {
-        ArrayList<String> answerRequestList = new ArrayList<>();
+    public String addCard(AnkiDeckChoose ankiDecksChoose, String deckName, String modelName, String front, String back) throws IOException {
+      // ArrayList<String> answerRequestList = new ArrayList<String>();
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -148,8 +148,8 @@ public class AnkiConnection {
 
                 if (resultElement != null && !resultElement.isJsonNull()) {
                     // Erfolgreiche Nachricht
-                 answerRequestList.add("Erfolgreich: " + resultElement.getAsString()+" "+front);
-                    //   return ("Fehlgeschlagen: " + resultElement.getAsString());
+                // answerRequestList.add("Erfolgreich: " + resultElement.getAsString()+" "+front);
+                      return (front+": Erfolgreich: " + resultElement.getAsString());
 
                    // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + resultElement.getAsString());
                    // System.out.println("Erfolgreich: " + resultElement.getAsString());
@@ -157,8 +157,8 @@ public class AnkiConnection {
                 } else if (errorElement != null && !errorElement.isJsonNull()) {
                     // Fehlgeschlagene Nachricht
                     String errorMessage = errorElement.getAsString();
-                   answerRequestList.add("Fehlgeschlagen: " + errorMessage+" "+front);
-                    //return ("Fehlgeschlagen: " + line+errorMessage);
+                   //answerRequestList.add("Fehlgeschlagen: " + errorMessage+" "+front);
+                    return (front+": Fehlgeschlagen: "+errorMessage);
                     // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + errorMessage);
                   //  System.out.println("Fehler: " + errorMessage);
 
@@ -173,7 +173,14 @@ public class AnkiConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
+      /*  for(String answer: answerRequestList){
+            System.out.println("AnswerRequest "+answer);
+
+        }
         return answerRequestList;
+
+       */
+        return "Unknown Error out of scope";
     }
 
     public static void createDeck(String deckName) throws IOException {

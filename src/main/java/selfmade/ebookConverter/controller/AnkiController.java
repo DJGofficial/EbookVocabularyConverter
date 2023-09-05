@@ -16,13 +16,14 @@ public class AnkiController {
     AnkiConnection ankiConnection;//= new AnkiConnection();
     EbookView ebookView;
     AnkiDeckChoose ankiDeckChoose;
+
     public AnkiController() {
-        ankiConnection= new AnkiConnection();
-        ebookView= new EbookView();
-        ankiDeckChoose= new AnkiDeckChoose();
+        ankiConnection = new AnkiConnection();
+        ebookView = new EbookView();
+        ankiDeckChoose = new AnkiDeckChoose();
     }
 
-    public ArrayList createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
+    public ArrayList<String> createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
         //ankiConnection= new AnkiConnection();
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
@@ -39,13 +40,14 @@ public class AnkiController {
             cardList.add(textAttributes);
         }
 
-        ArrayList retValList = null;
+        ArrayList<String> retValList = new ArrayList<String>();
         try {
             for (TextAttributesObject<String> textAttributes : cardList) {
                 //   if (ankiDeckChoose == null) {
-                retValList = ankiConnection.addCard(ankiDeckChoose, textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
-                return retValList;
-                // }
+                System.out.println("TextAtt "+textAttributes);
+               String retVal= ankiConnection.addCard(ankiDeckChoose, textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
+               retValList.add(retVal);
+               // }
                 //  System.out.println("AnkiDeckChoose is null");
                 //? maybe a message
             }
