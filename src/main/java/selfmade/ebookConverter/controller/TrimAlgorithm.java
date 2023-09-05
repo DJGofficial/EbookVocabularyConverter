@@ -1,6 +1,5 @@
 package selfmade.ebookConverter.controller;
 
-import javafx.scene.control.Button;
 import selfmade.ebookConverter.view.EbookView;
 
 import javafx.collections.ObservableList;
@@ -21,7 +20,7 @@ public class TrimAlgorithm {
 
     private List<String> texts = new ArrayList<>();
     private ArrayList<String> entryList = new ArrayList<>();
-
+    private ArrayList<String> trimmedList = new ArrayList<>();
     EbookView ebookView;
     ButtonController buttonController;
 
@@ -83,14 +82,16 @@ public class TrimAlgorithm {
                     break;
             }
         }
-        //extractVocabulary(endMark, vocabulary, titleToAdd, type);
-        textBlockStorage(endMark, String.valueOf(titleToAdd), type);
+//        textBlockStorage(endMark, String.valueOf(titleToAdd), type);
 
         //Process is divided with textBlockStorage
-        runListDetermineDistance(endMark, vocabulary);
+        runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd), type);
+        //extractVocabulary(endMark, vocabulary, titleToAdd, type);
+
     }
 
-    private void textBlockStorage(String endMark, String title, String type) {
+    private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
+        ArrayList<String> returnVocList = new ArrayList<>();
         StringBuilder currentBlock = new StringBuilder();
 
         for (String line : texts) {
@@ -101,32 +102,43 @@ public class TrimAlgorithm {
                 currentBlock.append(line).append("\n");
             }
         }
-        System.out.println("Type " + type);
-        System.out.println("Title " + title);
+
         for (int i = 0; i < entryList.size(); i++) {
             String line = entryList.get(i);
-                   System.out.println(entryList.get(1));
-                if (line.trim().equals(type.trim())) {
-                    System.out.println("EntryList textblock " + entryList.indexOf(line));
+
+            if (!(title.isEmpty()) && !(type.isEmpty())) {
+                if (line.contains(title) && line.contains(type)) {
+                    trimmedList.add(entryList.get(i));
                 }
-          /*  if (title != null && !type.isEmpty()) {
-                System.out.println("Title " + title);
+            } else if (!title.isEmpty()) {
+                if (line.contains(title)) {
+                    trimmedList.add(entryList.get(i));
+                }
+            } else if (!type.isEmpty()) {
+                if (line.contains(type)) {
+                    trimmedList.add(entryList.get(i));
+                }
+
             }
-
-            if (type != null && !title.isEmpty()) {
-                System.out.println("Type " + type);
-            }
-
-           */
-
         }
-        System.out.println("Size " + entryList.size());
-        //  for (String block : entryList) {
-        //  }
+        for (String trimprint : trimmedList) {
+          trimprint=findVocabulary(distanceIndex);
+          returnVocList.add(trimprint);
+              System.out.println("Trimmed " + trimprint);
+        }
+        /*
+        String retVal = findVocabulary(distanceIndex);
+        returnVocList.add(retVal);
+
+
+         */
+        ebookView.fillFlowPaneWithVocabulary(returnVocList);
+        //System.out.println("Size " + entryList.size());
+
     }
 
 
-    private void runListDetermineDistance(String endMark, String vocabulary) {
+    private void runListDetermineDistance(String endMark, String vocabulary, String s, String type) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
         int distanceIndex = 0;
@@ -149,31 +161,35 @@ public class TrimAlgorithm {
             }
 
         }
-        findVocabulary(distanceIndex);
+        textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
+
+        // findVocabulary(distanceIndex);
 
 
     }
 
-    private void findVocabulary(int distanceIndex) {
+    private String findVocabulary(int distanceIndex) {
         buttonController = new ButtonController();
-        ArrayList<String> returnVocList = new ArrayList<>();
+        // ArrayList<String> returnVocList = new ArrayList<>();
         String pattern = "[^a-zA-Z0-9]";
 
+//Hier eigentlichfor (String block : trimmedList) {
         for (String block : entryList) {
             String[] lines = block.split("\n");
             try {
-                String vorletzterString = lines[lines.length - distanceIndex];
-                String replacedRegex = vorletzterString.replaceAll(pattern, "");
-                returnVocList.add(replacedRegex);
+                String secondLastString = lines[lines.length - distanceIndex];
+                String replacedRegex = secondLastString.replaceAll(pattern, "");
+                return replacedRegex;
+                // returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.setMessageLabel("Bitte markiere Titel oder Art");
                 break;
             }
         }
+        return "Not in scope change";
 
-        ebookView.fillFlowPaneWithVocabulary(returnVocList);
-        // List<Button> buttonList = buttonController.createVocButton(returnVocList);
-       // ebookView.fillFlowPaneWithVocabulary(buttonList);
+        // ebookView.fillFlowPaneWithVocabulary(returnVocList);
+
     }
 
 
