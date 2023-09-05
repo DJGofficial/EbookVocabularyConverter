@@ -1,5 +1,6 @@
 package selfmade.ebookConverter.controller;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -45,10 +46,8 @@ public class ButtonController {
         List<Button> buttons = new ArrayList<>();
         for (String vocabulary : vocList) {
             Button button = new Button(vocabulary);
-            button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
-            button.setBorder(createStyledButton());
-
-            flowPane.getChildren().add(button);//buttons.add(button);
+            button.setStyle(createStyledButton());
+            flowPane.getChildren().add(button);
             button.setOnAction(event -> {
                 Button clickedButton = (Button) event.getSource();
                 flowPane.getChildren().remove(clickedButton);
@@ -61,10 +60,11 @@ public class ButtonController {
 
     public List<Button> createTranslatedButton(FlowPane flowPane, HashMap<String, String> transVocList) {
         List<Button> buttons = new ArrayList<>();
+
         for (Map.Entry<String, String> entry : transVocList.entrySet()) {
-            Button button = new Button(entry.getKey() + " " + entry.getValue());
-            button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
-            button.setBorder(createStyledButton());
+            Button button = new Button(entry.getKey() + " " + entry.getValue());//createStyledButton();
+            button.setStyle(createStyledButton());
+
             button.setOnAction(event -> {
                 Button clickedButton = (Button) event.getSource();
                 flowPane.getChildren().remove(clickedButton);
@@ -77,15 +77,16 @@ public class ButtonController {
         return buttons;
     }
 
-    public Border createStyledButton() {
-        CornerRadii cornerRadii = new CornerRadii(10);
-        return new Border(
-                new BorderStroke(
-                        Color.BLACK,
-                        BorderStrokeStyle.SOLID,
-                        cornerRadii,
-                        new BorderWidths(2)
-                )
-        );
+    public String createStyledButton() {
+        return "-fx-background-radius: 50;" +
+                "-fx-border-radius: 25px;" +
+                "-fx-background-color: #B0C4DE;" +
+                "-fx-text-fill: black;" +
+                "-fx-border-style: solid;" +
+                "-fx-border-color: black;" +
+                "-fx-border-width: 2px;" +
+                "-fx-background-insets: 5px;";
     }
+
+
 }

@@ -91,8 +91,7 @@ public class FileController {
                 String[] words = line.split("\\s+");
                 for (String word : words) {
                     ToggleButton button = new ToggleButton(word);
-                    button.setStyle("-fx-background-color: #B0C4DE;; -fx-text-fill: white;");
-                    button.setBorder(buttonController.createStyledButton());
+                    button.setStyle(buttonController.createStyledButton());
                     button.setOnAction(event -> {
                         setButtonAction(button);
                     });
