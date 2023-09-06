@@ -94,6 +94,7 @@ public class TrimAlgorithm {
         ArrayList<String> returnVocList = new ArrayList<>();
         StringBuilder currentBlock = new StringBuilder();
 
+
         for (String line : texts) {
             if (line.trim().equals(endMark)) {
                 entryList.add(currentBlock.toString());
@@ -118,25 +119,14 @@ public class TrimAlgorithm {
                 if (line.contains(type)) {
                     trimmedList.add(entryList.get(i));
                 }
-
+            } else {
+                trimmedList.add(entryList.get(i));
             }
         }
-        for (String trimprint : trimmedList) {
-          trimprint=findVocabulary(distanceIndex);
-          returnVocList.add(trimprint);
-              System.out.println("Trimmed " + trimprint);
-        }
-        /*
-        String retVal = findVocabulary(distanceIndex);
-        returnVocList.add(retVal);
 
-
-         */
-        ebookView.fillFlowPaneWithVocabulary(returnVocList);
-        //System.out.println("Size " + entryList.size());
+        findVocabulary(trimmedList, distanceIndex);
 
     }
-
 
     private void runListDetermineDistance(String endMark, String vocabulary, String s, String type) {
         int vocabularyIndex = 0;
@@ -168,27 +158,28 @@ public class TrimAlgorithm {
 
     }
 
-    private String findVocabulary(int distanceIndex) {
+    private void findVocabulary(ArrayList<String> trimmedList, int distanceIndex) {
         buttonController = new ButtonController();
-        // ArrayList<String> returnVocList = new ArrayList<>();
+        ArrayList<String> returnVocList = new ArrayList<>();
         String pattern = "[^a-zA-Z0-9]";
 
-//Hier eigentlichfor (String block : trimmedList) {
-        for (String block : entryList) {
+        for (String block : trimmedList) {
             String[] lines = block.split("\n");
             try {
                 String secondLastString = lines[lines.length - distanceIndex];
                 String replacedRegex = secondLastString.replaceAll(pattern, "");
-                return replacedRegex;
-                // returnVocList.add(replacedRegex);
+                //  return replacedRegex;
+                returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.setMessageLabel("Bitte markiere Titel oder Art");
                 break;
             }
         }
-        return "Not in scope change";
-
-        // ebookView.fillFlowPaneWithVocabulary(returnVocList);
+        //  return "Not in scope change";
+        for (String val : returnVocList) {
+            System.out.println(val);
+        }
+        ebookView.fillFlowPaneWithVocabulary(returnVocList);
 
     }
 
