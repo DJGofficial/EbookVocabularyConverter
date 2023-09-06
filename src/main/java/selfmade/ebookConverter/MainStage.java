@@ -24,7 +24,7 @@ public class MainStage extends Application {
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
-        stage.setResizable(false);
+        stage.setResizable(true);
     }
 
     public void showNewStage(){
@@ -42,6 +42,8 @@ public class MainStage extends Application {
         secondScene.getStylesheets().add("styles.css");
         newStage.setScene(secondScene);
         newStage.setTitle("Bitte Deck wählen");
+        newStage.initStyle(StageStyle.DECORATED);
+        newStage.setResizable(false);
         newStage.show();
 
     }

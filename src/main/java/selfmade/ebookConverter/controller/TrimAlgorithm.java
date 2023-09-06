@@ -74,26 +74,20 @@ public class TrimAlgorithm {
                     vocabulary = buttonText;  //word that is later translated
                     break;
                 case "-fx-background-color: #FFFFD9":
-                    titleToAdd.append(buttonText + " ");//Only include books with this title
-                    //ATTENTION SPACE COULD BE ADDED AFTER LAST POSITION
+                    titleToAdd.append(buttonText);//Only include books with this title
+                    System.out.println(titleToAdd+"-");
                     break;
                 case "-fx-background-color: #D9E5FF":
                     type = buttonText;//Only include text with this type
                     break;
             }
         }
-//        textBlockStorage(endMark, String.valueOf(titleToAdd), type);
-
-        //Process is divided with textBlockStorage
         runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd), type);
-        //extractVocabulary(endMark, vocabulary, titleToAdd, type);
 
     }
 
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
-        ArrayList<String> returnVocList = new ArrayList<>();
         StringBuilder currentBlock = new StringBuilder();
-
 
         for (String line : texts) {
             if (line.trim().equals(endMark)) {
@@ -152,10 +146,6 @@ public class TrimAlgorithm {
 
         }
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
-
-        // findVocabulary(distanceIndex);
-
-
     }
 
     private void findVocabulary(ArrayList<String> trimmedList, int distanceIndex) {
@@ -175,23 +165,10 @@ public class TrimAlgorithm {
                 break;
             }
         }
-        //  return "Not in scope change";
-        for (String val : returnVocList) {
-            System.out.println(val);
-        }
         ebookView.fillFlowPaneWithVocabulary(returnVocList);
 
     }
 
-
-    private void findAndPrintSpecialEntries() {
-        /*for (String text : texts) {
-            if (text.length() >= 2 && !Character.isLetterOrDigit(text.charAt(0)) && !Character.isLetterOrDigit(text.charAt(text.length() - 1))) {
-                System.out.println(text);
-            }
-        }
-         */
-
-    }
-
 }
+
+

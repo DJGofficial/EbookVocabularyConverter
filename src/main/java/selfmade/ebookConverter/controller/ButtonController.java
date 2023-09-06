@@ -83,7 +83,7 @@ public class ButtonController {
                 "-fx-background-color: #B0C4DE;" +
                 "-fx-text-fill: black;" +
                 "-fx-border-style: solid;" +
-                "-fx-border-color: black;" +
+                "-fx-border-color: EarlGrey;" +
                 "-fx-border-width: 2px;" +
                 "-fx-background-insets: 5px;";
     }

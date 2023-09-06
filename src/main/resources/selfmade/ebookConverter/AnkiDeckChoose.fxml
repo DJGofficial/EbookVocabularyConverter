@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="buttonStyle" fx:id="root" prefHeight="45.0" prefWidth="202.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
+<AnchorPane id="background" fx:id="root" prefHeight="525.0" prefWidth="523.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
    <children>
-      <HBox prefHeight="50.0" prefWidth="362.0">
+      <HBox prefHeight="50.0" prefWidth="513.0">
          <children>
-            <ChoiceBox fx:id="choiceBoxAnkiDecks" prefWidth="150.0">
+            <ChoiceBox id="buttonStyle" fx:id="choiceBoxAnkiDecks" prefWidth="150.0" stylesheets="@styles.css">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -21,7 +21,7 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </ChoiceBox>
-            <Button fx:id="deckConfirmButton" mnemonicParsing="false" onAction="#deckConfirmButtonClicked" text="Ok">
+            <Button id="buttonStyle" fx:id="deckConfirmButton" mnemonicParsing="false" onAction="#deckConfirmButtonClicked" text="Ok">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -31,14 +31,14 @@
             </Button>
          </children>
       </HBox>
-      <VBox layoutY="38.0" prefHeight="355.0" prefWidth="362.0">
+      <VBox layoutY="38.0" prefHeight="487.0" prefWidth="523.0">
          <children>
-            <ScrollPane prefHeight="360.0" prefWidth="390.0">
+            <ScrollPane prefHeight="501.0" prefWidth="513.0">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <content>
-                  <TextArea fx:id="textArea" prefHeight="347.0" prefWidth="351.0" />
+                  <TextArea fx:id="textArea" prefHeight="465.0" prefWidth="503.0" />
                </content>
             </ScrollPane>
          </children>

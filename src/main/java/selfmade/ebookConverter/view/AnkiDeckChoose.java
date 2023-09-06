@@ -81,36 +81,12 @@ public class AnkiDeckChoose implements Initializable {
 
     }
 
-    @FXML
-    public void setTextArea(String message) throws IOException {
-        System.out.println("Message " + message);
-       /* Text text = new Text();
-        String newText = message;
-        String currentText = text.getText();
-
-        // Wenn der TextArea-Text nicht leer ist, füge einen Zeilenumbruch hinzu
-        if (!currentText.isEmpty()) {
-            currentText += "\n";
-        }
-
-        // Füge den neuen Text hinzu
-        currentText += newText;
-        text.setText(currentText);
-        // Setze den aktualisierten Text zurück
-        textFlow.getChildren().add(text);
-
-        */
-        this.textField.setText(message);
-        this.text.setText(message);
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBoxAnkiDecks.getItems().addAll(this.deckListLocal);
         ankiController = new AnkiController();
 
     }
-//AnkiDeckChoose ankiDeckChoose= new AnkiDeckChoose();
 }
 
 
