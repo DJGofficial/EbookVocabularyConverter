@@ -27,28 +27,11 @@ public class AnkiConnection {
         this.ebookView = ebookView;
     }
 
-    /*public AnkiConnection(AnkiDeckChoose ankiDeckChoose) {
-        this.ankiDeckChoose = ankiDeckChoose;
-    }
 
-     */
 
     public AnkiConnection() {
         this.ebookView = new EbookView();
-       // this.ankiDeckChoose = new AnkiDeckChoose();
     }
-/*
-    public static void main(String[] args) throws IOException {
-        String deckName = "ZZDeck";
-        String modelName = "Basic";
-        String front = "this";
-        String back = "there";
-
-        createDeck(deckName);
-       // addCard(deckName, modelName, front, back);
-    }
-
- */
 
     public ObservableList<String> fetchDeckNames() {
         ObservableList<String> deckNames = FXCollections.observableArrayList();
@@ -97,8 +80,8 @@ public class AnkiConnection {
         return deckNames;
     }
 
-    public String addCard(AnkiDeckChoose ankiDecksChoose, String deckName, String modelName, String front, String back) throws IOException {
-      // ArrayList<String> answerRequestList = new ArrayList<String>();
+    public String addCard(String deckName, String modelName, String front, String back) throws IOException {
+
         try {
             URL url = new URL(ANKI_CONNECT_URL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -147,25 +130,13 @@ public class AnkiConnection {
                 JsonElement errorElement = responseObject.get("error");
 
                 if (resultElement != null && !resultElement.isJsonNull()) {
-                    // Erfolgreiche Nachricht
-                // answerRequestList.add("Erfolgreich: " + resultElement.getAsString()+" "+front);
                       return (front+": Erfolgreich: " + resultElement.getAsString());
-
-                   // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + resultElement.getAsString());
-                   // System.out.println("Erfolgreich: " + resultElement.getAsString());
-
                 } else if (errorElement != null && !errorElement.isJsonNull()) {
-                    // Fehlgeschlagene Nachricht
                     String errorMessage = errorElement.getAsString();
-                   //answerRequestList.add("Fehlgeschlagen: " + errorMessage+" "+front);
                     return (front+": Fehlgeschlagen: "+errorMessage);
-                    // ankiDeckChoose.setTextArea("Fehlgeschlagen: " + errorMessage);
-                  //  System.out.println("Fehler: " + errorMessage);
 
                 }
-                System.out.println(responseElement.getAsJsonObject());
-                //?{"result":null,"error":"cannot create note because it is a duplicate"} <--If not successfull
-                //? {"result":1693296648055,"error":null} <--successfull
+
                 writer.close();
                 outputStream.close();
                 connection.disconnect();
@@ -173,16 +144,9 @@ public class AnkiConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      /*  for(String answer: answerRequestList){
-            System.out.println("AnswerRequest "+answer);
-
-        }
-        return answerRequestList;
-
-       */
-        return "Unknown Error out of scope";
+        return "Unbekannter Fehler außerhalb des Geltungsbereiches";
     }
-
+/*
     public static void createDeck(String deckName) throws IOException {
         try {
             URL url = new URL(ANKI_CONNECT_URL);
@@ -236,6 +200,8 @@ public class AnkiConnection {
             e.printStackTrace();
         }
     }
+
+ */
 
 }
 

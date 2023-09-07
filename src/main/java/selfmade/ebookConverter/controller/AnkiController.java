@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AnkiController {
 
-    AnkiConnection ankiConnection;//= new AnkiConnection();
+    AnkiConnection ankiConnection;
     EbookView ebookView;
     AnkiDeckChoose ankiDeckChoose;
 
@@ -24,7 +24,7 @@ public class AnkiController {
     }
 
     public ArrayList<String> createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
-        //ankiConnection= new AnkiConnection();
+
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
         }
@@ -40,20 +40,13 @@ public class AnkiController {
             cardList.add(textAttributes);
         }
 
-        ArrayList<String> retValList = new ArrayList<String>();
+        ArrayList<String> retValList = new ArrayList<>();
         try {
             for (TextAttributesObject<String> textAttributes : cardList) {
-                //   if (ankiDeckChoose == null) {
-                System.out.println("TextAtt "+textAttributes);
-               String retVal= ankiConnection.addCard(ankiDeckChoose, textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
-               retValList.add(retVal);
-               // }
-                //  System.out.println("AnkiDeckChoose is null");
-                //? maybe a message
+                String retVal = ankiConnection.addCard(textAttributes.getDeckName(), textAttributes.getModelName(), textAttributes.getFront(), textAttributes.getBack());
+                retValList.add(retVal);
             }
         } catch (IOException e) {
-            System.out.println("Hier muss nochirgendwas hin");
-            //? Hier muss noch irgendwas hin
             e.printStackTrace();
         }
         return retValList;

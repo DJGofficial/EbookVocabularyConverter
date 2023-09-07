@@ -16,11 +16,11 @@ public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
 
-    static EbookView ebookView = new EbookView();
+    //? static EbookView ebookView = new EbookView();
 
     ButtonController buttonController = new ButtonController();
 
-    static TextColour tC;
+    //? static TextColour tC;
 
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));

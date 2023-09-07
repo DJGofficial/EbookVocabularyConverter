@@ -59,8 +59,8 @@ public class GoogleTranslateAPIConnection {
         testMap.put("deutsch1","englisch1");
         testMap.put("deutsch2","englisch2");
         testMap.put("deutsch3","englisch3");
-        ebookView.fillFlowPaneTranslatedMap(testMap);//translatedMap);
-        textAttributesObject.setTranslatedMap(testMap);//translatedMap);
+        ebookView.fillFlowPaneTranslatedMap(testMap);
+        textAttributesObject.setTranslatedMap(testMap);
 
     }
 }

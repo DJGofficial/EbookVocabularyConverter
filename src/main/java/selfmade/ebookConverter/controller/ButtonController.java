@@ -54,7 +54,6 @@ public class ButtonController {
 
             });
         }
-
         return buttons;
     }
 
@@ -69,23 +68,20 @@ public class ButtonController {
                 Button clickedButton = (Button) event.getSource();
                 flowPane.getChildren().remove(clickedButton);
             });
-
             buttons.add(button);
-
         }
-
         return buttons;
     }
 
     public String createStyledButton() {
         return "-fx-background-radius: 50;" +
-                "-fx-border-radius: 25px;" +
+                "-fx-border-radius: 15px;" +
                 "-fx-background-color: #B0C4DE;" +
                 "-fx-text-fill: black;" +
                 "-fx-border-style: solid;" +
-                "-fx-border-color: EarlGrey;" +
-                "-fx-border-width: 2px;" +
-                "-fx-background-insets: 5px;";
+                "-fx-border-color: Grey;" +
+                "-fx-border-width: 2px;"+
+                "-fx-background-insets: 2px;";
     }
 
 
