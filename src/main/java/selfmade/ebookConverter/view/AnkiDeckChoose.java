@@ -29,30 +29,17 @@ import java.util.ResourceBundle;
 public class AnkiDeckChoose implements Initializable {
 
     @FXML
-    private Button deckConfirmButton;
-
-    @FXML
-    private AnchorPane root;
-
-    @FXML
-    private Text text;
-    @FXML
     private TextArea textArea;
-    @FXML
-    private TextField textField;
+
     @FXML
     ChoiceBox<String> choiceBoxAnkiDecks = new ChoiceBox<>();
-
-
     private static ObservableList<String> deckListLocal = FXCollections.observableArrayList();
     @FXML
     MainStage mainStage = new MainStage();
     AnkiController ankiController;
-
     @FXML
     AnkiConnection ankiConnection;
     TextAttributesObject textAttributesObject = new TextAttributesObject<>();
-    // EbookView ebookView= new EbookView();
 
     @FXML
     public void callWindowAddDeckList(ObservableList<String> deckList) {
@@ -76,8 +63,6 @@ public class AnkiDeckChoose implements Initializable {
 
         textArea.setText(stringBuilder.toString());
         System.out.println("Size "+texter.size());
-        // Stage currentStage = (Stage) deckConfirmButton.getScene().getWindow();
-        // currentStage.close();
 
     }
 

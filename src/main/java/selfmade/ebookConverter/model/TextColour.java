@@ -1,15 +1,10 @@
 package selfmade.ebookConverter.model;
 
-import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TextColour {
     private String name;
     private String colour;
-
     static ArrayList<TextColour> textColourList = new ArrayList<>();
 
     public TextColour(String name, String colour) {

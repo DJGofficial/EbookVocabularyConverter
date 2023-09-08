@@ -1,8 +1,7 @@
 package selfmade.ebookConverter.model;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+
 
 public class TextAttributesObject<T> {
 
@@ -39,52 +38,22 @@ public class TextAttributesObject<T> {
         return deckName;
     }
 
-    public void setDeckName(T deckName) {
-        this.deckName = deckName;
-    }
+
 
     public T getModelName() {
         return modelName;
     }
 
-    public void setModelName(T modelName) {
-        this.modelName = modelName;
-    }
 
     public T getFront() {
         return front;
     }
 
-    public void setFront(T front) {
-        this.front = front;
-    }
 
     public T getBack() {
         return back;
     }
 
-    public void setBack(T back) {
-        this.back = back;
-    }
-
-  /*  public boolean hasNote() {
-        return note;
-    }
-
-    public void setNote(boolean note) {
-        this.note = note;
-    }
-
-    public boolean isBookmarked() {
-        return bookmark;
-    }
-
-    public void setBookmark(boolean bookmark) {
-        this.bookmark = bookmark;
-    }
-
-
-   */
     @Override
     public String toString() {
         return "Text Attributes{" +

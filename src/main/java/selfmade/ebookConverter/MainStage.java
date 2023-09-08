@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 
 import java.io.IOException;
 
@@ -30,7 +27,6 @@ public class MainStage extends Application {
     public void showNewStage(){
         Stage newStage= new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AnkiDeckChoose.fxml"));
-        //? Parent secondRoot = loader.load();
         Parent secondRoot = null;
         try {
             secondRoot = loader.load();
@@ -39,7 +35,6 @@ public class MainStage extends Application {
         }
 
         Scene secondScene= new Scene(secondRoot);
-        secondScene.getStylesheets().add("styles.css");
         newStage.setScene(secondScene);
         newStage.setTitle("Bitte Deck wählen");
         newStage.initStyle(StageStyle.DECORATED);

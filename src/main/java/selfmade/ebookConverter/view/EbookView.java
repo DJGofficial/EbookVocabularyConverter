@@ -1,6 +1,5 @@
 package selfmade.ebookConverter.view;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,8 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
-
 
 import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
@@ -19,11 +16,9 @@ import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.controller.ButtonController;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
 
 public class EbookView implements Initializable {
 
@@ -42,13 +37,11 @@ public class EbookView implements Initializable {
     @FXML
     Label messageLabel = new Label();
 
-
     ChoiceBoxItems choiceBoxItems;
     FileController fileController;
     ButtonController buttonController = new ButtonController();
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
-    //? eventuell braucht man das this nicht
     MessageController messageController = new MessageController(this);
 
     //Methods

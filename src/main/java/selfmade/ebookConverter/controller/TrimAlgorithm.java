@@ -35,8 +35,6 @@ public class TrimAlgorithm {
         boolean hasEndMark = false;
         boolean hasVocabulary = false;
         for (Node node : contentList) {
-            ToggleButton toggleButton = (ToggleButton) node;
-            String buttonText = toggleButton.getText();
             String styleString = node.lookup(".toggle-button").getStyle();
             switch (styleString) {
                 case "-fx-background-color: #D9FFD9":
@@ -143,7 +141,6 @@ public class TrimAlgorithm {
             } else {
                 System.out.println("Not found");
             }
-
         }
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
     }
@@ -158,7 +155,6 @@ public class TrimAlgorithm {
             try {
                 String secondLastString = lines[lines.length - distanceIndex];
                 String replacedRegex = secondLastString.replaceAll(pattern, "");
-                //  return replacedRegex;
                 returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
                 ebookView.setMessageLabel("Bitte markiere Titel oder Art");
