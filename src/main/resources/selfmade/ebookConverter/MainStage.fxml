@@ -32,9 +32,10 @@
         </VBox>
         <VBox prefHeight="69.0" prefWidth="106.0">
             <children>
+            <Button id="buttonStyle" fx:id="fillFlowPaneButton" disable="true" mnemonicParsing="false" onAction="#fillFlowPaneButtonClicked" text="Befüllen" />
                 <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="100.0">
                     <VBox.margin>
-                        <Insets top="45.0" />
+                        <Insets top="20.0" />
                     </VBox.margin>
                 </ChoiceBox>
             </children>
@@ -42,12 +43,12 @@
         </VBox>
         <VBox prefHeight="63.0" prefWidth="411.0">
 
-            <TextField id="textField" fx:id="fileTextField" prefHeight="26.0" prefWidth="377.0">
+            <TextField id="textField" fx:id="fileTextField" prefHeight="23.0" prefWidth="400.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             <VBox.margin>
-               <Insets right="5.0" />
+               <Insets left="10.0" right="5.0" />
             </VBox.margin>
             </TextField>
          <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
@@ -58,7 +59,7 @@
                      <Insets left="10.0" top="1.0" />
                   </HBox.margin>
                </ChoiceBox>
-                  <Button id="buttonStyle" fx:id="doneButton" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="124.0" text="Fertig">
+                  <Button id="buttonStyle" fx:id="doneButton" disable="true" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="124.0" text="Fertig">
                   <HBox.margin>
                      <Insets left="55.0" />
                   </HBox.margin>
@@ -103,7 +104,7 @@
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                     <Button id="buttonStyle" fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Löschen">
+                     <Button id="buttonStyle" fx:id="deleteButton" disable="true" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Löschen">
                         <HBox.margin>
                            <Insets left="380.0" top="5.0" />
                         </HBox.margin>
@@ -113,12 +114,18 @@
                      <Insets left="10.0" />
                   </VBox.margin>
                </HBox>
-               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0" />
+               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin></Label>
                     <TextField id="textField" fx:id="createFileTextField" prefHeight="0.0" prefWidth="529.0" promptText="Please enter name...">
                   <VBox.margin>
-                     <Insets bottom="5.0" left="5.0" right="5.0" />
+                     <Insets bottom="5.0" left="10.0" right="5.0" />
                   </VBox.margin></TextField>
                 </children>
+            <HBox.margin>
+               <Insets />
+            </HBox.margin>
             </VBox>
       </children>
     </HBox>

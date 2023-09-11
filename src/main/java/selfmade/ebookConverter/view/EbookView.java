@@ -23,7 +23,7 @@ import java.util.*;
 public class EbookView implements Initializable {
 
     @FXML
-    Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton;
+    Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
     @FXML
     TextField fileTextField, createFileTextField;
     @FXML
@@ -48,6 +48,7 @@ public class EbookView implements Initializable {
     @FXML
     private void setChooseFileButton() throws IOException {
         fileTextField.setText(fileController.chooseFile());
+        fillFlowPaneButton.setDisable(false);
     }
 
     @FXML
@@ -94,7 +95,6 @@ public class EbookView implements Initializable {
                 messageController.showErrorMessage(messageLabel, "Vokabel fehlt!");
             }
         }
-
     }
 
     @FXML
@@ -110,7 +110,14 @@ public class EbookView implements Initializable {
         connection = new GoogleTranslateAPIConnection(translation, this);
 
     }
-
+    @FXML
+    private void fillFlowPaneButtonClicked(){
+        flowPane.getChildren().addAll(fileController.createButtonsFromFile());
+    }
+    private void updateButtonStatus() {
+        boolean isFlowPaneEmpty = flowPane.getChildren().isEmpty();
+        fillFlowPaneButton.setDisable(isFlowPaneEmpty);
+    }
     @FXML
     public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
