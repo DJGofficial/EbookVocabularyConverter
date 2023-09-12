@@ -22,7 +22,7 @@
             <children>
 
                 <Button id="buttonStyle" fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Datei wählen" />
-                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" onMouseClicked="#createButtonText" prefHeight="26.0" prefWidth="100.0" stylesheets="@styles.css">
+                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" prefHeight="26.0" prefWidth="100.0" stylesheets="@styles.css">
                     <VBox.margin>
                         <Insets bottom="2.0" top="20.0" />
                     </VBox.margin>

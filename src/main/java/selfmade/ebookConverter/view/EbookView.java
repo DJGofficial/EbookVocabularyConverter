@@ -1,6 +1,7 @@
 package selfmade.ebookConverter.view;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,15 +66,17 @@ public class EbookView implements Initializable {
 
     @FXML
     public void deleteButtonClicked() {
+        fileTextField.setText("");
         flowPane.getChildren().clear();
     }
 
+    /*
     @FXML
     private void createButtonText() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
     }
 
-
+     */
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
@@ -113,11 +116,10 @@ public class EbookView implements Initializable {
     @FXML
     private void fillFlowPaneButtonClicked(){
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
+        doneButton.setDisable(false);
+        deleteButton.setDisable(false);
     }
-    private void updateButtonStatus() {
-        boolean isFlowPaneEmpty = flowPane.getChildren().isEmpty();
-        fillFlowPaneButton.setDisable(isFlowPaneEmpty);
-    }
+
     @FXML
     public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
@@ -132,7 +134,7 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    public void ankiButtonClicked() throws Exception {
+    public void ankiButtonClicked() {
         bottomMessageLabel.setText("");
         AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
         choiceBoxItems = new ChoiceBoxItems();
