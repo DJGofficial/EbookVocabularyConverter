@@ -13,7 +13,7 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
 
 
     opens selfmade.ebookConverter to javafx.fxml;
-    exports selfmade.ebookConverter;
-    exports selfmade.ebookConverter.view;
+   exports selfmade.ebookConverter;
+   exports selfmade.ebookConverter.view;
     opens selfmade.ebookConverter.view to javafx.fxml;
 }

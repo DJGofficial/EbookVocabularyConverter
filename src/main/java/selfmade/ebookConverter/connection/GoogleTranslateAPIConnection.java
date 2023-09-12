@@ -30,7 +30,7 @@ public class GoogleTranslateAPIConnection {
 
     public void translateAndReturnHashMap(HashMap<?, ?> vocList) {
         HashMap<String, String> translatedMap = new HashMap<>();
-/*
+
         for (Map.Entry<?, ?> entry : vocList.entrySet()) {
             try {
                 Translate translate = TranslateOptions.getDefaultInstance().getService();
@@ -54,7 +54,7 @@ public class GoogleTranslateAPIConnection {
             System.out.println();
         }
 
- */
+ /*
         HashMap<String, String> testMap= new HashMap<>();
         testMap.put("deutsch1","englisch1");
         testMap.put("deutsch2","englisch2");
@@ -62,6 +62,8 @@ public class GoogleTranslateAPIConnection {
         ebookView.fillFlowPaneTranslatedMap(testMap);
         textAttributesObject.setTranslatedMap(testMap);
 
+
+ */
     }
 }
 
