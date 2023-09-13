@@ -45,6 +45,8 @@ public class EbookView implements Initializable {
     AnkiConnection ankiConnection;
     MessageController messageController = new MessageController(this);
 
+    GoogleTranslateAPIConnection googleTranslateAPIConnection= new GoogleTranslateAPIConnection();
+
     //Methods
     @FXML
     private void setChooseFileButton() throws IOException {
@@ -110,7 +112,15 @@ public class EbookView implements Initializable {
                 translation.put(button.getText(), null);
             }
         }
-        connection = new GoogleTranslateAPIConnection(translation, this);
+        googleTranslateAPIConnection.translateAndReturnHashMap(this, translation);
+        ankiButton.setDisable(false);
+
+        /*for (Map.Entry<String, String> entry : retValTranslatedMap.entrySet()) {
+            System.out.println("Original Text: " + entry.getKey());
+            System.out.println("Translated Text: " + entry.getValue());
+            System.out.println();
+        }
+         */
 
     }
     @FXML
@@ -127,7 +137,7 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
+    public  void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
         flowPane.getChildren().clear();
         flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane, translatedMap));

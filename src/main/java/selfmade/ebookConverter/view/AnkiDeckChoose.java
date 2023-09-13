@@ -49,8 +49,8 @@ public class AnkiDeckChoose implements Initializable {
 
     @FXML
     private void deckConfirmButtonClicked() throws IOException {
-        List<String> texter = new ArrayList<>();
-               texter=ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
+        List<String> texter= new ArrayList<>();
+        texter=ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
         for (String entry : texter) {
             System.out.println(entry);
             textArea.setText(entry + "\n");

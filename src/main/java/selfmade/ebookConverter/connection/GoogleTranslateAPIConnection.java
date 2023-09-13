@@ -18,17 +18,17 @@ import java.util.Map;
 
 
 public class GoogleTranslateAPIConnection {
-    EbookView ebookView;
+    //EbookView ebookView;
     TextAttributesObject textAttributesObject= new TextAttributesObject<>();
     String targetLanguage = "de";
 
-    public GoogleTranslateAPIConnection(HashMap<?, ?> vocList, EbookView ebookView) throws IOException {
-        this.ebookView = ebookView;
-        translateAndReturnHashMap(vocList);
+    public GoogleTranslateAPIConnection(){//HashMap<?, ?> vocList, EbookView ebookView) throws IOException {
+        //this.ebookView = ebookView;
+      //  translateAndReturnHashMap(vocList);
 
     }
 
-    public void translateAndReturnHashMap(HashMap<?, ?> vocList) {
+    public void translateAndReturnHashMap(EbookView ebookView,HashMap<?, ?> vocList) {
         HashMap<String, String> translatedMap = new HashMap<>();
 
         for (Map.Entry<?, ?> entry : vocList.entrySet()) {
@@ -48,11 +48,10 @@ public class GoogleTranslateAPIConnection {
                 System.err.println("Error translating: " + e.getMessage());
             }
         }
-        for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
-            System.out.println("Original Text: " + entry.getKey());
-            System.out.println("Translated Text: " + entry.getValue());
-            System.out.println();
-        }
+
+        ebookView.fillFlowPaneTranslatedMap(translatedMap);
+        textAttributesObject.setTranslatedMap(translatedMap);
+
 
  /*
         HashMap<String, String> testMap= new HashMap<>();
