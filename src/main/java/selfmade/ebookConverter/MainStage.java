@@ -10,13 +10,14 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class MainStage extends Application {
+
+
     @Override
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainStage.class.getResource("MainStage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("styles.css");
         stage.setTitle("Ebook Vocabulary Converter");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
@@ -24,8 +25,8 @@ public class MainStage extends Application {
         stage.setResizable(true);
     }
 
-    public void showNewStage(){
-        Stage newStage= new Stage();
+    public void showNewStage() {
+        Stage newStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AnkiDeckChoose.fxml"));
         Parent secondRoot = null;
         try {
@@ -34,7 +35,7 @@ public class MainStage extends Application {
             throw new RuntimeException(e);
         }
 
-        Scene secondScene= new Scene(secondRoot);
+        Scene secondScene = new Scene(secondRoot);
         newStage.setScene(secondScene);
         newStage.setTitle("Bitte Deck wählen");
         newStage.initStyle(StageStyle.DECORATED);
@@ -46,4 +47,5 @@ public class MainStage extends Application {
     public static void main(String[] args) {
         launch();
     }
+
 }

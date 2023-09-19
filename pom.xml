@@ -101,7 +101,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                selfmade.ebookconverter.ebookvocabularyconverter/selfmade.ebookConverter.MainStage
+                                selfmade.ebookConverter.MainStage
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

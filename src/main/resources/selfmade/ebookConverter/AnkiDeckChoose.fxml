@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" fx:id="root" prefHeight="525.0" prefWidth="523.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
+<AnchorPane id="background" fx:id="root" prefHeight="525.0" prefWidth="523.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="selfmade.ebookConverter.view.AnkiDeckChoose">
    <children>
       <HBox prefHeight="50.0" prefWidth="513.0">
          <children>
