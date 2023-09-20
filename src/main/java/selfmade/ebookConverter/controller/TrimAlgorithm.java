@@ -72,20 +72,22 @@ public class TrimAlgorithm {
                     vocabulary = buttonText;  //word that is later translated
                     break;
                 case "-fx-background-color: #FFFFD9":
-                    titleToAdd.append(buttonText);//Only include books with this title
-                    System.out.println(titleToAdd+"-");
+                    titleToAdd.append(buttonText+" ");//Only include books with this title
+                    System.out.println(titleToAdd);
                     break;
                 case "-fx-background-color: #D9E5FF":
                     type = buttonText;//Only include text with this type
                     break;
             }
         }
-        runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd), type);
+        runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd).trim(), type);
 
     }
 
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
         StringBuilder currentBlock = new StringBuilder();
+
+        String[] deconstructTitle= title.split(" ");
 
         for (String line : texts) {
             if (line.trim().equals(endMark)) {
@@ -104,7 +106,8 @@ public class TrimAlgorithm {
                     trimmedList.add(entryList.get(i));
                 }
             } else if (!title.isEmpty()) {
-                if (line.contains(title)) {
+                if (line.contains(deconstructTitle[0])) {
+
                     trimmedList.add(entryList.get(i));
                 }
             } else if (!type.isEmpty()) {
@@ -124,19 +127,20 @@ public class TrimAlgorithm {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
         int distanceIndex = 0;
-
         boolean found = false;
+
         for (int i = 0; i < texts.size(); i++) {
             if (texts.get(i).trim().equals(vocabulary)) {
                 System.out.println("Vokabel bei " + i);
                 vocabularyIndex = i;
+                found = true;
             }
-            if (texts.get(i).trim().equals(endMark)) {
+            if (texts.get(i).trim().equals(endMark)&&found==true) {
                 System.out.println("Gefunden bei Index: " + i);
                 endMarkIndex = i;
                 distanceIndex = endMarkIndex - vocabularyIndex;
+                System.out.println("EndMark "+endMarkIndex+" VacIndex "+vocabularyIndex);
                 System.out.println("DistanceIndex " + distanceIndex);
-                found = true;
                 break;
             } else {
                 System.out.println("Not found");
@@ -166,5 +170,4 @@ public class TrimAlgorithm {
     }
 
 }
-
 
