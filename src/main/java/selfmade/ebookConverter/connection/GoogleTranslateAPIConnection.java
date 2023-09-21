@@ -1,10 +1,6 @@
 package selfmade.ebookConverter.connection;
 
-//import com.google.auth.oauth2.GoogleCredentials;
-
 import com.google.cloud.translate.Translate;
-//import com.google.cloud.translate.v3.*;
-
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
@@ -12,23 +8,17 @@ import com.google.cloud.translate.Translation;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.EbookView;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class GoogleTranslateAPIConnection {
-    //EbookView ebookView;
-    TextAttributesObject textAttributesObject= new TextAttributesObject<>();
-    String targetLanguage = "de";
+    private TextAttributesObject textAttributesObject = new TextAttributesObject<>();
 
-    public GoogleTranslateAPIConnection(){//HashMap<?, ?> vocList, EbookView ebookView) throws IOException {
-        //this.ebookView = ebookView;
-      //  translateAndReturnHashMap(vocList);
+  //  public GoogleTranslateAPIConnection() {
+  //  }
 
-    }
-
-    public void translateAndReturnHashMap(EbookView ebookView,HashMap<?, ?> vocList) {
+    public void translateAndReturnHashMap(EbookView ebookView, HashMap<?, ?> vocList) {
         HashMap<String, String> translatedMap = new HashMap<>();
 
         for (Map.Entry<?, ?> entry : vocList.entrySet()) {
@@ -52,17 +42,6 @@ public class GoogleTranslateAPIConnection {
         ebookView.fillFlowPaneTranslatedMap(translatedMap);
         textAttributesObject.setTranslatedMap(translatedMap);
 
-
- /*
-        HashMap<String, String> testMap= new HashMap<>();
-        testMap.put("deutsch1","englisch1");
-        testMap.put("deutsch2","englisch2");
-        testMap.put("deutsch3","englisch3");
-        ebookView.fillFlowPaneTranslatedMap(testMap);
-        textAttributesObject.setTranslatedMap(testMap);
-
-
- */
     }
 }
 

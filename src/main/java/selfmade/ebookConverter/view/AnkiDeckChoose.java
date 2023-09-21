@@ -1,23 +1,13 @@
 package selfmade.ebookConverter.view;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
+
 import selfmade.ebookConverter.MainStage;
-import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.controller.AnkiController;
-import selfmade.ebookConverter.controller.MessageController;
-import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.model.TextAttributesObject;
 
 import java.io.IOException;
@@ -30,15 +20,12 @@ public class AnkiDeckChoose implements Initializable {
 
     @FXML
     private TextArea textArea;
-
     @FXML
     ChoiceBox<String> choiceBoxAnkiDecks = new ChoiceBox<>();
     private static ObservableList<String> deckListLocal = FXCollections.observableArrayList();
     @FXML
     MainStage mainStage = new MainStage();
     AnkiController ankiController;
-    @FXML
-    AnkiConnection ankiConnection;
     TextAttributesObject textAttributesObject = new TextAttributesObject<>();
 
     @FXML
@@ -49,8 +36,8 @@ public class AnkiDeckChoose implements Initializable {
 
     @FXML
     private void deckConfirmButtonClicked() throws IOException {
-        List<String> texter= new ArrayList<>();
-        texter=ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
+        List<String> texter = new ArrayList<>();
+        texter = ankiController.createAndAddCards(choiceBoxAnkiDecks.getValue(), textAttributesObject.getTranslatedMap());
         for (String entry : texter) {
             System.out.println(entry);
             textArea.setText(entry + "\n");
@@ -60,10 +47,8 @@ public class AnkiDeckChoose implements Initializable {
         for (String entry : texter) {
             stringBuilder.append(entry).append("\n");
         }
-
         textArea.setText(stringBuilder.toString());
-        System.out.println("Size "+texter.size());
-
+        System.out.println("Size " + texter.size());
     }
 
     @Override

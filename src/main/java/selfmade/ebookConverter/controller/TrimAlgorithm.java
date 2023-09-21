@@ -72,7 +72,7 @@ public class TrimAlgorithm {
                     vocabulary = buttonText;  //word that is later translated
                     break;
                 case "-fx-background-color: #FFFFD9":
-                    titleToAdd.append(buttonText+" ");//Only include books with this title
+                    titleToAdd.append(buttonText + " ");//Only include books with this title
                     System.out.println(titleToAdd);
                     break;
                 case "-fx-background-color: #D9E5FF":
@@ -87,7 +87,7 @@ public class TrimAlgorithm {
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
         StringBuilder currentBlock = new StringBuilder();
 
-        String[] deconstructTitle= title.split(" ");
+        String[] deconstructTitle = title.split(" ");
 
         for (String line : texts) {
             if (line.trim().equals(endMark)) {
@@ -135,11 +135,11 @@ public class TrimAlgorithm {
                 vocabularyIndex = i;
                 found = true;
             }
-            if (texts.get(i).trim().equals(endMark)&&found==true) {
+            if (texts.get(i).trim().equals(endMark) && found == true) {
                 System.out.println("Gefunden bei Index: " + i);
                 endMarkIndex = i;
                 distanceIndex = endMarkIndex - vocabularyIndex;
-                System.out.println("EndMark "+endMarkIndex+" VacIndex "+vocabularyIndex);
+                System.out.println("EndMark " + endMarkIndex + " VacIndex " + vocabularyIndex);
                 System.out.println("DistanceIndex " + distanceIndex);
                 break;
             } else {

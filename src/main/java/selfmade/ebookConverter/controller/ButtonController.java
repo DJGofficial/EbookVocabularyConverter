@@ -1,12 +1,10 @@
 package selfmade.ebookConverter.controller;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+
 import selfmade.ebookConverter.model.TextColour;
-import selfmade.ebookConverter.view.EbookView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,15 +14,13 @@ import java.util.Map;
 public class ButtonController {
 
     private static FileChooser fileChooser = new FileChooser();
-
     private static String buttonChoiceBoxStatus;
 
-    static TextColour textColour = new TextColour();
+    //static TextColour textColour = new TextColour();
 
-    EbookView ebookView;
+    //EbookView ebookView;
 
     public ButtonController() {
-
     }
 
     public static void setButtonChoiceBoxStatus(String value) {
@@ -80,7 +76,7 @@ public class ButtonController {
                 "-fx-text-fill: black;" +
                 "-fx-border-style: solid;" +
                 "-fx-border-color: Grey;" +
-                "-fx-border-width: 2px;"+
+                "-fx-border-width: 2px;" +
                 "-fx-background-insets: 2px;";
     }
 

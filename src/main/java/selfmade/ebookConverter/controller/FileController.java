@@ -4,9 +4,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import selfmade.ebookConverter.model.TextColour;
-import selfmade.ebookConverter.view.EbookView;
-
 
 import java.io.*;
 import java.util.ArrayList;
@@ -16,18 +13,13 @@ public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
 
-    //? static EbookView ebookView = new EbookView();
-
     ButtonController buttonController = new ButtonController();
-
-    //? static TextColour tC;
 
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-
         readFile(selectedFile);
-        return selectedFile.getName();//May produce 'NullPointerException
+        return selectedFile.getName();
     }
 
     public static void readFile(File file) {
@@ -112,6 +104,7 @@ public class FileController {
             button.setStyle("");
         }
     }
+
     public static boolean userNameFile(String name) {
         File createdByUser = new File(name);
         try {

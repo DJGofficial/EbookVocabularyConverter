@@ -11,23 +11,17 @@ import selfmade.ebookConverter.view.EbookView;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 
 public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
-    EbookView ebookView;// = new EbookView();
-    MessageController messageController;
-   AnkiDeckChoose ankiDeckChoose;
-    ;
+    EbookView ebookView;
 
     public AnkiConnection(EbookView ebookView) {
         this.ebookView = ebookView;
     }
-
-
 
     public AnkiConnection() {
         this.ebookView = new EbookView();
@@ -57,14 +51,13 @@ public class AnkiConnection {
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-
                 in.close();
 
                 String jsonString = response.toString();
                 String[] deckNameArray = jsonString.split(",");
 
                 if (deckNameArray.length >= 2) {
-                    deckNames.add(deckNameArray[1].replaceAll("\"", "").trim());  // Set the second entry as the first
+                    deckNames.add(deckNameArray[1].replaceAll("\"", "").trim());
                     for (int i = 2; i < deckNameArray.length - 1; i++) {
                         deckNames.add(deckNameArray[i].replaceAll("[\\[\\]\"]", "").trim());
                     }
@@ -76,7 +69,7 @@ public class AnkiConnection {
             ebookView.setBottomLabelMessage("Bitte stelle Verbindung mit Anki über AnkiConnect her", false);
             e.printStackTrace();
         }
-        System.out.println(deckNames.get(0));
+        System.out.println(deckNames);
         return deckNames;
     }
 
@@ -130,10 +123,10 @@ public class AnkiConnection {
                 JsonElement errorElement = responseObject.get("error");
 
                 if (resultElement != null && !resultElement.isJsonNull()) {
-                      return (front+": Erfolgreich: " + resultElement.getAsString());
+                    return (front + ": Erfolgreich: " + resultElement.getAsString());
                 } else if (errorElement != null && !errorElement.isJsonNull()) {
                     String errorMessage = errorElement.getAsString();
-                    return (front+": Fehlgeschlagen: "+errorMessage);
+                    return (front + ": Fehlgeschlagen: " + errorMessage);
 
                 }
 
@@ -144,7 +137,7 @@ public class AnkiConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Unbekannter Fehler außerhalb des Geltungsbereiches";
+            return  "Unbekannter Fehler außerhalb des Geltungsbereiches";
     }
 /*
     public static void createDeck(String deckName) throws IOException {

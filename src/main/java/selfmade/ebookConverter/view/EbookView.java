@@ -1,7 +1,6 @@
 package selfmade.ebookConverter.view;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,8 +43,7 @@ public class EbookView implements Initializable {
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
     MessageController messageController = new MessageController(this);
-
-    GoogleTranslateAPIConnection googleTranslateAPIConnection= new GoogleTranslateAPIConnection();
+    GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
 
     //Methods
     @FXML
@@ -72,13 +70,6 @@ public class EbookView implements Initializable {
         flowPane.getChildren().clear();
     }
 
-    /*
-    @FXML
-    private void createButtonText() {
-        flowPane.getChildren().addAll(fileController.createButtonsFromFile());
-    }
-
-     */
     @FXML
     private void doneButtonClicked() {
         ObservableList<Node> content = flowPane.getChildren();
@@ -104,7 +95,7 @@ public class EbookView implements Initializable {
 
     @FXML
     private void translateButtonClicked() throws IOException {
-        GoogleTranslateAPIConnection connection;
+
         HashMap<String, String> translation = new HashMap<>();
         for (Node node : flowPane.getChildren()) {
             if (node instanceof Button) {
@@ -114,17 +105,10 @@ public class EbookView implements Initializable {
         }
         googleTranslateAPIConnection.translateAndReturnHashMap(this, translation);
         ankiButton.setDisable(false);
-
-        /*for (Map.Entry<String, String> entry : retValTranslatedMap.entrySet()) {
-            System.out.println("Original Text: " + entry.getKey());
-            System.out.println("Translated Text: " + entry.getValue());
-            System.out.println();
-        }
-         */
-
     }
+
     @FXML
-    private void fillFlowPaneButtonClicked(){
+    private void fillFlowPaneButtonClicked() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
         doneButton.setDisable(false);
         deleteButton.setDisable(false);
@@ -133,11 +117,11 @@ public class EbookView implements Initializable {
     @FXML
     public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
-        buttonController.createVocButton(flowPane,buttonList);
+        buttonController.createVocButton(flowPane, buttonList);
     }
 
     @FXML
-    public  void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
+    public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
         flowPane.getChildren().clear();
         flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane, translatedMap));
@@ -157,9 +141,6 @@ public class EbookView implements Initializable {
         } else {
             messageController.showErrorMessage(bottomMessageLabel, "Bitte stelle Verbindung mit Anki über AnkiConnect her");
         }
-
-
-
     }
 
     //Getter and Setter
@@ -204,7 +185,6 @@ public class EbookView implements Initializable {
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
-
 
 }
 

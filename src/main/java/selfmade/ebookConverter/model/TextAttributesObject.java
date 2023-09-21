@@ -11,16 +11,13 @@ public class TextAttributesObject<T> {
     private T back;
 
     static HashMap<String, String> translatedMap;
-   // private boolean note;
-   // private boolean bookmark;
 
-    public TextAttributesObject(T deckName, T modelName, T front, T back, boolean note, boolean bookmark) {
+    public TextAttributesObject(T deckName, T modelName, T front, T back) {
         this.deckName = deckName;
         this.modelName = modelName;
         this.front = front;
         this.back = back;
-       // this.note = note;
-       // this.bookmark = bookmark;
+
     }
 
     public TextAttributesObject() {
@@ -39,7 +36,6 @@ public class TextAttributesObject<T> {
     }
 
 
-
     public T getModelName() {
         return modelName;
     }
@@ -54,19 +50,7 @@ public class TextAttributesObject<T> {
         return back;
     }
 
-    @Override
-    public String toString() {
-        return "Text Attributes{" +
-                "deckName=" + deckName +
-                ", modelName=" + modelName +
-                ", front=" + front +
-                ", back=" + back +
-              /*  ", note=" + note +
-                ", bookmark=" + bookmark +
 
-               */
-                '}';
-    }
 }
 
 

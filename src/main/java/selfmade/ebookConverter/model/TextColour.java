@@ -27,11 +27,9 @@ public class TextColour {
     public static ArrayList<TextColour> createTextColourList() {
 
         textColourList.add(new TextColour("Vokabel", "#FFD9D9"));
-        //textColourList.add(new TextColour("Bookmarks", "#D9D9FF"));
         textColourList.add(new TextColour("Art (optional)", "#D9E5FF"));
         textColourList.add(new TextColour("Titel (optional)", "#FFFFD9"));
         textColourList.add(new TextColour("Zeichen für Ende", "#D9FFD9"));
-       // textColourList.add(new TextColour("NewButton", "#B0C4DE"));
         return textColourList;
     }
 

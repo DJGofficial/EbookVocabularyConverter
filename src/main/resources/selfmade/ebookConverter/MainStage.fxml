@@ -12,28 +12,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="selfmade.ebookConverter.view.EbookView">
+<AnchorPane id="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
     <HBox layoutY="2.0">
         <padding>
             <Insets bottom="20.0" left="20.0" top="20.0" />
         </padding>
 
-        <VBox prefHeight="74.0" prefWidth="114.0">
+        <VBox prefHeight="88.0" prefWidth="131.0">
             <children>
 
                 <Button id="buttonStyle" fx:id="fileButton" mnemonicParsing="false" onAction="#setChooseFileButton" text="Datei wählen" />
-                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" prefHeight="26.0" prefWidth="100.0" stylesheets="@styles.css">
+                <ChoiceBox id="buttonStyle" fx:id="rootChoiceBox" prefHeight="26.0" prefWidth="163.0" stylesheets="@styles.css">
                     <VBox.margin>
-                        <Insets bottom="2.0" top="20.0" />
+                        <Insets bottom="2.0" right="5.0" top="20.0" />
                     </VBox.margin>
+               <padding>
+                  <Insets right="5.0" />
+               </padding>
                 </ChoiceBox>
             </children>
 
         </VBox>
-        <VBox prefHeight="69.0" prefWidth="106.0">
+        <VBox prefHeight="54.0" prefWidth="129.0">
             <children>
             <Button id="buttonStyle" fx:id="fillFlowPaneButton" disable="true" mnemonicParsing="false" onAction="#fillFlowPaneButtonClicked" text="Befüllen" />
-                <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="100.0">
+                <ChoiceBox id="buttonStyle" fx:id="optionChoiceBox" prefHeight="26.0" prefWidth="126.0">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>
@@ -41,32 +44,32 @@
             </children>
 
         </VBox>
-        <VBox prefHeight="63.0" prefWidth="411.0">
-
-            <TextField id="textField" fx:id="fileTextField" prefHeight="23.0" prefWidth="400.0">
+        <VBox prefHeight="81.0" prefWidth="370.0">
+   
+                     <TextField id="textField" fx:id="fileTextField" prefColumnCount="0" prefHeight="26.0" prefWidth="150.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             <VBox.margin>
-               <Insets left="10.0" right="5.0" />
+               <Insets />
             </VBox.margin>
             </TextField>
-         <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="308.0" />
+         <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="370.0" />
          <HBox prefHeight="30.0" prefWidth="319.0">
             <children>
-                    <ChoiceBox id="buttonStyle" fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="100.0">
+                    <ChoiceBox id="buttonStyle" fx:id="fieldsChoiceBox" prefHeight="26.0" prefWidth="126.0">
                   <HBox.margin>
-                     <Insets left="10.0" top="1.0" />
+                     <Insets left="2.0" top="1.0" />
                   </HBox.margin>
                </ChoiceBox>
-                  <Button id="buttonStyle" fx:id="doneButton" disable="true" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="124.0" text="Fertig">
+                  <Button id="buttonStyle" fx:id="doneButton" disable="true" mnemonicParsing="false" onAction="#doneButtonClicked" prefHeight="26.0" prefWidth="68.0" text="Fertig">
                   <HBox.margin>
-                     <Insets left="55.0" />
+                     <Insets left="55.0" right="5.0" />
                   </HBox.margin>
                   </Button>
-               <Button id="buttonStyle " fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="110.0" text="Übersetzen">
+               <Button id="buttonStyle" fx:id="translateButton" disable="true" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="26.0" prefWidth="102.0" text="Übersetzen">
                   <HBox.margin>
-                     <Insets left="10.0" right="5.0" />
+                     <Insets />
                   </HBox.margin>
                </Button>
             </children>
@@ -99,14 +102,14 @@
                            <Insets left="5.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                          <Button id="buttonStyle" fx:id="ankiButton" disable="true" mnemonicParsing="false" onAction="#ankiButtonClicked" text="Anki">
+                          <Button id="buttonStyle" fx:id="ankiButton" disable="true" mnemonicParsing="false" onAction="#ankiButtonClicked" prefHeight="26.0" prefWidth="91.0" text="Anki">
                         <HBox.margin>
                            <Insets left="15.0" top="5.0" />
                         </HBox.margin>
                      </Button>
-                     <Button id="buttonStyle" fx:id="deleteButton" disable="true" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="75.0" text="Löschen">
+                     <Button id="buttonStyle" fx:id="deleteButton" disable="true" mnemonicParsing="false" onAction="#deleteButtonClicked" prefHeight="26.0" prefWidth="77.0" text="Löschen">
                         <HBox.margin>
-                           <Insets left="380.0" top="5.0" />
+                           <Insets left="320.0" right="5.0" top="5.0" />
                         </HBox.margin>
                      </Button>
                   </children>
@@ -114,9 +117,9 @@
                      <Insets left="10.0" />
                   </VBox.margin>
                </HBox>
-               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="570.0">
+               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="636.0">
                   <VBox.margin>
-                     <Insets />
+                     <Insets left="10.0" />
                   </VBox.margin></Label>
                     <TextField id="textField" fx:id="createFileTextField" prefHeight="0.0" prefWidth="529.0" promptText="Please enter name...">
                   <VBox.margin>

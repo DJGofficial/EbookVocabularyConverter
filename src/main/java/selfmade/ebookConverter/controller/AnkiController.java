@@ -30,13 +30,13 @@ public class AnkiController {
         }
         List<TextAttributesObject<String>> cardList = new ArrayList<>();
 
-        String modelName = "Basic";
+        String modelName = "Basic (and reversed card)";
 
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {
             String front = entry.getKey();
             String back = entry.getValue();
 
-            TextAttributesObject<String> textAttributes = new TextAttributesObject<>(deckName, modelName, front, back, false, false);
+            TextAttributesObject<String> textAttributes = new TextAttributesObject<>(deckName, modelName, front, back);
             cardList.add(textAttributes);
         }
 
