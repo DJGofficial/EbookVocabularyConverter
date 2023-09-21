@@ -46,12 +46,12 @@
         </VBox>
         <VBox prefHeight="81.0" prefWidth="370.0">
    
-                     <TextField id="textField" fx:id="fileTextField" prefColumnCount="0" prefHeight="26.0" prefWidth="150.0">
+                     <TextField id="textField" fx:id="fileTextField" prefColumnCount="0" prefHeight="26.0" prefWidth="348.0">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             <VBox.margin>
-               <Insets />
+               <Insets right="10.0" />
             </VBox.margin>
             </TextField>
          <Label fx:id="messageLabel" prefHeight="18.0" prefWidth="370.0" />
