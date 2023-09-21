@@ -105,21 +105,23 @@ public class FileController {
         }
     }
 
-    public static boolean userNameFile(String name) {
-        File createdByUser = new File(name);
-        try {
-            File rootFile = new File("filename.txt");
-            BufferedReader reader = new BufferedReader(new FileReader(rootFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(createdByUser));
-            String line;
-            while ((line = reader.readLine()) != null) {
+    public static boolean userNameFile(ArrayList<String> outputList) throws IOException {
+        System.out.println(outputList);
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Textdateien", "*.txt"));
+
+        File selectedFile = fileChooser.showSaveDialog(stage);
+        if (selectedFile != null) {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile));
+            for (String line : outputList) {
                 writer.write(line);
                 writer.newLine();
+
             }
-            return true;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+        return true;
+
     }
     /*
     public static String chooseFile() throws IOException {

@@ -25,7 +25,7 @@ public class EbookView implements Initializable {
     @FXML
     Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
     @FXML
-    TextField fileTextField, createFileTextField;
+    TextField fileTextField;
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
     @FXML
@@ -42,7 +42,7 @@ public class EbookView implements Initializable {
     ButtonController buttonController = new ButtonController();
     TrimAlgorithm trimAlgorithm;
     AnkiConnection ankiConnection;
-    MessageController messageController = new MessageController(this);
+    MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
 
     //Methods
@@ -53,16 +53,22 @@ public class EbookView implements Initializable {
     }
 
     @FXML
-    private void setCreateButton() {
+    private void setCreateButton() throws IOException {
         bottomMessageLabel.setText("");
-        String name = createFileTextField.getText();
-        if (!name.isEmpty()) {
-            fileController.userNameFile(name);
+        ArrayList<String> outputList = new ArrayList<>();
+        for (Node node : flowPane.getChildren()) {
+            if (node instanceof ToggleButton) {
+                ToggleButton button = (ToggleButton) node;
+                String buttonText = button.getText();
+                outputList.add(buttonText);
+            }
+        }
+        boolean retVal = fileController.userNameFile(outputList);
+        if (retVal == true) {
             messageController.showSuccessMessage(bottomMessageLabel, "Successfully created!");
-        } else {
-            messageController.showErrorMessage(bottomMessageLabel, "Please enter a name for your file");
         }
     }
+
 
     @FXML
     public void deleteButtonClicked() {
@@ -146,7 +152,7 @@ public class EbookView implements Initializable {
     //Getter and Setter
     @FXML
     public void setMessageLabel(String message) {
-        //Not sure yet if I need this
+
         messageController.showErrorMessage(messageLabel, message);
     }
 

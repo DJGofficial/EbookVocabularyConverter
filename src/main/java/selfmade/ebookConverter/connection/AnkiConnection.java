@@ -4,8 +4,6 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import selfmade.ebookConverter.controller.MessageController;
-import selfmade.ebookConverter.view.AnkiDeckChoose;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
+<AnchorPane id="background" prefHeight="393.0" prefWidth="632.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="selfmade.ebookConverter.view.EbookView">
     <HBox layoutY="2.0">
         <padding>
             <Insets bottom="20.0" left="20.0" top="20.0" />
@@ -91,11 +91,11 @@
         </ScrollPane>
 
     </Pane>
-    <HBox id="#buttonStyle" layoutY="373.0" prefHeight="106.0" prefWidth="650.0">
+    <HBox id="#buttonStyle" layoutY="373.0" prefHeight="26.0" prefWidth="650.0">
       <children>
-            <VBox prefHeight="106.0" prefWidth="652.0">
+            <VBox prefHeight="59.0" prefWidth="660.0">
                 <children>
-               <HBox prefHeight="57.0" prefWidth="643.0">
+               <HBox prefHeight="40.0" prefWidth="640.0">
                   <children>
                           <Button id="buttonStyle" fx:id="createButton" mnemonicParsing="false" onAction="#setCreateButton" prefHeight="26.0" prefWidth="119.0" text="Datei erstellen">
                         <HBox.margin>
@@ -117,14 +117,11 @@
                      <Insets left="10.0" />
                   </VBox.margin>
                </HBox>
-               <Label fx:id="bottomMessageLabel" prefHeight="18.0" prefWidth="636.0">
+               <Label fx:id="bottomMessageLabel" prefHeight="27.0" prefWidth="636.0">
                   <VBox.margin>
                      <Insets left="10.0" />
-                  </VBox.margin></Label>
-                    <TextField id="textField" fx:id="createFileTextField" prefHeight="0.0" prefWidth="529.0" promptText="Please enter name...">
-                  <VBox.margin>
-                     <Insets bottom="5.0" left="10.0" right="5.0" />
-                  </VBox.margin></TextField>
+                  </VBox.margin>
+               </Label>
                 </children>
             <HBox.margin>
                <Insets />
