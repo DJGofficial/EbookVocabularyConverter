@@ -16,10 +16,6 @@ public class ButtonController {
     private static FileChooser fileChooser = new FileChooser();
     private static String buttonChoiceBoxStatus;
 
-    //static TextColour textColour = new TextColour();
-
-    //EbookView ebookView;
-
     public ButtonController() {
     }
 

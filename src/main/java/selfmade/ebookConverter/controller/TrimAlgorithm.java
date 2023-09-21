@@ -18,7 +18,7 @@ public class TrimAlgorithm {
     private String vocabulary = "";
     private ObservableList<Node> contentList;
 
-    private List<String> texts = new ArrayList<>();
+    private ArrayList<String> texts = new ArrayList<>();
     private ArrayList<String> entryList = new ArrayList<>();
     private ArrayList<String> trimmedList = new ArrayList<>();
     EbookView ebookView;
