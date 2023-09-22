@@ -15,8 +15,6 @@ import java.util.Map;
 public class GoogleTranslateAPIConnection {
     private TextAttributesObject textAttributesObject = new TextAttributesObject<>();
 
-  //  public GoogleTranslateAPIConnection() {
-  //  }
 
     public void translateAndReturnHashMap(EbookView ebookView, HashMap<?, ?> vocList) {
         HashMap<String, String> translatedMap = new HashMap<>();

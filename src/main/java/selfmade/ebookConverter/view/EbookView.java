@@ -22,6 +22,7 @@ import java.util.*;
 
 public class EbookView implements Initializable {
 
+    // Definition der FXML-Elemente
     @FXML
     Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
     @FXML
@@ -37,6 +38,7 @@ public class EbookView implements Initializable {
     @FXML
     Label messageLabel = new Label();
 
+    // Initialisierung von Controller und Verbindungen
     ChoiceBoxItems choiceBoxItems;
     FileController fileController;
     ButtonController buttonController = new ButtonController();
@@ -45,13 +47,16 @@ public class EbookView implements Initializable {
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
 
-    //Methods
+    // Hier beginnen die Methoden für die Controller-Funktionalitäten
+
+    // Methode für das Auswählen einer Datei
     @FXML
     private void setChooseFileButton() throws IOException {
         fileTextField.setText(fileController.chooseFile());
         fillFlowPaneButton.setDisable(false);
     }
 
+    // Methode für das Erstellen von Benutzerdateien
     @FXML
     private void setCreateButton() throws IOException {
         bottomMessageLabel.setText("");
@@ -69,15 +74,17 @@ public class EbookView implements Initializable {
         }
     }
 
-
+    // Methode zum Löschen von Inhalten
     @FXML
     public void deleteButtonClicked() {
         fileTextField.setText("");
         flowPane.getChildren().clear();
     }
 
+    // Methode für den Abschluss
     @FXML
     private void doneButtonClicked() {
+        // Überprüfung des Inhalts auf Endmarken und Vokabeln
         ObservableList<Node> content = flowPane.getChildren();
         trimAlgorithm = new TrimAlgorithm(content, this);
         messageLabel.setText("");
@@ -99,9 +106,10 @@ public class EbookView implements Initializable {
         }
     }
 
+    // Methode für die Übersetzung
     @FXML
     private void translateButtonClicked() throws IOException {
-
+        // Übersetzen der Inhalte mit der Google Translate API
         HashMap<String, String> translation = new HashMap<>();
         for (Node node : flowPane.getChildren()) {
             if (node instanceof Button) {
@@ -113,6 +121,7 @@ public class EbookView implements Initializable {
         ankiButton.setDisable(false);
     }
 
+    // Methode zum Hinzufügen von Inhalten aus einer Datei
     @FXML
     private void fillFlowPaneButtonClicked() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
@@ -120,12 +129,14 @@ public class EbookView implements Initializable {
         deleteButton.setDisable(false);
     }
 
+    // Methode zum Hinzufügen von Vokabeln in den FlowPane
     @FXML
     public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
         buttonController.createVocButton(flowPane, buttonList);
     }
 
+    // Methode zum Hinzufügen von übersetzten Buttons in den FlowPane
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
@@ -133,12 +144,14 @@ public class EbookView implements Initializable {
         flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane, translatedMap));
     }
 
+    // Methode für das Klicken des Anki-Buttons
     @FXML
     public void ankiButtonClicked() {
         bottomMessageLabel.setText("");
         AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
         choiceBoxItems = new ChoiceBoxItems();
 
+        // Verbindung mit Anki herstellen und Deck-Namen abrufen
         ankiConnection = new AnkiConnection(this);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
 
@@ -149,10 +162,9 @@ public class EbookView implements Initializable {
         }
     }
 
-    //Getter and Setter
+    // Getter und Setter für Nachrichten-Labels
     @FXML
     public void setMessageLabel(String message) {
-
         messageController.showErrorMessage(messageLabel, message);
     }
 
@@ -165,17 +177,18 @@ public class EbookView implements Initializable {
         }
     }
 
+    // Initialisierungsmethode für den Controller
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         fileController = new FileController();
-
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
 
+        // Initialisierung der ChoiceBox-Elemente
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
         fieldsChoiceBox.setItems(choiceBoxItems.getThirdItems());
 
+        // Listener für die ChoiceBoxen hinzufügen
         rootChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             ObservableList<String> updatedSecondItems = choiceBoxItems.updateSecondItems(newValue);
             optionChoiceBox.setItems(updatedSecondItems);
@@ -185,14 +198,10 @@ public class EbookView implements Initializable {
         optionChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             ObservableList<String> updatedThirdItems = choiceBoxItems.updateThirdItems(newValue);
             fieldsChoiceBox.setItems(updatedThirdItems);
-
         });
+
         fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
     }
-
 }
-
-
-

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class TrimAlgorithm {
 
+    // Variablen zur Speicherung von Informationen
     private String title = "";
     private StringBuilder titleToAdd = new StringBuilder();
     private String type = titleToAdd.toString();
@@ -24,13 +25,13 @@ public class TrimAlgorithm {
     EbookView ebookView;
     ButtonController buttonController;
 
+    // Konstruktor für den TrimAlgorithmus
     public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
         this.ebookView = ebookView;
         this.contentList = content;
-
     }
 
-    //Checks if EndMark and Vocabulary are marked as minimal requirement for the algorithm to work
+    // Überprüft, ob EndMark und Vokabel als Mindestanforderung für den Algorithmus markiert sind
     public boolean[] checkContent() {
         boolean hasEndMark = false;
         boolean hasVocabulary = false;
@@ -48,7 +49,7 @@ public class TrimAlgorithm {
         return new boolean[]{hasEndMark, hasVocabulary};
     }
 
-    //Format Button to designation and save it to List
+    // Formatieren des Buttons zur Bezeichnung und Speichern in der Liste
     public void getContentToTextFragments() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -58,7 +59,7 @@ public class TrimAlgorithm {
         getMarkings();
     }
 
-    //Search content for begin/end marks
+    // Sucht den Inhalt nach Anfangs-/Endmarkierungen ab
     private void getMarkings() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -66,24 +67,24 @@ public class TrimAlgorithm {
             String styleString = node.lookup(".toggle-button").getStyle();
             switch (styleString) {
                 case "-fx-background-color: #D9FFD9":
-                    endMark = buttonText.trim();//text before endMark is added as unit
+                    endMark = buttonText.trim(); // Text vor der EndMark wird als Einheit hinzugefügt
                     break;
                 case "-fx-background-color: #FFD9D9":
-                    vocabulary = buttonText;  //word that is later translated
+                    vocabulary = buttonText; // Wort, das später übersetzt wird
                     break;
                 case "-fx-background-color: #FFFFD9":
-                    titleToAdd.append(buttonText + " ");//Only include books with this title
+                    titleToAdd.append(buttonText + " "); // Nur Bücher mit diesem Titel werden einbezogen
                     System.out.println(titleToAdd);
                     break;
                 case "-fx-background-color: #D9E5FF":
-                    type = buttonText;//Only include text with this type
+                    type = buttonText; // Nur Text mit diesem Typ wird einbezogen
                     break;
             }
         }
         runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd).trim(), type);
-
     }
 
+    // Speichert Textblöcke basierend auf der Entfernung zwischen EndMark und Vokabel
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
         StringBuilder currentBlock = new StringBuilder();
 
@@ -107,7 +108,6 @@ public class TrimAlgorithm {
                 }
             } else if (!title.isEmpty()) {
                 if (line.contains(deconstructTitle[0])) {
-
                     trimmedList.add(entryList.get(i));
                 }
             } else if (!type.isEmpty()) {
@@ -120,9 +120,9 @@ public class TrimAlgorithm {
         }
 
         findVocabulary(trimmedList, distanceIndex);
-
     }
 
+    // Bestimmt die Entfernung zwischen EndMark und Vokabel
     private void runListDetermineDistance(String endMark, String vocabulary, String s, String type) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
@@ -149,6 +149,7 @@ public class TrimAlgorithm {
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
     }
 
+    // Sucht nach Vokabeln in den formatierten Textblöcken
     private void findVocabulary(ArrayList<String> trimmedList, int distanceIndex) {
         buttonController = new ButtonController();
         ArrayList<String> returnVocList = new ArrayList<>();
@@ -166,8 +167,5 @@ public class TrimAlgorithm {
             }
         }
         ebookView.fillFlowPaneWithVocabulary(returnVocList);
-
     }
-
 }
-
