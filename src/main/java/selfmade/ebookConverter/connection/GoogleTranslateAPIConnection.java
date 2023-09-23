@@ -14,14 +14,18 @@ import java.util.Map;
 
 public class GoogleTranslateAPIConnection {
     private TextAttributesObject textAttributesObject = new TextAttributesObject<>();
-
+    private final String apiKey = "AIzaSyB0VYtdAisUlT0Q_JEl4K0uliB0Kiu14HQ";
 
     public void translateAndReturnHashMap(EbookView ebookView, HashMap<?, ?> vocList) {
+
+
         HashMap<String, String> translatedMap = new HashMap<>();
 
         for (Map.Entry<?, ?> entry : vocList.entrySet()) {
             try {
-                Translate translate = TranslateOptions.getDefaultInstance().getService();
+                //Translate translate = TranslateOptions.getDefaultInstance().getService();
+                TranslateOptions options = TranslateOptions.newBuilder().setApiKey(apiKey).build();
+                Translate translate = options.getService();
                 Translation translation = translate.translate(String.valueOf(entry.getKey()),
                         Translate.TranslateOption.sourceLanguage("en"),
                         Translate.TranslateOption.targetLanguage("de"));
