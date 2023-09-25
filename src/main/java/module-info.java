@@ -1,6 +1,5 @@
 module selfmade.ebookconverter.ebookvocabularyconverter {
     requires javafx.controls;
-    requires javafx.fxml;
 
     requires org.controlsfx.controls;
     requires org.kordamp.ikonli.javafx;
@@ -8,6 +7,7 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
     requires google.cloud.translate;
     requires com.google.gson;
     requires com.google.auth.oauth2;
+    requires javafx.fxml;
 
 
     opens selfmade.ebookConverter to javafx.fxml;
