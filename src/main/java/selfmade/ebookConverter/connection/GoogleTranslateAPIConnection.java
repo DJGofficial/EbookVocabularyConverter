@@ -4,20 +4,17 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
-
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class GoogleTranslateAPIConnection {
     private TextAttributesObject textAttributesObject = new TextAttributesObject<>();
     private final String apiKey = "AIzaSyB0VYtdAisUlT0Q_JEl4K0uliB0Kiu14HQ";
 
     public void translateAndReturnHashMap(EbookView ebookView, HashMap<?, ?> vocList) {
-
 
         HashMap<String, String> translatedMap = new HashMap<>();
 

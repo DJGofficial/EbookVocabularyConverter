@@ -18,7 +18,7 @@ public class MainStage extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainStage.class.getResource("MainStage.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Ebook Vocabulary Converter");
+        stage.setTitle("E-Book Vocabulary Converter");
         stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
