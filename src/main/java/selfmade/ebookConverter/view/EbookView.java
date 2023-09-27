@@ -168,6 +168,10 @@ public class EbookView implements Initializable {
         messageController.showErrorMessage(messageLabel, message);
     }
 
+    public Label getMessageLabel() {
+        return messageLabel;
+    }
+
     @FXML
     public void setBottomLabelMessage(String message, Boolean value) {
         if (value == false) {

@@ -6,7 +6,7 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
    requires google.cloud.core;
     requires google.cloud.translate;
     requires com.google.gson;
-    requires com.google.auth.oauth2;
+    //requires com.google.auth.oauth2;
     requires javafx.fxml;
 
 
