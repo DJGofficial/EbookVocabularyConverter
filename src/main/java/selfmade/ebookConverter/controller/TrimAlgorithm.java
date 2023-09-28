@@ -60,7 +60,7 @@ public class TrimAlgorithm {
     }
 
     // Sucht den Inhalt nach Anfangs-/Endmarkierungen ab
-    private void getMarkings() {
+    public void getMarkings() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
             String buttonText = toggleButton.getText();
@@ -168,4 +168,23 @@ public class TrimAlgorithm {
         }
         ebookView.fillFlowPaneWithVocabulary(returnVocList);
     }
+
+    // Test Methoden
+    public String getEndMark() {
+        return this.endMark;
+    }
+
+    public String getVocabulary() {
+        return this.vocabulary;
+    }
+
+    public String getTitle() {
+        return this.titleToAdd.toString();
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+
 }

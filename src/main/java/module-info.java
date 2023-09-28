@@ -14,4 +14,6 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
     exports selfmade.ebookConverter;
     exports selfmade.ebookConverter.view;
     opens selfmade.ebookConverter.view to javafx.fxml;
+    exports selfmade.ebookConverter.controller;
 }
+

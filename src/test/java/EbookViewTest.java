@@ -1,26 +1,46 @@
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.testfx.api.FxToolkit.setupStage;
+
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
-
-import javafx.stage.Stage;
+import selfmade.ebookConverter.MainStage;
+import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.view.EbookView;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.api.FxToolkit.*;
+import java.io.IOException;
 
+//@ExtendWith(MockitoExtension.class)
 @ExtendWith(ApplicationExtension.class)
-public class EbookViewTest extends ApplicationTest {
+public class EbookViewTest {
 
+    @Mock
+    private FileController fileController;
+
+   // @InjectMocks
     private EbookView ebookView;
+
+    @Start
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(EbookView.class.getResource("MainStage.fxml"));
+        VBox root = loader.load();
+        ebookView = loader.getController();
+       Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -31,51 +51,37 @@ public class EbookViewTest extends ApplicationTest {
         });
     }
 
-    @Start
-    public void start(Stage stage) throws Exception {
-        // Initialize your JavaFX application (you may need to modify this depending on your setup)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/E_Little/IdeaProjects/EbookVocabularyConverter/src/main/resources/selfmade/ebookConverter/MainStage.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        ebookView = loader.getController();
-    }
 
-    @Test
-    public void testSetMessageLabel(FxRobot robot) {
-        // Call the setMessageLabel method with the desired message
-        String message = "Ein Test";
-        ebookView.setMessageLabel(message);
-
-        // Now, you can assert something based on the expected behavior
-        Label messageLabel = ebookView.getMessageLabel(); // Replace with the actual method to get the label
-        assertNotNull(messageLabel); // Assuming the label exists
-        assertEquals(message, messageLabel.getText());
-    }
 
 /*
-    @Test
-    public void testSetCreateButton(FxRobot robot) {
-        // Simulate clicking on the "createButton"
-        robot.clickOn(ebookView.getCreateButton());
-
-        // Now, you can assert something based on the expected behavior
-        assertEquals("Successfully created!", ebookView.getBottomMessageLabel().getText());
-    }
-
+    // Schnittstellentest
     @Test
     public void testFillFlowPaneButtonClicked(FxRobot robot) {
-        // Simulate clicking on the "fillFlowPaneButton"
-        robot.clickOn(ebookView.getFillFlowPaneButton());
-
-        // Now, you can assert something based on the expected behavior
-        assertTrue(ebookView.getFlowPane().getChildren().size() > 0);
-
-        // You can add more assertions as needed
+        robot.clickOn("#fillFlowPaneButton"); // die fx:id des Buttons in der FXML-Datei
+        FlowPane flowPane = ebookView.getTestFlowPane();
+        assertFalse(flowPane.getChildren().isEmpty(), "FlowPane sollte nach dem Klick nicht leer sein");
     }
 
-    // Add more test methods for other functionalities of your EbookView class as needed.
+ */
+
+    // Komponententest
+    @Test
+    public void testSetMessageLabel() {
+        String message = "Test message";
+        ebookView.setMessageLabel(message);
+        assertEquals(message, ebookView.getMessageLabel().getText(), "Das Nachrichtenlabel sollte den Testtext enthalten");
+    }
+/*
+    // Black-Box-Test
+    @Test
+    public void testFileControllerInvocation(FxRobot robot) throws IOException {
+        when(fileController.chooseFile()).thenReturn("test-file-path");
+
+        robot.clickOn("#fileButton");
+
+        verify(fileController, times(1)).chooseFile();
+        assertEquals("test-file-path", ebookView.getTestFileTextField().getText(), "Das Textfeld sollte den simulierten Dateipfad enthalten");
+    }
 
  */
 }

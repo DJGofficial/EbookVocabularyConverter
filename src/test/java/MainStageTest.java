@@ -50,7 +50,7 @@ public class MainStageTest {
     @Test
     void should_click_on_button(FxRobot robot) {
         // when:
-        robot.clickOn(".button");
+        robot.clickOn(".ankiButton");
 
         // then:
         verifyThat(".button", hasText("clicked!"));

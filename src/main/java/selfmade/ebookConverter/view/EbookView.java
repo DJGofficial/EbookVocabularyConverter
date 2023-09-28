@@ -27,12 +27,18 @@ public class EbookView implements Initializable {
     Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
     @FXML
     TextField fileTextField;
+    public TextField getTestFileTextField() {
+        return this.fileTextField;
+    }
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
     @FXML
     ScrollPane scrollPane;
     @FXML
     FlowPane flowPane;
+    public FlowPane getTestFlowPane() {
+        return this.flowPane;
+    }
     @FXML
     Label bottomMessageLabel = new Label();
     @FXML
