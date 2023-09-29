@@ -10,10 +10,10 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
     requires javafx.fxml;
 
 
-    opens selfmade.ebookConverter to javafx.fxml;
-    exports selfmade.ebookConverter;
-    exports selfmade.ebookConverter.view;
-    opens selfmade.ebookConverter.view to javafx.fxml;
-    exports selfmade.ebookConverter.controller;
+    //opens selfmade.ebookConverter to javafx.fxml;
+    //exports selfmade.ebookConverter;
+  //  exports selfmade.ebookConverter.view;
+  //  opens selfmade.ebookConverter.view to javafx.fxml;
+   // exports selfmade.ebookConverter.controller;
 }
 

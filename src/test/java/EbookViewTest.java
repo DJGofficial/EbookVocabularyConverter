@@ -1,57 +1,70 @@
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.testfx.api.FxToolkit.setupStage;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.layout.AnchorPane;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.testfx.api.FxRobot;
-import org.testfx.framework.junit5.ApplicationExtension;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.testfx.framework.junit5.Start;
-import selfmade.ebookConverter.MainStage;
 import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
 
-//@ExtendWith(MockitoExtension.class)
-@ExtendWith(ApplicationExtension.class)
+@ExtendWith({ApplicationExtension.class, MockitoExtension.class})
 public class EbookViewTest {
 
     @Mock
     private FileController fileController;
 
-   // @InjectMocks
+    @InjectMocks
     private EbookView ebookView;
 
     @Start
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(EbookView.class.getResource("MainStage.fxml"));
-        VBox root = loader.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/E_Little/IdeaProjects/EbookVocabularyConverter/src/main/resources/selfmade/ebookConverter/MainStage.fxml"));
+       AnchorPane anchorPane = loader.load();
         ebookView = loader.getController();
-       Scene scene = new Scene(root);
+       // loader.setRoot(new AnchorPane());
+       // Parent root= loader.load();
+        Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
     }
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        setupStage(stage -> {
-            ebookView = new EbookView();
-            //stage.setScene(new Scene(ebookView));
-            stage.show();
-        });
+    // UI Component Test with TestFX
+    @Test
+    public void testFillFlowPaneButtonClicked(FxRobot robot) {
+        robot.clickOn("#fillFlowPaneButton");
+        assertFalse(ebookView.getTestFlowPane().getChildren().isEmpty(), "FlowPane should not be empty after click");
     }
 
+    // Simple Unit Test
+    @Test
+    public void testSetMessageLabel() {
+        String message = "Test message";
+        ebookView.setMessageLabel(message);
+        assertEquals(message, ebookView.getMessageLabel().getText(), "Message label should contain test text");
+    }
 
+    // Integration Test with Mockito
+    @Test
+    public void testFileControllerInvocation(FxRobot robot) throws IOException {
+        when(fileController.chooseFile()).thenReturn("test-file-path");
+        robot.clickOn("#fileButton");
+        verify(fileController, times(1)).chooseFile();
+        assertEquals("test-file-path", ebookView.getTestFileTextField().getText(), "Text field should contain simulated file path");
+    }
 
 /*
     // Schnittstellentest
@@ -62,7 +75,7 @@ public class EbookViewTest {
         assertFalse(flowPane.getChildren().isEmpty(), "FlowPane sollte nach dem Klick nicht leer sein");
     }
 
- */
+
 
     // Komponententest
     @Test
@@ -71,6 +84,8 @@ public class EbookViewTest {
         ebookView.setMessageLabel(message);
         assertEquals(message, ebookView.getMessageLabel().getText(), "Das Nachrichtenlabel sollte den Testtext enthalten");
     }
+    */
+
 /*
     // Black-Box-Test
     @Test

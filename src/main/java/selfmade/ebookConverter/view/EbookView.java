@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
 import selfmade.ebookConverter.connection.AnkiConnection;
@@ -23,6 +24,8 @@ import java.util.*;
 public class EbookView implements Initializable {
 
     // Definition der FXML-Elemente
+    @FXML
+    AnchorPane anchorPane;
     @FXML
     Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
     @FXML
