@@ -2,6 +2,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.testfx.api.FxRobot;
@@ -15,21 +16,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 import selfmade.ebookConverter.controller.FileController;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
 
-@ExtendWith({ApplicationExtension.class, MockitoExtension.class})
-public class EbookViewTest {
+@ExtendWith(ApplicationExtension.class)//, MockitoExtension.class})
+public class EbookViewTest extends ApplicationTest {
 
-    @Mock
-    private FileController fileController;
+   // @Mock
+   // private FileController fileController;
 
-    @InjectMocks
-    private EbookView ebookView;
+   // @InjectMocks
+   // private EbookView ebookView;
+   private Button button;
+    @Override
+    public void start(Stage stage) {
+        button = new Button("click me!");
+        button.setOnAction(actionEvent -> button.setText("clicked!"));
+        stage.setScene(new Scene(new AnchorPane(button), 100, 100));
+        stage.show();
+    }
 
+/*
     @Start
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/home/E_Little/IdeaProjects/EbookVocabularyConverter/src/main/resources/selfmade/ebookConverter/MainStage.fxml"));

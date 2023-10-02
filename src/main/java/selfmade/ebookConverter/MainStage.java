@@ -23,6 +23,7 @@ public class MainStage extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(true);
+
     }
 
     public void showNewStage() {
