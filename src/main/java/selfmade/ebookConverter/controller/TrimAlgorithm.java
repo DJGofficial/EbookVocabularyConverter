@@ -1,5 +1,6 @@
 package selfmade.ebookConverter.controller;
 
+import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.view.EbookView;
 
 import javafx.collections.ObservableList;
@@ -24,6 +25,7 @@ public class TrimAlgorithm {
     private ArrayList<String> trimmedList = new ArrayList<>();
     EbookView ebookView;
     ButtonController buttonController;
+    EbookViewUIManager uiManager;
 
     // Konstruktor für den TrimAlgorithmus
     public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
@@ -81,7 +83,7 @@ public class TrimAlgorithm {
                     break;
             }
         }
-        runListDetermineDistance(endMark, vocabulary, String.valueOf(titleToAdd).trim(), type);
+        runListDetermineDistance(endMark, vocabulary, type);
     }
 
     // Speichert Textblöcke basierend auf der Entfernung zwischen EndMark und Vokabel
@@ -123,7 +125,7 @@ public class TrimAlgorithm {
     }
 
     // Bestimmt die Entfernung zwischen EndMark und Vokabel
-    private void runListDetermineDistance(String endMark, String vocabulary, String s, String type) {
+    private void runListDetermineDistance(String endMark, String vocabulary, String type) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
         int distanceIndex = 0;
@@ -131,7 +133,8 @@ public class TrimAlgorithm {
 
         for (int i = 0; i < texts.size(); i++) {
             if (texts.get(i).trim().equals(vocabulary)) {
-                System.out.println("Vokabel bei " + i);
+                System.out.println("Vok" +
+                        "abel bei " + i);
                 vocabularyIndex = i;
                 found = true;
             }
@@ -162,7 +165,8 @@ public class TrimAlgorithm {
                 String replacedRegex = secondLastString.replaceAll(pattern, "");
                 returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
-                ebookView.setMessageLabel("Bitte markiere Titel oder Art");
+
+                uiManager.setMessageLabel("Bitte markiere Titel oder Art");
                 break;
             }
         }

@@ -4,6 +4,7 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;
@@ -16,9 +17,11 @@ public class AnkiConnection {
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
     EbookView ebookView;
+    EbookViewUIManager uiManager;
 
-    public AnkiConnection(EbookView ebookView) {
+    public AnkiConnection(EbookView ebookView, EbookViewUIManager uiManager) {
         this.ebookView = ebookView;
+        this.uiManager = uiManager;
     }
 
     public AnkiConnection() {
@@ -64,7 +67,7 @@ public class AnkiConnection {
             }
 
         } catch (Exception e) {
-            ebookView.setBottomLabelMessage("Bitte stelle Verbindung mit Anki über AnkiConnect her", false);
+            uiManager.setBottomMessage(false,"Bitte stelle Verbindung mit Anki über AnkiConnect her");
             e.printStackTrace();
         }
         System.out.println(deckNames);

@@ -16,6 +16,7 @@ import selfmade.ebookConverter.controller.MessageController;
 import selfmade.ebookConverter.controller.TrimAlgorithm;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
 import selfmade.ebookConverter.controller.ButtonController;
+import selfmade.ebookConverter.model.EbookViewUIManager;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,7 +74,7 @@ public class EbookView implements Initializable {
     AnkiConnection ankiConnection;
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
-
+    EbookViewUIManager uiManager;
     /**
      * Initialisiert die GUI und setzt die Startwerte.
      *
@@ -84,7 +85,7 @@ public class EbookView implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileController = new FileController();
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
-
+        uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
         // Initialisierung der ChoiceBox-Elemente
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
@@ -114,8 +115,10 @@ public class EbookView implements Initializable {
      */
     @FXML
     private void setChooseFileButton() throws IOException {
-        fileTextField.setText(fileController.chooseFile());
-        fillFlowPaneButton.setDisable(false);
+      //  fileTextField.setText(fileController.chooseFile());
+      //  fillFlowPaneButton.setDisable(false);
+        String chosenFilePath = fileController.chooseFile();
+        uiManager.updateFileTextField(chosenFilePath);
     }
 
     /**
@@ -125,19 +128,10 @@ public class EbookView implements Initializable {
      */
     @FXML
     private void setCreateButton() throws IOException {
-        bottomMessageLabel.setText("");
-        ArrayList<String> outputList = new ArrayList<>();
-        for (Node node : flowPane.getChildren()) {
-            if (node instanceof ToggleButton) {
-                ToggleButton button = (ToggleButton) node;
-                String buttonText = button.getText();
-                outputList.add(buttonText);
-            }
-        }
+        ArrayList<String> outputList = uiManager.getToggleButtonTextFromFlowPane();
         boolean retVal = fileController.userNameFile(outputList);
-        if (retVal == true) {
-            messageController.showSuccessMessage(bottomMessageLabel, "Successfully created!");
-        }
+        uiManager.setBottomMessage(retVal, "Successfully created!");
+
     }
 
     /**
@@ -184,7 +178,7 @@ public class EbookView implements Initializable {
     @FXML
     private void translateButtonClicked() throws IOException {
         // Übersetzen der Inhalte mit der Google Translate API
-        HashMap<String, String> translation = new HashMap<>();
+        HashMap<String, String> translation =new HashMap<>();
         for (Node node : flowPane.getChildren()) {
             if (node instanceof Button) {
                 Button button = (Button) node;
@@ -193,6 +187,8 @@ public class EbookView implements Initializable {
         }
         googleTranslateAPIConnection.translateAndReturnHashMap(this, translation);
         ankiButton.setDisable(false);
+
+     //   uiManager.showTranslations(translation);
     }
 
     /**
@@ -233,54 +229,20 @@ public class EbookView implements Initializable {
      */
     @FXML
     public void ankiButtonClicked() {
-        bottomMessageLabel.setText("");
-        AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
-        choiceBoxItems = new ChoiceBoxItems();
-
+       // bottomMessageLabel.setText("");
+    AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
         // Verbindung mit Anki herstellen und Deck-Namen abrufen
-        ankiConnection = new AnkiConnection(this);
+
+       ankiConnection = new AnkiConnection(this,uiManager);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
 
         if (deckList != null && !deckList.isEmpty()) {
-            ankiDeckChoose.callWindowAddDeckList(deckList);
+           ankiDeckChoose.callWindowAddDeckList(deckList);
         } else {
             messageController.showErrorMessage(bottomMessageLabel, "Bitte stelle Verbindung mit Anki über AnkiConnect her");
         }
     }
 
-    /**
-     * Setzt die Nachricht im Message-Label.
-     *
-     * @param message Die Nachricht, die angezeigt werden soll.
-     */
-    @FXML
-    public void setMessageLabel(String message) {
-        messageController.showErrorMessage(messageLabel, message);
-    }
-
-    /**
-     * Gibt das Label für Nachrichten zurück.
-     *
-     * @return Das Label für Nachrichten.
-     */
-    public Label getMessageLabel() {
-        return messageLabel;
-    }
-
-    /**
-     * Setzt die Nachricht im unteren Label und entscheidet, ob es sich um eine Erfolgs- oder Fehlermeldung handelt.
-     *
-     * @param message Die anzuzeigende Nachricht.
-     * @param value   Ein boolescher Wert, der angibt, ob es sich um eine Erfolgs- (true) oder Fehlermeldung (false) handelt.
-     */
-    @FXML
-    public void setBottomLabelMessage(String message, Boolean value) {
-        if (value == false) {
-            messageController.showErrorMessage(bottomMessageLabel, message);
-        } else {
-            messageController.showSuccessMessage(bottomMessageLabel, message);
-        }
-    }
 
 
 }
