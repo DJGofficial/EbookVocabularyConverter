@@ -1,6 +1,8 @@
 package selfmade.ebookConverter.controller;
 
+import javafx.collections.ObservableList;
 import selfmade.ebookConverter.connection.AnkiConnection;
+import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.AnkiDeckChoose;
 import selfmade.ebookConverter.view.EbookView;
@@ -16,13 +18,23 @@ public class AnkiController {
     AnkiConnection ankiConnection;
     EbookView ebookView;
     AnkiDeckChoose ankiDeckChoose;
+    MessageController messageController;
+
 
     public AnkiController() {
         ankiConnection = new AnkiConnection();
         ebookView = new EbookView();
         ankiDeckChoose = new AnkiDeckChoose();
+        messageController= new MessageController();
     }
-
+    public void handleAnkiDeck(EbookView ebookView, EbookViewUIManager uiManager) {
+        ObservableList<String> deckList = ankiConnection.fetchDeckNames();
+        if (deckList != null && !deckList.isEmpty()) {
+            ankiDeckChoose.callWindowAddDeckList(deckList);
+        } else {
+            uiManager.setBottomMessage(false,"Bitte stelle Verbindung mit Anki über AnkiConnect her");
+        }
+    }
     public ArrayList<String> createAndAddCards(String deckName, HashMap<String, String> translatedMap) throws IOException {
 
         for (Map.Entry<String, String> entry : translatedMap.entrySet()) {

@@ -4,6 +4,9 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.layout.FlowPane;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.EbookView;
 
@@ -41,6 +44,17 @@ public class GoogleTranslateAPIConnection {
         ebookView.fillFlowPaneTranslatedMap(translatedMap);
         textAttributesObject.setTranslatedMap(translatedMap);
 
+    }
+
+    public void handleTranslation(EbookView ebookView, FlowPane flowPane) {
+        HashMap<String, String> translation = new HashMap<>();
+        for (Node node : flowPane.getChildren()) {
+            if (node instanceof Button) {
+                Button button = (Button) node;
+                translation.put(button.getText(), null);
+            }
+        }
+        translateAndReturnHashMap(ebookView, translation);
     }
 }
 

@@ -11,11 +11,8 @@ import javafx.scene.layout.FlowPane;
 
 import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
-import selfmade.ebookConverter.controller.FileController;
-import selfmade.ebookConverter.controller.MessageController;
-import selfmade.ebookConverter.controller.TrimAlgorithm;
+import selfmade.ebookConverter.controller.*;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
-import selfmade.ebookConverter.controller.ButtonController;
 import selfmade.ebookConverter.model.EbookViewUIManager;
 
 import java.io.IOException;
@@ -71,7 +68,7 @@ public class EbookView implements Initializable {
     FileController fileController;
     ButtonController buttonController = new ButtonController();
     TrimAlgorithm trimAlgorithm;
-    AnkiConnection ankiConnection;
+    AnkiController ankiController;
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
     EbookViewUIManager uiManager;
@@ -177,18 +174,7 @@ public class EbookView implements Initializable {
      */
     @FXML
     private void translateButtonClicked() throws IOException {
-        // Übersetzen der Inhalte mit der Google Translate API
-        HashMap<String, String> translation =new HashMap<>();
-        for (Node node : flowPane.getChildren()) {
-            if (node instanceof Button) {
-                Button button = (Button) node;
-                translation.put(button.getText(), null);
-            }
-        }
-        googleTranslateAPIConnection.translateAndReturnHashMap(this, translation);
-        ankiButton.setDisable(false);
-
-     //   uiManager.showTranslations(translation);
+        googleTranslateAPIConnection.handleTranslation(this, flowPane);        // Übersetzen der Inhalte mit der Google Translate API
     }
 
     /**
@@ -229,11 +215,11 @@ public class EbookView implements Initializable {
      */
     @FXML
     public void ankiButtonClicked() {
+        ankiController= new AnkiController();
        // bottomMessageLabel.setText("");
-    AnkiDeckChoose ankiDeckChoose = new AnkiDeckChoose();
         // Verbindung mit Anki herstellen und Deck-Namen abrufen
-
-       ankiConnection = new AnkiConnection(this,uiManager);
+        ankiController.handleAnkiDeck(this, uiManager);
+      /* ankiConnection = new AnkiConnection(this,uiManager);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
 
         if (deckList != null && !deckList.isEmpty()) {
@@ -241,6 +227,8 @@ public class EbookView implements Initializable {
         } else {
             messageController.showErrorMessage(bottomMessageLabel, "Bitte stelle Verbindung mit Anki über AnkiConnect her");
         }
+
+       */
     }
 
 
