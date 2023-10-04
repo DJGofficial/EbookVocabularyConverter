@@ -5,14 +5,14 @@ import java.util.HashMap;
 
 public class TextAttributesObject<T> {
 
-    private T deckName;
-    private T modelName;
-    private T front;
-    private T back;
+    private String deckName;
+    private String modelName;
+    private String front;
+    private String back;
 
     static HashMap<String, String> translatedMap;
 
-    public TextAttributesObject(T deckName, T modelName, T front, T back) {
+    public TextAttributesObject(String deckName, String modelName, String front, String back) {
         this.deckName = deckName;
         this.modelName = modelName;
         this.front = front;
@@ -31,22 +31,22 @@ public class TextAttributesObject<T> {
         translatedMap = transMap;
     }
 
-    public T getDeckName() {
+    public String getDeckName() {
         return deckName;
     }
 
 
-    public T getModelName() {
+    public String getModelName() {
         return modelName;
     }
 
 
-    public T getFront() {
+    public String getFront() {
         return front;
     }
 
 
-    public T getBack() {
+    public String getBack() {
         return back;
     }
 

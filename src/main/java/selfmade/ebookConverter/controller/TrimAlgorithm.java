@@ -165,7 +165,6 @@ public class TrimAlgorithm {
                 String replacedRegex = secondLastString.replaceAll(pattern, "");
                 returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
-
                 uiManager.setMessageLabel("Bitte markiere Titel oder Art");
                 break;
             }
