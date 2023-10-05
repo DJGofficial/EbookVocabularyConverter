@@ -33,7 +33,7 @@ public class AnkiDeckChoose implements Initializable {
     @FXML
     MainStage mainStage = new MainStage();
     AnkiController ankiController;
-    TextAttributesObject textAttributesObject = new TextAttributesObject<>();
+    TextAttributesObject textAttributesObject;
 
     /**
      * Aktualisiert die Deckliste und zeigt ein neues Fenster.
