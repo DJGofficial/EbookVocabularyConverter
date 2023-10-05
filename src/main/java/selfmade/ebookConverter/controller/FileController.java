@@ -8,20 +8,32 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Controller-Klasse für die Dateioperationen, einschließlich Dateiauswahl,
+ * Lesen, Schreiben und Erzeugung von Buttons basierend auf Dateiinhalten.
+ */
 public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
 
     ButtonController buttonController = new ButtonController();
-
+    /**
+     * Ermöglicht dem Benutzer, eine Datei auszuwählen und deren Inhalt in "filename.txt" zu speichern.
+     *
+     * @return Der Name der ausgewählten Datei.
+     * @throws IOException Wenn ein Ein-/Ausgabefehler auftritt.
+     */
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         readFile(selectedFile);
         return selectedFile.getName();
     }
-
+    /**
+     * Liest den Inhalt der gegebenen Datei und schreibt ihn in "filename.txt".
+     *
+     * @param file Die zu lesende Datei.
+     */
     public static void readFile(File file) {
         try (
                 FileWriter myWriter = new FileWriter("filename.txt");
@@ -35,7 +47,11 @@ public class FileController {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Erzeugt eine gepufferte Datei namens "filename.txt".
+     *
+     * @return true, wenn die Datei erfolgreich erstellt wurde, false andernfalls.
+     */
     public static boolean createBufferedFile() {
         try {
             File myObj = new File("filename.txt");
@@ -53,7 +69,11 @@ public class FileController {
         }
     }
 
-
+    /**
+     * Liest den Inhalt der Datei "filename.txt" und gibt ihn als Textobjekt zurück.
+     *
+     * @return Das Textobjekt mit dem Inhalt der Datei.
+     */
     public static Text writeFile() {
         File toWrite = new File("filename.txt");
         String textFromFile = null;
@@ -73,7 +93,11 @@ public class FileController {
         return retVal;
     }
 
-
+    /**
+     * Erzeugt ToggleButtons basierend auf dem Inhalt der Datei "filename.txt".
+     *
+     * @return Eine Liste von ToggleButtons.
+     */
     public List<ToggleButton> createButtonsFromFile() {
         List<ToggleButton> buttons = new ArrayList<>();
         File toWrite = new File("filename.txt");
@@ -95,7 +119,11 @@ public class FileController {
         }
         return buttons;
     }
-
+    /**
+     * Setzt die Aktion für den gegebenen ToggleButton.
+     *
+     * @param button Der ToggleButton, für den die Aktion gesetzt werden soll.
+     */
     public void setButtonAction(ToggleButton button) {
         if (button.isSelected() == true) {
             button.setStyle("-fx-background-color: " + buttonController.getButtonColour());
@@ -103,7 +131,13 @@ public class FileController {
             button.setStyle("");
         }
     }
-
+    /**
+     * Speichert eine Liste von Zeilen in einer vom Benutzer ausgewählten Datei.
+     *
+     * @param outputList Die Liste der zu speichernden Zeilen.
+     * @return true, wenn die Datei erfolgreich gespeichert wurde, false andernfalls.
+     * @throws IOException Wenn ein Ein-/Ausgabefehler auftritt.
+     */
     public static boolean userNameFile(ArrayList<String> outputList) throws IOException {
         System.out.println(outputList);
         Stage stage = new Stage();

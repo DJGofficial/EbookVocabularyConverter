@@ -8,7 +8,6 @@ module selfmade.ebookconverter.ebookvocabularyconverter {
     requires com.google.gson;
     requires javafx.fxml;
 
-
     exports selfmade.ebookConverter;
     exports selfmade.ebookConverter.view;
     opens selfmade.ebookConverter to javafx.fxml;

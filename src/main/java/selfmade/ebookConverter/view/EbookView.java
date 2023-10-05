@@ -20,9 +20,10 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * Verantwortlich für die Darstellung der E-Book-Ansicht und die Steuerung der Interaktionen.
+ * EbookView ist zuständig für die Darstellung der E-Book-Ansicht und die Steuerung der Interaktionen.
+ * Sie initialisiert und verwaltet alle für die E-Book-Verarbeitung erforderlichen Benutzeroberflächenkomponenten.
  */
-public class EbookView implements Initializable {
+public class EbookView implements Initializable{
 
     /**
      * AnchorPane zur Organisation der UI-Komponenten.

@@ -16,6 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Die AnkiDeckChoose Klasse dient zur Verwaltung der UI-Elemente
+ * für die Auswahl von Anki-Decks.
+ * <p>
+ * Diese Klasse implementiert das Initializable Interface von JavaFX,
+ * um die Initialisierung von UI-Elementen zu erleichtern.
+ */
 public class AnkiDeckChoose implements Initializable {
 
     @FXML
@@ -28,12 +35,25 @@ public class AnkiDeckChoose implements Initializable {
     AnkiController ankiController;
     TextAttributesObject textAttributesObject = new TextAttributesObject<>();
 
+    /**
+     * Aktualisiert die Deckliste und zeigt ein neues Fenster.
+     *
+     * @param deckList Die neue Liste der Decks.
+     */
     @FXML
     public void callWindowAddDeckList(ObservableList<String> deckList) {
         this.deckListLocal.addAll(deckList);
         mainStage.showNewStage();
     }
 
+    /**
+     * Diese Methode wird aufgerufen, wenn die Deck-Auswahl bestätigt wird.
+     * Sie erstellt und fügt Karten zum ausgewählten Deck hinzu.
+     * <p>
+     * Diese Methode kann eine IOException werfen.
+     *
+     * @throws IOException Wenn ein I/O-Fehler auftritt.
+     */
     @FXML
     private void deckConfirmButtonClicked() throws IOException {
         List<String> texter = new ArrayList<>();
@@ -51,6 +71,13 @@ public class AnkiDeckChoose implements Initializable {
         System.out.println("Size " + texter.size());
     }
 
+    /**
+     * Initialisiert die UI-Elemente und Controller.
+     * Diese Methode ist durch das Initializable Interface vorgeschrieben.
+     *
+     * @param url            Der Ort der zugehörigen FXML-Datei.
+     * @param resourceBundle Die Ressourcen für die Lokalisierung.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         choiceBoxAnkiDecks.getItems().addAll(this.deckListLocal);

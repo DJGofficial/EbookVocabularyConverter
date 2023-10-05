@@ -10,9 +10,11 @@ import javafx.scene.control.ToggleButton;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Klasse TrimAlgorithm kümmert sich um die Extraktion von markierten Elementen und Textblöcken.
+ */
 public class TrimAlgorithm {
 
-    // Variablen zur Speicherung von Informationen
     private String title = "";
     private StringBuilder titleToAdd = new StringBuilder();
     private String type = titleToAdd.toString();
@@ -27,13 +29,22 @@ public class TrimAlgorithm {
     ButtonController buttonController;
     EbookViewUIManager uiManager;
 
-    // Konstruktor für den TrimAlgorithmus
+    /**
+     * Konstruktor initialisiert TrimAlgorithm mit dem zu verarbeitenden Inhalt.
+     *
+     * @param content   Der Inhalt als ObservableList von Nodes.
+     * @param ebookView Das View-Objekt für das E-Book.
+     */
     public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
         this.ebookView = ebookView;
         this.contentList = content;
     }
 
-    // Überprüft, ob EndMark und Vokabel als Mindestanforderung für den Algorithmus markiert sind
+    /**
+     * Überprüft die Anwesenheit von Mindestanforderungen für den Algorithmus.
+     *
+     * @return Ein boolean-Array, das die Anwesenheit von EndMark und Vocabulary anzeigt.
+     */
     public boolean[] checkContent() {
         boolean hasEndMark = false;
         boolean hasVocabulary = false;
@@ -51,7 +62,9 @@ public class TrimAlgorithm {
         return new boolean[]{hasEndMark, hasVocabulary};
     }
 
-    // Formatieren des Buttons zur Bezeichnung und Speichern in der Liste
+    /**
+     * Konvertiert UI-Elemente zu Textfragmenten und speichert diese.
+     */
     public void getContentToTextFragments() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -61,7 +74,9 @@ public class TrimAlgorithm {
         getMarkings();
     }
 
-    // Sucht den Inhalt nach Anfangs-/Endmarkierungen ab
+    /**
+     * Identifiziert und erfasst die verschiedenen Markierungen.
+     */
     public void getMarkings() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -86,7 +101,14 @@ public class TrimAlgorithm {
         runListDetermineDistance(endMark, vocabulary, type);
     }
 
-    // Speichert Textblöcke basierend auf der Entfernung zwischen EndMark und Vokabel
+    /**
+     * Teilt und speichert den Text basierend auf dem Abstand zwischen EndMark und Vocabulary.
+     *
+     * @param distanceIndex Der Abstandsindex zwischen EndMark und Vocabulary.
+     * @param endMark       Das EndMark.
+     * @param title         Der Titel.
+     * @param type          Der Typ.
+     */
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
         StringBuilder currentBlock = new StringBuilder();
 
@@ -124,7 +146,13 @@ public class TrimAlgorithm {
         findVocabulary(trimmedList, distanceIndex);
     }
 
-    // Bestimmt die Entfernung zwischen EndMark und Vokabel
+    /**
+     * Ermittelt den Abstand zwischen EndMark und Vocabulary und löst die Textblockspeicherung aus.
+     *
+     * @param endMark    Das EndMark.
+     * @param vocabulary Das Vocabulary.
+     * @param type       Der Typ.
+     */
     private void runListDetermineDistance(String endMark, String vocabulary, String type) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
@@ -152,7 +180,12 @@ public class TrimAlgorithm {
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
     }
 
-    // Sucht nach Vokabeln in den formatierten Textblöcken
+    /**
+     * Sucht nach dem Vokabular in den formatierten Textblöcken.
+     *
+     * @param trimmedList   Die Liste der beschnittenen Textblöcke.
+     * @param distanceIndex Der Abstandsindex zwischen EndMark und Vocabulary.
+     */
     private void findVocabulary(ArrayList<String> trimmedList, int distanceIndex) {
         buttonController = new ButtonController();
         ArrayList<String> returnVocList = new ArrayList<>();
