@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Controller-Klasse für die Dateioperationen, einschließlich Dateiauswahl,
  * Lesen, Schreiben und Erzeugung von Buttons basierend auf Dateiinhalten.
@@ -17,6 +18,36 @@ public class FileController {
     private final static FileChooser fileChooser = new FileChooser();
 
     ButtonController buttonController = new ButtonController();
+
+    /**
+     * Liest den Inhalt der gegebenen Datei und schreibt ihn in "filename.txt".
+     *
+     * @param file Die zu lesende Datei.
+     */
+    public static void readFile(File file) {
+        try (
+                FileWriter myWriter = new FileWriter("filename.txt");
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr)) {
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String replacedLine = line.replace("\u00A0", " ");//NBSP replacement needed because unicode differs
+                myWriter.write(replacedLine);
+                myWriter.write(System.lineSeparator());
+            }
+            int content;
+            while ((content = fr.read()) != -1) {
+                myWriter.write((char) content);
+            }
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Ermöglicht dem Benutzer, eine Datei auszuwählen und deren Inhalt in "filename.txt" zu speichern.
      *
@@ -29,24 +60,7 @@ public class FileController {
         readFile(selectedFile);
         return selectedFile.getName();
     }
-    /**
-     * Liest den Inhalt der gegebenen Datei und schreibt ihn in "filename.txt".
-     *
-     * @param file Die zu lesende Datei.
-     */
-    public static void readFile(File file) {
-        try (
-                FileWriter myWriter = new FileWriter("filename.txt");
-                FileReader fr = new FileReader(file)) {
-            int content;
-            while ((content = fr.read()) != -1) {
-                myWriter.write((char) content);
-            }
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     /**
      * Erzeugt eine gepufferte Datei namens "filename.txt".
      *
@@ -106,6 +120,7 @@ public class FileController {
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split("\\s+");
                 for (String word : words) {
+                    System.out.println("!" + word + "!");
                     ToggleButton button = new ToggleButton(word);
                     button.setStyle(buttonController.createStyledButton());
                     button.setOnAction(event -> {
@@ -119,6 +134,7 @@ public class FileController {
         }
         return buttons;
     }
+
     /**
      * Setzt die Aktion für den gegebenen ToggleButton.
      *
@@ -131,6 +147,7 @@ public class FileController {
             button.setStyle("");
         }
     }
+
     /**
      * Speichert eine Liste von Zeilen in einer vom Benutzer ausgewählten Datei.
      *

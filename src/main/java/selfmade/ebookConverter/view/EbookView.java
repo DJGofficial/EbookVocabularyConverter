@@ -46,15 +46,29 @@ public class EbookView implements Initializable{
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
     /**
+     * FlowPane zur dynamischen Anordnung der Buttons.
+     */
+    @FXML
+    //FlowPane flowPane;
+    //Test Initialisierung für TrimAlgorithmusTest
+    private static FlowPane createAndFillFlowPane() {
+        FlowPane pane = new FlowPane();
+        for (int i = 1; i <= 20; i++) {
+            ToggleButton toggleButton = new ToggleButton("Button " + i);
+            pane.getChildren().add(toggleButton);
+        }
+        return pane;
+    }
+    /**
      * ScrollPane zur Anzeige dynamischer Inhalte.
      */
     @FXML
     ScrollPane scrollPane;
-    /**
-     * FlowPane zur dynamischen Anordnung der Buttons.
-     */
+
+    // Test-Initialisierung für TrimAlgorithmusTest
     @FXML
-    FlowPane flowPane;
+    private FlowPane flowPane = createAndFillFlowPane();
+
     /**
      * Label für die Anzeige von Nachrichten.
      */
@@ -81,7 +95,7 @@ public class EbookView implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fileController = new FileController();
+        fileController = new FileController();//TODO: Brauche ich eventuell garnicht
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
         uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
         // Initialisierung der ChoiceBox-Elemente
@@ -104,6 +118,8 @@ public class EbookView implements Initializable{
         fieldsChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             buttonController.setButtonChoiceBoxStatus(fieldsChoiceBox.getValue());
         });
+
+
     }
 
     /**
