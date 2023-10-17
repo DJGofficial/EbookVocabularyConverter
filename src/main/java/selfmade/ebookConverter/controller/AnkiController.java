@@ -5,7 +5,6 @@ import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.AnkiDeckChoose;
-import selfmade.ebookConverter.view.EbookView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,14 +18,15 @@ import java.util.Map;
  */
 public class AnkiController {
 
-    AnkiConnection ankiConnection;
-    AnkiDeckChoose ankiDeckChoose;
-    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
+    private AnkiConnection ankiConnection;
+    private AnkiDeckChoose ankiDeckChoose;
+    private EbookViewUIManager uiManager;
 
 
     public AnkiController() {
-        ankiConnection = new AnkiConnection();
-        ankiDeckChoose = new AnkiDeckChoose();
+        this.uiManager = new EbookViewUIManager();
+        this.ankiConnection = new AnkiConnection(uiManager);
+        this.ankiDeckChoose = new AnkiDeckChoose();
     }
 
     public void handleAnkiDeck() {
@@ -64,5 +64,9 @@ public class AnkiController {
             e.printStackTrace();
         }
         return retValList;
+    }
+
+    public EbookViewUIManager getUiManager() {
+        return uiManager;
     }
 }

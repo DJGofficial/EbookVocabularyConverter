@@ -86,7 +86,7 @@ public class EbookView implements Initializable{
     AnkiController ankiController;
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
-    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
+    EbookViewUIManager uiManager;
     /**
      * Initialisiert die GUI und setzt die Startwerte.
      *
@@ -97,7 +97,9 @@ public class EbookView implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileController = new FileController();//TODO: Brauche ich eventuell garnicht
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
-       uiManager.initializeUIComponents(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
+        ankiController= new AnkiController();
+        uiManager = ankiController.getUiManager();
+        uiManager.initializeUIComponents(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
         // uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
         // Initialisierung der ChoiceBox-Elemente
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
@@ -233,7 +235,6 @@ public class EbookView implements Initializable{
      */
     @FXML
     public void ankiButtonClicked() {
-        ankiController= new AnkiController();
        // bottomMessageLabel.setText("");
         // Verbindung mit Anki herstellen und Deck-Namen abrufen
         ankiController.handleAnkiDeck();
@@ -249,6 +250,7 @@ public class EbookView implements Initializable{
        */
     }
 
-
-
+    public EbookViewUIManager getUiManager() {
+        return uiManager;
+    }
 }

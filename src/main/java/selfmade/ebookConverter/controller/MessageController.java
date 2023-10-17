@@ -3,8 +3,6 @@ package selfmade.ebookConverter.controller;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
-import selfmade.ebookConverter.view.EbookView;
-
 /**
  * Controller-Klasse für die Anzeige von Nachrichten in der Benutzeroberfläche.
  * Ermöglicht die Anzeige von Erfolgs- und Fehlermeldungen.

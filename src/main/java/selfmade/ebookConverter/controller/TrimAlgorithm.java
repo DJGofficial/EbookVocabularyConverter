@@ -27,7 +27,6 @@ public class TrimAlgorithm {
     private ArrayList<String> trimmedList = new ArrayList<>();
     EbookView ebookView;
     ButtonController buttonController;
-    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
 
     /**
      * Konstruktor initialisiert TrimAlgorithm mit dem zu verarbeitenden Inhalt.
@@ -199,7 +198,7 @@ public class TrimAlgorithm {
                 String replacedRegex = secondLastString.replaceAll(pattern, "");
                 returnVocList.add(replacedRegex);
             } catch (ArrayIndexOutOfBoundsException e) {
-                uiManager.setMessageLabel("Bitte markiere Titel oder Art");
+                ebookView.getUiManager().setMessageLabel("Bitte markiere Titel oder Art");
                 break;
             }
         }

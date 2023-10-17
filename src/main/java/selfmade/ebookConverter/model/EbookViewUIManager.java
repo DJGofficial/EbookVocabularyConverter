@@ -15,8 +15,6 @@ import java.util.Map;
  */
 public class EbookViewUIManager {
 
-    private static EbookViewUIManager instance;
-
     private TextField fileTextField;
     private Button fillFlowPaneButton;
     private FlowPane flowPane;
@@ -24,17 +22,10 @@ public class EbookViewUIManager {
     private Label messageLabel;
     private MessageController messageController;
 
-    private EbookViewUIManager() {
+    public EbookViewUIManager() {
         // Verzögerte Initialisierung der Mitglieder
         // Oder fügen Sie hier Ihren Initialisierungscode ein, falls benötigt
         this.messageController = new MessageController();
-    }
-
-    public static synchronized EbookViewUIManager getInstance() {
-        if (instance == null) {
-            instance = new EbookViewUIManager();
-        }
-        return instance;
     }
 
     public void initializeUIComponents(TextField fileTextField,

@@ -5,7 +5,6 @@ import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import selfmade.ebookConverter.model.EbookViewUIManager;
-import selfmade.ebookConverter.view.EbookView;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,17 +15,10 @@ public class AnkiConnection {
     //Info https://foosoft.net/projects/anki-connect/
     private static final String ANKI_CONNECT_URL = "http://127.0.0.1:8765";
 
-    EbookView ebookView;
-    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
+    private EbookViewUIManager uiManager;
 
-    public AnkiConnection(EbookView ebookView, EbookViewUIManager uiManager) {
-        this.ebookView = ebookView;
+    public AnkiConnection(EbookViewUIManager uiManager) {
         this.uiManager = uiManager;
-    }
-
-
-    public AnkiConnection() {
-        this.ebookView = new EbookView();
     }
 
     public ObservableList<String> fetchDeckNames() {
