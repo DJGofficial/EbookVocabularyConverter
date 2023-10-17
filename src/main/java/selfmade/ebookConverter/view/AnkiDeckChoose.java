@@ -35,6 +35,7 @@ public class AnkiDeckChoose implements Initializable {
     AnkiController ankiController;
     TextAttributesObject textAttributesObject;
 
+
     /**
      * Aktualisiert die Deckliste und zeigt ein neues Fenster.
      *

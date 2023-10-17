@@ -86,7 +86,7 @@ public class EbookView implements Initializable{
     AnkiController ankiController;
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
-    EbookViewUIManager uiManager;
+    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
     /**
      * Initialisiert die GUI und setzt die Startwerte.
      *
@@ -97,7 +97,8 @@ public class EbookView implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileController = new FileController();//TODO: Brauche ich eventuell garnicht
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
-        uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
+       uiManager.initializeUIComponents(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
+        // uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
         // Initialisierung der ChoiceBox-Elemente
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
@@ -235,7 +236,7 @@ public class EbookView implements Initializable{
         ankiController= new AnkiController();
        // bottomMessageLabel.setText("");
         // Verbindung mit Anki herstellen und Deck-Namen abrufen
-        ankiController.handleAnkiDeck(this, uiManager);
+        ankiController.handleAnkiDeck();
       /* ankiConnection = new AnkiConnection(this,uiManager);
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
 

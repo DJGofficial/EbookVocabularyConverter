@@ -27,7 +27,7 @@ public class TrimAlgorithm {
     private ArrayList<String> trimmedList = new ArrayList<>();
     EbookView ebookView;
     ButtonController buttonController;
-    EbookViewUIManager uiManager;
+    EbookViewUIManager uiManager = EbookViewUIManager.getInstance();
 
     /**
      * Konstruktor initialisiert TrimAlgorithm mit dem zu verarbeitenden Inhalt.
@@ -175,6 +175,7 @@ public class TrimAlgorithm {
                 break;
             } else {
                 System.out.println("Not found");
+
             }
         }
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);

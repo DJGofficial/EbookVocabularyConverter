@@ -15,12 +15,46 @@ import java.util.Map;
  */
 public class EbookViewUIManager {
 
-    private final TextField fileTextField;
+    private static EbookViewUIManager instance;
+
+    private TextField fileTextField;
+    private Button fillFlowPaneButton;
+    private FlowPane flowPane;
+    private Label bottomMessageLabel;
+    private Label messageLabel;
+    private MessageController messageController;
+
+    private EbookViewUIManager() {
+        // Verzögerte Initialisierung der Mitglieder
+        // Oder fügen Sie hier Ihren Initialisierungscode ein, falls benötigt
+        this.messageController = new MessageController();
+    }
+
+    public static synchronized EbookViewUIManager getInstance() {
+        if (instance == null) {
+            instance = new EbookViewUIManager();
+        }
+        return instance;
+    }
+
+    public void initializeUIComponents(TextField fileTextField,
+                                       Button fillFlowPaneButton,
+                                       FlowPane flowPane,
+                                       Label bottomMessageLabel,
+                                       Label messageLabel) {
+        this.fileTextField = fileTextField;
+        this.fillFlowPaneButton = fillFlowPaneButton;
+        this.flowPane = flowPane;
+        this.bottomMessageLabel = bottomMessageLabel;
+        this.messageLabel = messageLabel;
+    }
+    /*
+    private final TextField fileTextField ;
     private final Button fillFlowPaneButton;
     private final FlowPane flowPane;
     private final Label bottomMessageLabel;
-    private final Label messageLabel;
-    private MessageController messageController;
+    private final Label messageLabel ;
+    private final MessageController messageController;
 
     /**
      * Konstruktor, initialisiert die UI-Elemente.
@@ -30,7 +64,7 @@ public class EbookViewUIManager {
      * @param flowPane           Container für dynamisch hinzugefügte Elemente.
      * @param bottomMessageLabel Label für Nachrichten am unteren Rand.
      * @param messageLabel       Label für allgemeine Nachrichten.
-     */
+
     public EbookViewUIManager(TextField fileTextField,
                               Button fillFlowPaneButton,
                               FlowPane flowPane,
@@ -43,6 +77,8 @@ public class EbookViewUIManager {
         this.messageLabel = messageLabel;
         this.messageController = new MessageController();
     }
+*/
+
 
     /**
      * Aktualisiert den Text im fileTextField und aktiviert den fillFlowPaneButton.
