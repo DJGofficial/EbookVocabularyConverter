@@ -2,7 +2,6 @@ package selfmade.ebookConverter.controller;
 
 import javafx.collections.ObservableList;
 import selfmade.ebookConverter.connection.AnkiConnection;
-import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.model.TextAttributesObject;
 import selfmade.ebookConverter.view.AnkiDeckChoose;
 
@@ -28,7 +27,9 @@ public class AnkiController {
         this.ankiConnection = new AnkiConnection(uiManager);
         this.ankiDeckChoose = new AnkiDeckChoose();
     }
-
+    public EbookViewUIManager getUiManager() {
+        return uiManager;
+    }
     public void handleAnkiDeck() {
         ObservableList<String> deckList = ankiConnection.fetchDeckNames();
         if (deckList != null && !deckList.isEmpty()) {
@@ -66,7 +67,5 @@ public class AnkiController {
         return retValList;
     }
 
-    public EbookViewUIManager getUiManager() {
-        return uiManager;
-    }
+
 }

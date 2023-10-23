@@ -1,6 +1,5 @@
 package selfmade.ebookConverter.controller;
 
-import selfmade.ebookConverter.model.EbookViewUIManager;
 import selfmade.ebookConverter.view.EbookView;
 
 import javafx.collections.ObservableList;
@@ -8,7 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 
 import java.util.*;
-import java.util.List;
 
 /**
  * Klasse TrimAlgorithm kümmert sich um die Extraktion von markierten Elementen und Textblöcken.
@@ -28,22 +26,13 @@ public class TrimAlgorithm {
     EbookView ebookView;
     ButtonController buttonController;
 
-    /**
-     * Konstruktor initialisiert TrimAlgorithm mit dem zu verarbeitenden Inhalt.
-     *
-     * @param content   Der Inhalt als ObservableList von Nodes.
-     * @param ebookView Das View-Objekt für das E-Book.
-     */
+
     public TrimAlgorithm(ObservableList<Node> content, EbookView ebookView) {
         this.ebookView = ebookView;
         this.contentList = content;
     }
 
-    /**
-     * Überprüft die Anwesenheit von Mindestanforderungen für den Algorithmus.
-     *
-     * @return Ein boolean-Array, das die Anwesenheit von EndMark und Vocabulary anzeigt.
-     */
+
     public boolean[] checkContent() {
         boolean hasEndMark = false;
         boolean hasVocabulary = false;
@@ -61,9 +50,6 @@ public class TrimAlgorithm {
         return new boolean[]{hasEndMark, hasVocabulary};
     }
 
-    /**
-     * Konvertiert UI-Elemente zu Textfragmenten und speichert diese.
-     */
     public void getContentToTextFragments() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -73,9 +59,7 @@ public class TrimAlgorithm {
         getMarkings();
     }
 
-    /**
-     * Identifiziert und erfasst die verschiedenen Markierungen.
-     */
+
     public void getMarkings() {
         for (Node node : contentList) {
             ToggleButton toggleButton = (ToggleButton) node;
@@ -100,14 +84,7 @@ public class TrimAlgorithm {
         runListDetermineDistance(endMark, vocabulary, type);
     }
 
-    /**
-     * Teilt und speichert den Text basierend auf dem Abstand zwischen EndMark und Vocabulary.
-     *
-     * @param distanceIndex Der Abstandsindex zwischen EndMark und Vocabulary.
-     * @param endMark       Das EndMark.
-     * @param title         Der Titel.
-     * @param type          Der Typ.
-     */
+
     private void textBlockStorage(int distanceIndex, String endMark, String title, String type) {
         StringBuilder currentBlock = new StringBuilder();
 
@@ -145,13 +122,7 @@ public class TrimAlgorithm {
         findVocabulary(trimmedList, distanceIndex);
     }
 
-    /**
-     * Ermittelt den Abstand zwischen EndMark und Vocabulary und löst die Textblockspeicherung aus.
-     *
-     * @param endMark    Das EndMark.
-     * @param vocabulary Das Vocabulary.
-     * @param type       Der Typ.
-     */
+
     private void runListDetermineDistance(String endMark, String vocabulary, String type) {
         int vocabularyIndex = 0;
         int endMarkIndex = 0;
@@ -180,12 +151,7 @@ public class TrimAlgorithm {
         textBlockStorage(distanceIndex, endMark, String.valueOf(titleToAdd), type);
     }
 
-    /**
-     * Sucht nach dem Vokabular in den formatierten Textblöcken.
-     *
-     * @param trimmedList   Die Liste der beschnittenen Textblöcke.
-     * @param distanceIndex Der Abstandsindex zwischen EndMark und Vocabulary.
-     */
+
     private void findVocabulary(ArrayList<String> trimmedList, int distanceIndex) {
         buttonController = new ButtonController();
         ArrayList<String> returnVocList = new ArrayList<>();

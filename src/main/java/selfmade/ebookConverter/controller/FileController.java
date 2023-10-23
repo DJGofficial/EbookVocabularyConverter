@@ -9,21 +9,12 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Controller-Klasse für die Dateioperationen, einschließlich Dateiauswahl,
- * Lesen, Schreiben und Erzeugung von Buttons basierend auf Dateiinhalten.
- */
 public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
 
     ButtonController buttonController = new ButtonController();
 
-    /**
-     * Liest den Inhalt der gegebenen Datei und schreibt ihn in "filename.txt".
-     *
-     * @param file Die zu lesende Datei.
-     */
     public static void readFile(File file) {
         try (
                 FileWriter myWriter = new FileWriter("filename.txt");
@@ -48,12 +39,6 @@ public class FileController {
         }
     }
 
-    /**
-     * Ermöglicht dem Benutzer, eine Datei auszuwählen und deren Inhalt in "filename.txt" zu speichern.
-     *
-     * @return Der Name der ausgewählten Datei.
-     * @throws IOException Wenn ein Ein-/Ausgabefehler auftritt.
-     */
     public static String chooseFile() throws IOException {
         fileChooser.setInitialDirectory(new File("/"));
         File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -61,11 +46,6 @@ public class FileController {
         return selectedFile.getName();
     }
 
-    /**
-     * Erzeugt eine gepufferte Datei namens "filename.txt".
-     *
-     * @return true, wenn die Datei erfolgreich erstellt wurde, false andernfalls.
-     */
     public static boolean createBufferedFile() {
         try {
             File myObj = new File("filename.txt");

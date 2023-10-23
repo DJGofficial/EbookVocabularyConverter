@@ -9,93 +9,51 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
-import selfmade.ebookConverter.connection.AnkiConnection;
 import selfmade.ebookConverter.connection.GoogleTranslateAPIConnection;
 import selfmade.ebookConverter.controller.*;
 import selfmade.ebookConverter.model.ChoiceBoxItems;
-import selfmade.ebookConverter.model.EbookViewUIManager;
+import selfmade.ebookConverter.controller.EbookViewUIManager;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-/**
- * EbookView ist zuständig für die Darstellung der E-Book-Ansicht und die Steuerung der Interaktionen.
- * Sie initialisiert und verwaltet alle für die E-Book-Verarbeitung erforderlichen Benutzeroberflächenkomponenten.
- */
 public class EbookView implements Initializable{
 
-    /**
-     * AnchorPane zur Organisation der UI-Komponenten.
-     */
     @FXML
     AnchorPane anchorPane;
-    /**
-     * Verschiedene Buttons für Benutzeraktionen.
-     */
+
     @FXML
     Button fileButton, ankiButton, doneButton, createButton, translateButton, deleteButton, fillFlowPaneButton;
-    /**
-     * Textfeld zur Darstellung des Dateipfads.
-     */
     @FXML
     TextField fileTextField;
-    /**
-     * ChoiceBox-Elemente zur Auswahl von Optionen.
-     */
+
     @FXML
     ChoiceBox<String> rootChoiceBox, optionChoiceBox, fieldsChoiceBox;
-    /**
-     * FlowPane zur dynamischen Anordnung der Buttons.
-     */
-    @FXML
-    //FlowPane flowPane;
-    //Test Initialisierung für TrimAlgorithmusTest
-    private static FlowPane createAndFillFlowPane() {
-        FlowPane pane = new FlowPane();
-        for (int i = 1; i <= 20; i++) {
-            ToggleButton toggleButton = new ToggleButton("Button " + i);
-            pane.getChildren().add(toggleButton);
-        }
-        return pane;
-    }
-    /**
-     * ScrollPane zur Anzeige dynamischer Inhalte.
-     */
+
     @FXML
     ScrollPane scrollPane;
 
-    // Test-Initialisierung für TrimAlgorithmusTest
     @FXML
-    private FlowPane flowPane = createAndFillFlowPane();
+    private FlowPane flowPane;
 
-    /**
-     * Label für die Anzeige von Nachrichten.
-     */
     @FXML
     Label bottomMessageLabel = new Label();
 
     @FXML
     Label messageLabel = new Label();
 
-    // Initialisierung von Controller und Verbindungen
     ChoiceBoxItems choiceBoxItems;
-    FileController fileController;
+    FileController fileController= new FileController();
     ButtonController buttonController = new ButtonController();
     TrimAlgorithm trimAlgorithm;
     AnkiController ankiController;
     MessageController messageController = new MessageController();
     GoogleTranslateAPIConnection googleTranslateAPIConnection = new GoogleTranslateAPIConnection();
     EbookViewUIManager uiManager;
-    /**
-     * Initialisiert die GUI und setzt die Startwerte.
-     *
-     * @param url            Eine URL zu einer Ressource. Nicht verwendet.
-     * @param resourceBundle Ein ResourceBundle. Nicht verwendet.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fileController = new FileController();//TODO: Brauche ich eventuell garnicht
         ChoiceBoxItems choiceBoxItems = new ChoiceBoxItems();
         ankiController= new AnkiController();
         uiManager = ankiController.getUiManager();
@@ -125,11 +83,6 @@ public class EbookView implements Initializable{
 
     }
 
-    /**
-     * Lässt den Benutzer eine Datei auswählen und aktualisiert das Textfeld entsprechend.
-     *
-     * @throws IOException Wenn das Auslesen der Datei fehlschlägt.
-     */
     @FXML
     private void setChooseFileButton() throws IOException {
       //  fileTextField.setText(fileController.chooseFile());
@@ -138,11 +91,6 @@ public class EbookView implements Initializable{
         uiManager.updateFileTextField(chosenFilePath);
     }
 
-    /**
-     * Erstellt Benutzerdateien basierend auf der aktuellen Auswahl.
-     *
-     * @throws IOException Wenn das Schreiben der Datei fehlschlägt.
-     */
     @FXML
     private void setCreateButton() throws IOException {
         ArrayList<String> outputList = uiManager.getToggleButtonTextFromFlowPane();
@@ -151,18 +99,12 @@ public class EbookView implements Initializable{
 
     }
 
-    /**
-     * Löscht alle Elemente aus dem FlowPane.
-     */
     @FXML
     public void deleteButtonClicked() {
         fileTextField.setText("");
         flowPane.getChildren().clear();
     }
 
-    /**
-     * Prüft den aktuellen Inhalt und bereitet die Übersetzung vor.
-     */
     @FXML
     private void doneButtonClicked() {
         // Überprüfung des Inhalts auf Endmarken und Vokabeln
@@ -187,19 +129,12 @@ public class EbookView implements Initializable{
         }
     }
 
-    /**
-     * Führt die Übersetzung der ausgewählten Textelemente durch.
-     *
-     * @throws IOException Wenn der Übersetzungsdienst nicht erreicht werden kann.
-     */
     @FXML
     private void translateButtonClicked() throws IOException {
-        googleTranslateAPIConnection.handleTranslation(this, flowPane);        // Übersetzen der Inhalte mit der Google Translate API
+        googleTranslateAPIConnection.handleTranslation(this, flowPane);
     }
 
-    /**
-     * Füllt das FlowPane mit den Inhalten aus der ausgewählten Datei.
-     */
+
     @FXML
     private void fillFlowPaneButtonClicked() {
         flowPane.getChildren().addAll(fileController.createButtonsFromFile());
@@ -207,22 +142,12 @@ public class EbookView implements Initializable{
         deleteButton.setDisable(false);
     }
 
-    /**
-     * Aktualisiert das FlowPane mit einer Liste von Vokabeln.
-     *
-     * @param buttonList Die Liste der Vokabeln.
-     */
     @FXML
     public void fillFlowPaneWithVocabulary(ArrayList<String> buttonList) {
         flowPane.getChildren().clear();
         buttonController.createVocButton(flowPane, buttonList);
     }
 
-    /**
-     * Aktualisiert das FlowPane mit übersetzten Inhalten.
-     *
-     * @param translatedMap Eine HashMap der übersetzten Begriffe.
-     */
     @FXML
     public void fillFlowPaneTranslatedMap(HashMap<String, String> translatedMap) {
         ankiButton.setDisable(false);
@@ -230,9 +155,6 @@ public class EbookView implements Initializable{
         flowPane.getChildren().addAll(buttonController.createTranslatedButton(flowPane, translatedMap));
     }
 
-    /**
-     * Führt Aktionen aus, wenn der Anki-Button geklickt wird.
-     */
     @FXML
     public void ankiButtonClicked() {
        // bottomMessageLabel.setText("");

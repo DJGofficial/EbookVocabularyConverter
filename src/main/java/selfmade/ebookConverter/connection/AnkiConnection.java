@@ -4,7 +4,7 @@ package selfmade.ebookConverter.connection;
 import com.google.gson.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import selfmade.ebookConverter.model.EbookViewUIManager;
+import selfmade.ebookConverter.controller.EbookViewUIManager;
 
 import java.io.*;
 import java.net.HttpURLConnection;
