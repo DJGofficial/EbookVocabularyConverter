@@ -8,9 +8,6 @@ import javafx.scene.control.ToggleButton;
 
 import java.util.*;
 
-/**
- * Klasse TrimAlgorithm kümmert sich um die Extraktion von markierten Elementen und Textblöcken.
- */
 public class TrimAlgorithm {
 
     private String title = "";
@@ -67,17 +64,17 @@ public class TrimAlgorithm {
             String styleString = node.lookup(".toggle-button").getStyle();
             switch (styleString) {
                 case "-fx-background-color: #D9FFD9":
-                    endMark = buttonText.trim(); // Text vor der EndMark wird als Einheit hinzugefügt
+                    endMark = buttonText.trim();
                     break;
                 case "-fx-background-color: #FFD9D9":
-                    vocabulary = buttonText; // Wort, das später übersetzt wird
+                    vocabulary = buttonText;
                     break;
                 case "-fx-background-color: #FFFFD9":
-                    titleToAdd.append(buttonText + " "); // Nur Bücher mit diesem Titel werden einbezogen
+                    titleToAdd.append(buttonText + " ");
                     System.out.println(titleToAdd);
                     break;
                 case "-fx-background-color: #D9E5FF":
-                    type = buttonText; // Nur Text mit diesem Typ wird einbezogen
+                    type = buttonText;
                     break;
             }
         }
@@ -170,23 +167,5 @@ public class TrimAlgorithm {
         }
         ebookView.fillFlowPaneWithVocabulary(returnVocList);
     }
-
-    // Test Methoden
-    public String getEndMark() {
-        return this.endMark;
-    }
-
-    public String getVocabulary() {
-        return this.vocabulary;
-    }
-
-    public String getTitle() {
-        return this.titleToAdd.toString();
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
 
 }

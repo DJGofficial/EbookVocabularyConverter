@@ -12,12 +12,13 @@ import java.util.List;
 public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
-
-    ButtonController buttonController = new ButtonController();
+    private static String fileName = "src/main/resources/save.txt";
+  //  private static final String RESOURCE_PATH = "src/main/resources/";
+  ButtonController buttonController = new ButtonController();
 
     public static void readFile(File file) {
         try (
-                FileWriter myWriter = new FileWriter("filename.txt");
+                FileWriter myWriter = new FileWriter(fileName);
                 FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr)) {
 
@@ -63,11 +64,6 @@ public class FileController {
         }
     }
 
-    /**
-     * Liest den Inhalt der Datei "filename.txt" und gibt ihn als Textobjekt zurück.
-     *
-     * @return Das Textobjekt mit dem Inhalt der Datei.
-     */
     public static Text writeFile() {
         File toWrite = new File("filename.txt");
         String textFromFile = null;
@@ -87,14 +83,9 @@ public class FileController {
         return retVal;
     }
 
-    /**
-     * Erzeugt ToggleButtons basierend auf dem Inhalt der Datei "filename.txt".
-     *
-     * @return Eine Liste von ToggleButtons.
-     */
-    public List<ToggleButton> createButtonsFromFile() {
-        List<ToggleButton> buttons = new ArrayList<>();
-        File toWrite = new File("filename.txt");
+    public ArrayList<ToggleButton> createButtonsFromFile() {
+        ArrayList<ToggleButton> buttons = new ArrayList<>();
+        File toWrite = new File(fileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(toWrite))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -115,11 +106,7 @@ public class FileController {
         return buttons;
     }
 
-    /**
-     * Setzt die Aktion für den gegebenen ToggleButton.
-     *
-     * @param button Der ToggleButton, für den die Aktion gesetzt werden soll.
-     */
+
     public void setButtonAction(ToggleButton button) {
         if (button.isSelected() == true) {
             button.setStyle("-fx-background-color: " + buttonController.getButtonColour());
@@ -128,13 +115,7 @@ public class FileController {
         }
     }
 
-    /**
-     * Speichert eine Liste von Zeilen in einer vom Benutzer ausgewählten Datei.
-     *
-     * @param outputList Die Liste der zu speichernden Zeilen.
-     * @return true, wenn die Datei erfolgreich gespeichert wurde, false andernfalls.
-     * @throws IOException Wenn ein Ein-/Ausgabefehler auftritt.
-     */
+
     public static boolean userNameFile(ArrayList<String> outputList) throws IOException {
         System.out.println(outputList);
         Stage stage = new Stage();

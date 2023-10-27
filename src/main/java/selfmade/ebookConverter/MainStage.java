@@ -6,20 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import selfmade.ebookConverter.controller.ButtonController;
 
 import java.io.IOException;
+import java.net.URL;
 
-/**
- * Hauptklasse für die JavaFX-Anwendung, die das Hauptfenster und die
- * Methode für das Erzeugen eines neuen Fensters zur Auswahl eines Anki-Decks bereitstellt.
- */
 public class MainStage extends Application {
-    /**
-     * Startet die Hauptbühne (Stage) der Anwendung.
-     *
-     * @param stage Die Hauptbühne.
-     * @throws IOException Wenn das Laden der FXML-Ressource fehlschlägt.
-     */
+
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -34,11 +27,6 @@ public class MainStage extends Application {
 
     }
 
-    /**
-     * Erzeugt und zeigt ein neues Fenster, in dem der Benutzer ein Anki-Deck auswählen kann.
-     * <p>
-     * Das Fenster ist nicht skalierbar und verwendet das Layout aus der 'AnkiDeckChoose.fxml'-Datei.
-     */
     public void showNewStage() {
         Stage newStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AnkiDeckChoose.fxml"));
