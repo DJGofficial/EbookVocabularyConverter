@@ -58,13 +58,12 @@ public class EbookView implements Initializable{
         ankiController= new AnkiController();
         uiManager = ankiController.getUiManager();
         uiManager.initializeUIComponents(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
-        // uiManager = new EbookViewUIManager(fileTextField, fillFlowPaneButton, flowPane, bottomMessageLabel, messageLabel);
-        // Initialisierung der ChoiceBox-Elemente
+
         rootChoiceBox.setItems(choiceBoxItems.getFirstItems());
         optionChoiceBox.setItems(choiceBoxItems.getSecondItems());
         fieldsChoiceBox.setItems(choiceBoxItems.getThirdItems());
 
-        // Listener für die ChoiceBoxen hinzufügen
+
         rootChoiceBox.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             ObservableList<String> updatedSecondItems = choiceBoxItems.updateSecondItems(newValue);
             optionChoiceBox.setItems(updatedSecondItems);
