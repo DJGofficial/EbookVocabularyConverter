@@ -133,62 +133,6 @@ public class AnkiConnection {
         }
             return  "Unbekannter Fehler außerhalb des Geltungsbereiches";
     }
-/*
-    public static void createDeck(String deckName) throws IOException {
-        try {
-            URL url = new URL(ANKI_CONNECT_URL);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoOutput(true);
-
-
-            JsonObject request = new JsonObject();
-            request.addProperty("action", "createDeck");
-            request.addProperty("version", 6);
-
-            JsonObject params = new JsonObject();
-            params.addProperty("deck", deckName);
-
-            request.add("params", params);
-
-            OutputStream outputStream = connection.getOutputStream();
-            OutputStreamWriter writer = new OutputStreamWriter(outputStream, "UTF-8");
-            writer.write(request.toString());
-            writer.flush();
-
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                InputStream inputStream = connection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
-
-
-                StringBuilder responseBuilder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    responseBuilder.append(line);
-                }
-                reader.close();
-
-
-                JsonParser parser = new JsonParser();
-                JsonElement responseElement = parser.parse(responseBuilder.toString());
-                // if (responseElement.isJsonObject()) {
-                System.out.println(responseElement.getAsJsonObject());
-                //   System.out.println("Karte wurde zur Anki-Kollektion hinzugefügt." + responseCode);
-                //   } else {
-                //    System.err.println("Fehler beim Hinzufügen der Karte zur Anki-Kollektion. Antwortcode: " + responseCode);
-                // }
-            }
-
-            writer.close();
-            outputStream.close();
-            connection.disconnect();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
- */
 
 }
 

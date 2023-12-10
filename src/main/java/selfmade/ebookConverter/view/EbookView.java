@@ -85,8 +85,6 @@ public class EbookView implements Initializable{
 
     @FXML
     private void setChooseFileButton() throws IOException {
-      //  fileTextField.setText(fileController.chooseFile());
-      //  fillFlowPaneButton.setDisable(false);
         String chosenFilePath = fileController.chooseFile();
         uiManager.updateFileTextField(chosenFilePath);
     }
@@ -107,7 +105,6 @@ public class EbookView implements Initializable{
 
     @FXML
     private void doneButtonClicked() {
-        // Überprüfung des Inhalts auf Endmarken und Vokabeln
         ObservableList<Node> content = flowPane.getChildren();
         trimAlgorithm = new TrimAlgorithm(content, this);
         messageLabel.setText("");
@@ -157,19 +154,7 @@ public class EbookView implements Initializable{
 
     @FXML
     public void ankiButtonClicked() {
-       // bottomMessageLabel.setText("");
-        // Verbindung mit Anki herstellen und Deck-Namen abrufen
         ankiController.handleAnkiDeck();
-      /* ankiConnection = new AnkiConnection(this,uiManager);
-        ObservableList<String> deckList = ankiConnection.fetchDeckNames();
-
-        if (deckList != null && !deckList.isEmpty()) {
-           ankiDeckChoose.callWindowAddDeckList(deckList);
-        } else {
-            messageController.showErrorMessage(bottomMessageLabel, "Bitte stelle Verbindung mit Anki über AnkiConnect her");
-        }
-
-       */
     }
 
     public EbookViewUIManager getUiManager() {

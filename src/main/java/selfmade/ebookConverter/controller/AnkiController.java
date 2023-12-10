@@ -11,10 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Die Klasse AnkiController dient als Schnittstelle zur Anki-Anwendung über AnkiConnect.
- * Sie verwaltet Operationen wie das Abrufen von Deck-Namen und das Hinzufügen von Karten zu einem bestimmten Deck.
- */
+
 public class AnkiController {
 
     private AnkiConnection ankiConnection;

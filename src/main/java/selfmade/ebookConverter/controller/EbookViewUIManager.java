@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Verwaltet die UI-Elemente in der E-Book-Ansicht.
- */
 public class EbookViewUIManager {
 
     private TextField fileTextField;
@@ -64,22 +61,19 @@ public class EbookViewUIManager {
         }
     }
 
-    public Label getBottomMessage() {
-        return bottomMessageLabel;
-    }
 
     public void setMessageLabel(String message) {
         messageController.showErrorMessage(messageLabel, message);
     }
 
     public void showTranslations(HashMap<String, String> translations) {
-        flowPane.getChildren().clear();  // Löschen des vorherigen Inhalts
+        flowPane.getChildren().clear();
         for (Map.Entry<String, String> entry : translations.entrySet()) {
             Label originalText = new Label(entry.getKey());
             Label translatedText = new Label(entry.getValue());
 
-            VBox vBox = new VBox(originalText, translatedText); // Beide Labels in einem VBox
-            flowPane.getChildren().add(vBox); // Fügen Sie die VBox zum FlowPane hinzu
+            VBox vBox = new VBox(originalText, translatedText);
+            flowPane.getChildren().add(vBox);
         }
     }
 

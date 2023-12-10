@@ -13,7 +13,6 @@ public class FileController {
 
     private final static FileChooser fileChooser = new FileChooser();
     private static String fileName = "src/main/resources/save.txt";
-  //  private static final String RESOURCE_PATH = "src/main/resources/";
   ButtonController buttonController = new ButtonController();
 
     public static void readFile(File file) {
@@ -24,7 +23,7 @@ public class FileController {
 
             String line;
             while ((line = br.readLine()) != null) {
-                String replacedLine = line.replace("\u00A0", " ");//NBSP replacement needed because unicode differs
+                String replacedLine = line.replace("\u00A0", " ");
                 myWriter.write(replacedLine);
                 myWriter.write(System.lineSeparator());
             }
