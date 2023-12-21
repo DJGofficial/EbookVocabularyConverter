@@ -37,7 +37,6 @@ public class GoogleTranslateAPIConnection {
 
                 translatedMap.put(originalText, translatedText);
 
-
             } catch (Exception e) {
                 System.err.println("Error translating: " + e.getMessage());
             }
